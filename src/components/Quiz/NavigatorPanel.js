@@ -108,10 +108,10 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
           <h4>Choose a Question</h4>
       </div>
 
-      {/* --- 2. QUESTION SECTIONS (Split Spaces) --- */}
+      {/* --- 2. QUESTION SECTIONS (Accordion) --- */}
       <div className="question-sections">
         {questionChunks.map((chunk, sectionIndex) => {
-          // Calculate range labels (e.g., 1-10, 11-20)
+          // Calculate labels
           const startNum = sectionIndex * 10 + 1;
           const endNum = Math.min((sectionIndex + 1) * 10, questions.length);
           const isOpen = openSection === sectionIndex;

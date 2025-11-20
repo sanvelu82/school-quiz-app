@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. GLOBAL RESET & IMMERSIVE SETTINGS
+   1. GLOBAL SETTINGS
    ========================================================================== */
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -131,7 +131,7 @@ html, body {
   margin: 30px; white-space: nowrap; user-select: none; text-transform: uppercase;
 }
 
-/* Quiz Header (TIGHTER PADDING) */
+/* Quiz Header (REDUCED PADDING) */
 .quiz-header {
   background: #ffffff; border-bottom: 1px solid #f1f5f9; 
   padding: 4px 15px; 
@@ -214,7 +214,6 @@ html, body {
 .mobile-close-btn { display: none; }
 .mobile-overlay { display: none; }
 
-/* Bottom Bar */
 .bottom-bar { height: 70px; background: #ffffff; border-top: 2px solid #e2e8f0; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; position: fixed; bottom: 0; width: 100%; z-index: 20; }
 .bottom-left, .bottom-right { display: flex; gap: 10px; }
 .quiz-btn { padding: 12px 20px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: 1px solid transparent; }
@@ -223,7 +222,6 @@ html, body {
 .btn-save { background: #10b981; color: white; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2); }
 .btn-mark { background: #a855f7; color: white; }
 
-/* Strict Mode */
 .violation-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
 .violation-box { background: #fff; padding: 30px; border-radius: 16px; text-align: center; width: 100%; max-width: 400px; border-top: 6px solid #dc2626; }
 .return-btn { margin-top: 20px; padding: 14px; width: 100%; background: #2563eb; color: white; border: none; border-radius: 12px; font-weight: 700; }
@@ -269,10 +267,11 @@ html, body {
   /* D. SIDEBAR DRAWER (Right to Left, 75%, Scrollable) */
   .navigator-panel {
     position: fixed; top: 0; right: -100%; width: 75%; height: 100%;
-    background: #ffffff; z-index: 1500; border-left: none;
+    background: #ffffff; z-index: 2000; border-left: none;
     box-shadow: -10px 0 30px rgba(0,0,0,0.2);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding-top: calc(30px + env(safe-area-inset-top));
+    /* Increased padding-top to ensure it covers the header */
+    padding-top: calc(40px + env(safe-area-inset-top)); 
     display: flex !important; flex-direction: column;
     overflow-y: auto; /* Scrollable Sidebar */
   }
