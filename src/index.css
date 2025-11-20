@@ -972,46 +972,63 @@ html, body {
   /* --- 1. Header Adjustments (Notch Fix) --- */
   .quiz-header {
     height: auto;
-    /* Pushes content down to avoid camera */
+    /* Ensure items stack vertically (Top to Bottom) */
+    flex-direction: column !important; 
+    /* Push content down below camera notch */
     padding-top: calc(40px + env(safe-area-inset-top)); 
-    padding-bottom: 10px;
-    align-items: flex-start;
+    padding-bottom: 15px;
+    align-items: center; /* Center align the content */
+    gap: 10px;
   }
   
-  .quiz-brand { flex: 1; justify-content: center; }
-  .student-badge-container { display: none; } /* Save space on phone */
-  .right-header-group { display: none; } /* Hide desktop timer/info */
+  /* Branding */
+  .quiz-brand { 
+    width: 100%; 
+    justify-content: center; 
+  }
+  
+  /* Hide Desktop Elements */
+  .student-badge-container { display: none; }
+  .right-header-group { display: none; } 
 
-  /* --- 2. New Mobile Student Row (Below Header) --- */
+  /* --- 2. Mobile Student Row (Force Visible) --- */
   .student-info-row {
-    display: flex;
+    display: flex !important; /* Force display */
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
     background: #f8fafc;
-    padding: 8px;
+    padding: 8px 12px;
     border-radius: 8px;
     border: 1px solid #e2e8f0;
     width: 100%;
     margin-top: 5px;
   }
   
-  .student-photo-mobile { width: 50px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid #cbd5e1; flex-shrink: 0; }
+  .student-photo-mobile { 
+    width: 45px; height: 55px; 
+    border-radius: 4px; overflow: hidden; 
+    border: 1px solid #cbd5e1; flex-shrink: 0; 
+  }
   .student-photo-mobile img { width: 100%; height: 100%; object-fit: cover; }
 
   .student-text-mobile {
-    display: flex; flex-direction: column; gap: 2px; flex-grow: 1;
+    display: flex; flex-direction: column; gap: 2px; flex-grow: 1; text-align: left;
   }
-  .info-name { font-size: 0.95rem; font-weight: 800; color: #1e293b; }
+  .info-name { font-size: 0.9rem; font-weight: 800; color: #1e293b; }
   .info-meta { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; }
   
   .mobile-timer {
-    font-size: 0.9rem; font-weight: 700; color: #fff; background: #2563eb; padding: 5px 10px; border-radius: 6px;
+    font-size: 0.9rem; font-weight: 700; color: #fff; 
+    background: #2563eb; padding: 6px 10px; border-radius: 6px;
+    white-space: nowrap;
   }
 
   /* --- 3. Layout Stack --- */
   .quiz-main-grid {
     flex-direction: column;
-    height: calc(100vh - 140px); /* Adjust for header + bottom bar */
+    /* Adjust height to account for taller header */
+    height: calc(100vh - 220px); 
   }
   .quiz-panel { width: 100%; padding: 20px; padding-bottom: 80px; }
   
@@ -1020,18 +1037,17 @@ html, body {
     position: fixed;
     top: 0;
     right: -100%; /* Hidden Off-screen */
-    width: 75%; /* 3/4 Screen width */
+    width: 75%; 
     height: 100%;
     background: #ffffff;
-    z-index: 2000; /* Highest Z-Index */
+    z-index: 2000;
     border-left: none;
     box-shadow: -10px 0 30px rgba(0,0,0,0.2);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    padding-top: calc(40px + env(safe-area-inset-top)); /* Match header padding */
+    padding-top: calc(40px + env(safe-area-inset-top));
     display: flex; flex-direction: column;
   }
 
-  /* Slide In Class */
   .navigator-panel.mobile-visible {
     right: 0; 
   }
@@ -1060,7 +1076,7 @@ html, body {
   }
   .mobile-close-btn span { font-weight: 700; color: #1e293b; font-size: 1.1rem; }
 
-  /* --- 7. Overlay (Darken Background) --- */
+  /* --- 7. Overlay --- */
   .mobile-overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.6); z-index: 1500; display: none;
