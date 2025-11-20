@@ -7,12 +7,12 @@
   padding: 0;
 }
 
-/* Force Body to fill 100% of the screen */
+/* Force Body to fill 100% of the screen (including notch area) */
 html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden; /* Prevent bounce scrolling */
-  background-color: #ffffff; /* Pure White Base */
+  overflow: hidden; /* Prevent bounce scrolling on main container */
+  background-color: #ffffff;
   font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
   color: #1c1c1c;
   /* Fix for iOS height */
@@ -25,7 +25,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. LOGIN SCREEN (Pure White Professional)
+   2. LOGIN SCREEN (The "Fintech Minimalist" Look)
    ========================================================================== */
 
 /* The Background Wrapper */
@@ -35,36 +35,29 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff; /* Pure White */
+  background-color: #ffffff;
+  /* Remove padding to allow full bleed on mobile */
   padding: 0 !important; 
 }
 
 /* The Card */
 .glass-panel {
-  background: #ffffff; /* Pure White */
+  background: #ffffff;
   width: 100%;
-  max-width: 450px;
-  padding: 40px;
-  
-  /* VISUAL SEPARATION: */
-  /* Since background is white, we use a clean grey border to define the card */
-  border: 1px solid #e5e7eb; 
-  border-radius: 16px;
-  
-  /* Very soft shadow to lift it slightly */
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-  
-  /* Tech Accent Bar on the left */
-  border-left: 6px solid #000000; 
+  max-width: 420px;
+  padding: 30px;
+  /* Desktop: Subtle border */
+  border: 1px solid #e7e7e7;
+  border-radius: 24px; 
   position: relative;
 }
 
 /* Entry Animation */
 .animate-card-entry {
-  animation: slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  animation: slideUp 0.4s ease-out;
 }
 @keyframes slideUp {
-  from { opacity: 0; transform: translateY(20px); }
+  from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -72,22 +65,27 @@ html, body {
 .id-header {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
   margin-bottom: 30px;
 }
 
-/* --- LOGO FIX: INVISIBLE BOX --- */
+/* =========================================
+   LOGO FIX: REMOVE WHITE BOX
+   ========================================= */
+
 .logo-wrapper {
-  width: 90px; 
-  height: 90px;
+  /* Adjust size if needed */
+  width: 85px; 
+  height: 85px;
   
-  /* CRITICAL: No background, No shadow, No border */
+  /* 1. Remove the container box completely */
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
   
+  /* Center the image */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,10 +95,15 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Multiply ensures any off-white pixels blend into the background */
-  mix-blend-mode: multiply; 
+
+  /* 2. THE MAGIC TRICK (Darken/Multiply) */
+  /* This makes the white parts of your logo transparent */
+  /* It will blend perfectly onto the white background of the app */
+  mix-blend-mode: multiply;
+  
+  /* 3. Optional: Boost colors slightly if it looks dim */
+  filter: contrast(1.1);
 }
-/* ------------------------------- */
 
 .text-wrapper {
   display: flex;
@@ -109,62 +112,56 @@ html, body {
 }
 
 .school-line-1 {
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #000;
-  letter-spacing: -0.5px;
-  line-height: 1;
-  margin-bottom: 4px;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #000000;
+  line-height: 1.2;
+  margin: 0;
 }
 
 .school-line-2 {
-  font-size: 0.8rem;
-  color: #666;
-  font-weight: 700;
+  font-size: 0.75rem;
+  color: #666666;
+  font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  margin-top: 2px;
 }
 
 /* Badge Styling */
 .portal-subtitle {
-  display: inline-flex;
-  align-items: center;
-  background-color: #f3f4f6; /* Light Grey pill */
-  color: #374151;
-  font-size: 0.8rem;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: 100px;
-  margin-bottom: 30px;
+  display: inline-block;
+  background-color: #f0fdf4; /* Light Mint */
+  color: #15803d; /* Dark Green */
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px;
+  margin-bottom: 25px;
   text-transform: uppercase;
 }
 
 /* Input Fields */
 .input-container {
-  background-color: #f8fafc; /* Very light grey to stand out on white */
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 20px;
+  background-color: #f5f7f9; /* Soft Grey */
+  border-radius: 16px;
+  padding: 15px;
+  margin-bottom: 15px;
   display: flex;
   align-items: center;
-  border: 1px solid #e2e8f0;
+  border: 1px solid transparent;
   transition: all 0.2s ease;
 }
 
 .input-container.focused {
-  background-color: #fff;
-  border-color: #000; /* Black focus */
-  box-shadow: 0 0 0 1px #000;
+  background-color: #ffffff;
+  border-color: #000000; /* Black focus */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
 .icon-box {
   font-size: 1.2rem;
   margin-right: 15px;
-  opacity: 0.5;
-}
-
-.input-container.focused .icon-box {
-  opacity: 1;
+  color: #888;
 }
 
 .field-wrapper {
@@ -175,7 +172,7 @@ html, body {
 
 .field-wrapper label {
   font-size: 0.75rem;
-  color: #64748b;
+  color: #666;
   font-weight: 600;
   margin-bottom: 2px;
 }
@@ -184,32 +181,34 @@ html, body {
   background: transparent;
   border: none;
   outline: none;
-  font-size: 1.05rem;
-  color: #0f172a;
+  font-size: 1rem;
+  color: #000;
   font-weight: 600;
   width: 100%;
 }
 
-/* The Main Button */
+/* The Main Button (Used for Login & Start) */
 .neon-button {
   width: 100%;
   padding: 18px;
-  margin-top: 10px;
-  background-color: #000000; /* Deep Black */
+  margin-top: 15px;
+  background-color: #2e0c41; /* Dark Purple/Black */
   color: white;
   border: none;
-  border-radius: 12px;
+  border-radius: 16px;
   font-size: 1rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
   transition: transform 0.1s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
 .neon-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+  transform: scale(0.98);
+  opacity: 0.95;
 }
 
 .neon-button:disabled {
@@ -217,32 +216,28 @@ html, body {
   cursor: not-allowed;
 }
 
-/* Remove flare for clean look */
-.btn-flare { display: none; }
-
 /* Error Message */
 .error-toast {
   background: #fff1f2;
   color: #e11d48;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  padding: 14px;
+  padding: 12px;
   border-radius: 12px;
   margin-bottom: 20px;
-  border: 1px solid #fecdd3;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 /* Footer */
 .panel-footer {
   margin-top: 30px;
   text-align: center;
-  border-top: 1px solid #f1f5f9;
-  padding-top: 20px;
 }
 .panel-footer p {
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: #999;
   font-weight: 500;
 }
 
@@ -250,6 +245,7 @@ html, body {
    3. CONFIRMATION SCREEN
    ========================================================================== */
 .confirmation-page {
+  /* Reusing login styles structure */
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -268,7 +264,6 @@ html, body {
   padding: 10px;
   background: #f9fafb;
   border-radius: 8px;
-  border: 1px solid #eee;
 }
 
 .confirmation-checkbox {
@@ -281,9 +276,10 @@ html, body {
 }
 
 .start-button {
+  /* Reusing neon-button styles logic */
   width: 100%;
   padding: 18px;
-  background-color: #10b981; /* Green for Go */
+  background-color: #28a745; /* Green for Go */
   color: white;
   border: none;
   border-radius: 16px;
@@ -309,6 +305,7 @@ html, body {
   position: sticky;
   top: 0;
   z-index: 100;
+  /* Padding top handles Notch automatically via Safe Area logic at bottom */
 }
 
 .header-photo {
@@ -363,6 +360,7 @@ html, body {
   background: white;
   display: flex;
   flex-direction: column;
+  /* Extra padding at bottom so content isn't hidden behind buttons */
   padding-bottom: 80px; 
 }
 
@@ -396,7 +394,7 @@ html, body {
   height: 20px;
 }
 
-/* Action Buttons */
+/* Action Buttons (Fixed at bottom) */
 .action-buttons {
   position: fixed;
   bottom: 0;
@@ -412,8 +410,8 @@ html, body {
 
 .btn-review {
   flex: 1;
-  background-color: #f59e0b;
-  color: #fff;
+  background-color: #ffc107;
+  color: #000;
   padding: 14px;
   border: none;
   border-radius: 12px;
@@ -422,7 +420,7 @@ html, body {
 
 .btn-save-next {
   flex: 1;
-  background-color: #10b981;
+  background-color: #10b981; /* Vibrant Green */
   color: white;
   padding: 14px;
   border: none;
@@ -466,7 +464,7 @@ html, body {
 .current-q { border: 2px solid #2563eb; transform: scale(1.1); }
 
 /* ==========================================================================
-   5. STRICT MODE & MOBILE FIXES
+   5. STRICT MODE OVERLAY
    ========================================================================== */
 .violation-overlay {
   position: fixed;
@@ -501,15 +499,16 @@ html, body {
   font-weight: 700;
 }
 
+/* ==========================================================================
+   6. MOBILE RESPONSIVENESS & IMMERSIVE LAYOUT (The Fixes)
+   ========================================================================== */
+
 @media (max-width: 768px) {
   /* Login Screen Mobile */
   .glass-panel {
     border: none;
     padding: 20px;
     max-width: 100%;
-    box-shadow: none;
-    border-left: none;
-    border-top: 4px solid #000;
   }
   .ultimate-bg {
     align-items: flex-start;
@@ -520,30 +519,44 @@ html, body {
   .quiz-main-grid {
     flex-direction: column;
   }
+
   .quiz-panel {
     flex: none;
-    height: 60vh;
+    height: 60vh; /* Questions take top 60% */
     width: 100%;
-    padding-bottom: 80px;
+    padding-bottom: 80px; /* Space for buttons */
   }
+
   .navigator-panel {
     flex: none;
-    height: 40vh;
+    height: 40vh; /* Grid takes bottom 40% */
     width: 100%;
     border-left: none;
     border-top: 1px solid #eee;
   }
+
   .action-buttons {
     position: fixed;
     bottom: 0;
     width: 100%;
   }
+  
+  /* Ensure header wraps properly on small screens */
   .app-header {
     flex-wrap: wrap;
   }
 }
 
-/* NOTCH / CAMERA FIXES */
-.app-header { padding-top: calc(10px + env(safe-area-inset-top)); }
-.ultimate-bg { padding-top: env(safe-area-inset-top) !important; }
-.violation-overlay { padding-top: env(safe-area-inset-top); }
+/* SAFARI / NOTCH / CAMERA AREA FIXES */
+/* Use Safe Area Insets to prevent content hiding behind camera */
+.app-header {
+  padding-top: calc(10px + env(safe-area-inset-top));
+}
+
+.ultimate-bg {
+  padding-top: env(safe-area-inset-top) !important;
+}
+
+.violation-overlay {
+  padding-top: env(safe-area-inset-top);
+}
