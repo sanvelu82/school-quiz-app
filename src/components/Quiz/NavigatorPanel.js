@@ -10,30 +10,30 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
     return response.status || 'unvisited';
   };
 
+  // Status to CSS mapping
   const getStatusClass = (qId) => {
     const status = getStatus(qId);
     switch (status) {
       case 'answered': return 'answered'; // Green
-      // Combine any review status into 'marked-review' (removing the blue 'marked-answered' distinction)
-      case 'marked_review': 
-      case 'marked_answered': return 'marked-review'; // Purple/Orange
+      case 'marked_review': return 'marked-review'; // Purple/Orange
       case 'visited': return 'not-answered'; // Red
       default: return 'unvisited'; // Grey
     }
   };
 
+  // Count Helper
   const getCount = (statusType) => {
     return questions.filter(q => {
       const status = getStatus(q.id);
       if (statusType === 'unvisited') return status === 'unvisited';
       if (statusType === 'answered') return status === 'answered';
-      // Count both types of review as 'marked_review'
-      if (statusType === 'marked_review') return status === 'marked_review' || status === 'marked_answered';
+      if (statusType === 'marked_review') return status === 'marked_review';
       if (statusType === 'not_answered') return status === 'visited';
       return false;
     }).length;
   };
 
+  // Chunk questions for accordion
   const chunkQuestions = (arr, size) => {
     const chunks = [];
     for (let i = 0; i < arr.length; i += size) {
@@ -51,7 +51,7 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
   return (
     <div className="navigator-panel-container">
       
-      {/* --- LEGEND SECTION (Updated: 4 items only) --- */}
+      {/* --- UPDATED LEGEND (4 ITEMS) --- */}
       <div className="palette-legend">
         <div className="legend-row">
             <div className="legend-item">
@@ -86,8 +86,6 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
                 </div>
             </div>
         </div>
-        
-        {/* Removed the 5th "Blue" Legend Row */}
       </div>
 
       <div className="palette-section-header">

@@ -1,12 +1,14 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchQuestions } from '../../services/data';
 import { getExamDurationSeconds } from '../../utils/scheduler';
 import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-// 🔊 Receive 'beepAudio' as a prop
-function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
+// 🔊 YOUR SPECIFIC AUDIO FILE
+const BEEP_URL = "/beep-warning-6387.mp3"; 
+
+function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState(0);
@@ -14,6 +16,10 @@ function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
   const [allResponses, setAllResponses] = useState({}); 
   const [isPaletteOpen, setIsPaletteOpen] = useState(false); 
 
+  // Audio Ref
+  const beepAudio = useRef(new Audio(BEEP_URL));
+
+  // 1. Load Data
   useEffect(() => {
     if (session && session.questionFile) {
       fetchQuestions(session.questionFile)
@@ -41,6 +47,7 @@ function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
     onQuizFinish(score, allResponses);
   }, [questions, allResponses, onQuizFinish]);
 
+  // 2. Timer & Audio Logic
   useEffect(() => {
     if (loading) return;
 
@@ -52,14 +59,13 @@ function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
           return 0;
         }
         
-        // 🔊 BEEP LOGIC (Uses unlocked audio)
-        // Play beep when 10s or less remaining (and not at 0)
-        if (prev <= 11 && prev > 1 && beepAudio) { 
-           try {
-             beepAudio.currentTime = 0;
-             beepAudio.play().catch(e => console.warn("Audio error:", e));
-           } catch (e) {
-             console.warn("Audio fail");
+        // 🔊 Play beep every second for the last 10 seconds
+        if (prev <= 11 && prev > 1) { 
+           if (beepAudio.current) {
+             beepAudio.current.currentTime = 0;
+             beepAudio.current.play().catch(e => {
+                 // Ignore errors if user hasn't interacted yet
+             });
            }
         }
         
@@ -68,9 +74,17 @@ function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [loading, handleFinalSubmit, beepAudio]);
+  }, [loading, handleFinalSubmit]);
 
+  // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
+    // Unlock audio on first interaction
+    if (beepAudio.current.paused) {
+        beepAudio.current.play().then(() => {
+            beepAudio.current.pause();
+            beepAudio.current.currentTime = 0;
+        }).catch(() => {});
+    }
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
   }, []);
 
@@ -85,6 +99,7 @@ function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
     });
   };
 
+  // NEW: Mark for Review handler
   const handleMarkReview = () => {
     const currentQId = questions[currentQIndex].id;
     setAllResponses(prev => ({
@@ -152,6 +167,7 @@ function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
         <div className="bottom-left">
           <button className="quiz-btn btn-prev" onClick={handlePrevious} disabled={currentQIndex === 0}>←</button>
           <button className="quiz-btn btn-clear" onClick={handleClearSelection}>Clear</button>
+          {/* REVIEW BUTTON ADDED */}
           <button className="quiz-btn btn-mark" onClick={handleMarkReview}>Review</button>
         </div>
         <div className="bottom-right">

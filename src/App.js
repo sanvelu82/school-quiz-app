@@ -1,11 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginScreen from './components/Auth/LoginScreen';
 import ConfirmationScreen from './components/Auth/ConfirmationScreen';
 import QuizApp from './components/Quiz/QuizApp'; 
 import { handleSubmitResults } from './services/api';
-
-// 🔊 DEFINE AUDIO HERE (Ensure file exists in public folder)
-const BEEP_URL = "/beep.mp3"; 
 
 function App() {
   const [studentProfile, setStudentProfile] = useState(null);
@@ -13,9 +10,6 @@ function App() {
   const [submissionStatus, setSubmissionStatus] = useState('idle');
   const [currentSession, setCurrentSession] = useState(null);
   const [isFullScreen, setIsFullScreen] = useState(true); 
-
-  // 🔊 CREATE AUDIO PLAYER ONCE
-  const beepAudio = useRef(new Audio(BEEP_URL));
 
   const enterFullScreen = () => {
     const elem = document.documentElement;
@@ -46,17 +40,6 @@ function App() {
   const handleStartQuiz = () => {
     setIsConfirmed(true);
     enterFullScreen();
-
-    // 🔊 UNLOCK AUDIO: Play and immediately pause
-    // This tells the browser "The user wants this sound," so the timer can play it later.
-    const audio = beepAudio.current;
-    if (audio) {
-      audio.volume = 1.0;
-      audio.play().then(() => {
-        audio.pause();
-        audio.currentTime = 0;
-      }).catch(error => console.log("Audio Unlock Failed (Check file path):", error));
-    }
   };
 
   const handleQuizFinish = async (finalScore, detailedResponses) => {
@@ -83,6 +66,7 @@ function App() {
       <div className="violation-overlay">
         <div className="violation-box">
           <h1>⚠️ ACTION REQUIRED</h1>
+          <p>You are attempting to exit the secure exam environment.</p>
           <p>To continue the quiz, you must return to Full Screen mode.</p>
           <button onClick={enterFullScreen} className="return-btn">Return to Exam</button>
         </div>
@@ -117,14 +101,7 @@ function App() {
     );
   }
 
-  return (
-    <QuizApp 
-      studentProfile={studentProfile} 
-      session={currentSession}
-      onQuizFinish={handleQuizFinish}
-      beepAudio={beepAudio.current} // 🔊 PASS UNLOCKED AUDIO DOWN
-    />
-  );
+  return <QuizApp studentProfile={studentProfile} session={currentSession} onQuizFinish={handleQuizFinish} />;
 }
 
 export default App;
