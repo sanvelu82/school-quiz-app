@@ -8,28 +8,42 @@ function App() {
   const [studentProfile, setStudentProfile] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState('idle');
+  
+  // Session State
   const [currentSession, setCurrentSession] = useState(null);
+  
+  // Strict Mode State
   const [isFullScreen, setIsFullScreen] = useState(true); 
 
+  // Full Screen Helper
   const enterFullScreen = () => {
     const elem = document.documentElement;
-    if (elem.requestFullscreen) elem.requestFullscreen().catch(err => console.log(err));
-    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen().catch(err => console.log(err));
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
   };
 
+  // Strict Mode Listener
   useEffect(() => {
     const handleFullScreenChange = () => {
       const isFull = !!document.fullscreenElement || !!document.webkitFullscreenElement;
       setIsFullScreen(isFull);
     };
+
     document.addEventListener('fullscreenchange', handleFullScreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
+
     return () => {
       document.removeEventListener('fullscreenchange', handleFullScreenChange);
       document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
     };
   }, []);
 
+  // Login Success Handler (Now receives session data)
   const handleLoginSuccess = (profileData, sessionData) => {
     setStudentProfile(profileData);
     setCurrentSession(sessionData); 
@@ -61,6 +75,7 @@ function App() {
     if (document.exitFullscreen) document.exitFullscreen().catch(e => {});
   };
 
+  // --- VIOLATION SCREEN ---
   if (studentProfile && !isFullScreen && submissionStatus !== 'success') {
     return (
       <div className="violation-overlay">
@@ -68,11 +83,15 @@ function App() {
           <h1>⚠️ ACTION REQUIRED</h1>
           <p>You are attempting to exit the secure exam environment.</p>
           <p>To continue the quiz, you must return to Full Screen mode.</p>
-          <button onClick={enterFullScreen} className="return-btn">Return to Exam</button>
+          <button onClick={enterFullScreen} className="return-btn">
+            Return to Exam
+          </button>
         </div>
       </div>
     );
   }
+
+  // --- RENDER LOGIC ---
 
   if (!studentProfile) {
     return <LoginScreen onLoginSuccess={handleLoginSuccess} />; 
@@ -89,19 +108,34 @@ function App() {
   }
 
   if (submissionStatus === 'submitting') {
-    return <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}><h2>Submitting...</h2></div>;
-  }
-
-  if (submissionStatus === 'success') {
     return (
       <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}>
-        <h1 style={{color: 'green'}}>Submitted Successfully!</h1>
-        <button onClick={handleLogout} style={{padding: '10px 20px', marginTop: '20px'}}>Return to Home</button>
+        <h2>Submitting your results...</h2>
+        <p>Please do not close this window.</p>
       </div>
     );
   }
 
-  return <QuizApp studentProfile={studentProfile} session={currentSession} onQuizFinish={handleQuizFinish} />;
+  if (submissionStatus === 'success') {
+    return (
+      <div className="app-container" style={{textAlign: 'center', marginTop: '50px', fontFamily: 'Arial'}}>
+        <h1 style={{color: 'green'}}>Test Submitted Successfully!</h1>
+        <p>Thank you, <strong>{studentProfile.fullName}</strong>.</p>
+        <p>Your response has been recorded.</p>
+        <button onClick={handleLogout} style={{padding: '10px 20px', marginTop: '20px', cursor: 'pointer'}}>
+          Return to Home
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <QuizApp 
+      studentProfile={studentProfile} 
+      session={currentSession}
+      onQuizFinish={handleQuizFinish} 
+    />
+  );
 }
 
 export default App;

@@ -1,3 +1,4 @@
+// src/components/Quiz/QuizApp.js
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchQuestions } from '../../services/data';
 import { getExamDurationSeconds } from '../../utils/scheduler';
@@ -5,8 +6,8 @@ import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-// 🔊 YOUR SPECIFIC AUDIO FILE
-const BEEP_URL = "/beep-warning-6387.mp3"; 
+// 🔊 UPDATED: Your new 9-second countdown file
+const BEEP_URL = "/mixkit-start-countdown-927.wav"; 
 
 function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [questions, setQuestions] = useState([]);
@@ -19,7 +20,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   // Audio Ref
   const beepAudio = useRef(new Audio(BEEP_URL));
 
-  // 1. Load Data
+  // 1. Load Questions & Timer
   useEffect(() => {
     if (session && session.questionFile) {
       fetchQuestions(session.questionFile)
@@ -59,12 +60,14 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
           return 0;
         }
         
-        // 🔊 Play beep every second for the last 10 seconds
-        if (prev <= 11 && prev > 1) { 
+        // 🔊 PLAY ONCE at 9 Seconds
+        // Since the clip is 9s long, playing it at 9s will end exactly at 0s.
+        if (prev === 9) { 
            if (beepAudio.current) {
              beepAudio.current.currentTime = 0;
              beepAudio.current.play().catch(e => {
-                 // Ignore errors if user hasn't interacted yet
+                 // This catches errors if the user hasn't clicked anything yet
+                 console.warn("Audio blocked - user interaction needed first");
              });
            }
         }
@@ -78,7 +81,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
 
   // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
-    // Unlock audio on first interaction
+    // Unlock audio on first interaction (Safety measure)
     if (beepAudio.current.paused) {
         beepAudio.current.play().then(() => {
             beepAudio.current.pause();
@@ -99,7 +102,6 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     });
   };
 
-  // NEW: Mark for Review handler
   const handleMarkReview = () => {
     const currentQId = questions[currentQIndex].id;
     setAllResponses(prev => ({
@@ -167,7 +169,6 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
         <div className="bottom-left">
           <button className="quiz-btn btn-prev" onClick={handlePrevious} disabled={currentQIndex === 0}>←</button>
           <button className="quiz-btn btn-clear" onClick={handleClearSelection}>Clear</button>
-          {/* REVIEW BUTTON ADDED */}
           <button className="quiz-btn btn-mark" onClick={handleMarkReview}>Review</button>
         </div>
         <div className="bottom-right">

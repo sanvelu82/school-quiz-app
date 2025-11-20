@@ -5,10 +5,10 @@ export const EXAM_SESSIONS = [
   {
     id: 1,
     name: "Physics & Chemistry (Morning)",
-    date: "2025-11-22",   // 🗓️ Update this to your test date
+    date: "2025-11-21",   // 🗓️ Update this to your test date
     loginTime: "00:26",   // Can enter app
-    startTime: "00:26",   // Can click Start
-    endTime:   "00:27",   // Auto-submit
+    startTime: "00:42",   // Can click Start
+    endTime:   "00:43",   // Auto-submit
     questionFile: "/questions1.json"
   },
   {
