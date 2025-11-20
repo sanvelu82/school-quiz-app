@@ -1,8 +1,10 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import LoginScreen from './components/Auth/LoginScreen';
 import ConfirmationScreen from './components/Auth/ConfirmationScreen';
 import QuizApp from './components/Quiz/QuizApp'; 
 import { handleSubmitResults } from './services/api';
+import './App.css'; // Ensure CSS is imported
 
 function App() {
   const [studentProfile, setStudentProfile] = useState(null);
@@ -10,7 +12,7 @@ function App() {
   const [submissionStatus, setSubmissionStatus] = useState('idle');
   
   // STRICT MODE STATE
-  const [isFullScreen, setIsFullScreen] = useState(true); // Default true so it doesn't block login
+  const [isFullScreen, setIsFullScreen] = useState(true); 
 
   // --- 1. Full Screen Helper Function ---
   const enterFullScreen = () => {
@@ -27,12 +29,10 @@ function App() {
   // --- 2. Strict Mode Listener ---
   useEffect(() => {
     const handleFullScreenChange = () => {
-      // Check if document has a fullscreen element
       const isFull = !!document.fullscreenElement || !!document.webkitFullscreenElement;
       setIsFullScreen(isFull);
     };
 
-    // Listen for changes (ESC key, etc.)
     document.addEventListener('fullscreenchange', handleFullScreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
 
@@ -45,23 +45,26 @@ function App() {
   const handleLoginSuccess = (profileData) => {
     setStudentProfile(profileData);
     setSubmissionStatus('idle');
-    // Trigger Full Screen immediately on success
     enterFullScreen();
   };
   
   const handleStartQuiz = () => {
     setIsConfirmed(true);
-    // Re-trigger just in case
     enterFullScreen();
   };
 
   const handleQuizFinish = async (finalScore, detailedResponses) => {
     setSubmissionStatus('submitting');
+    
+    // Exit full screen safely before alert (optional, keeps UX clean)
+    if (document.exitFullscreen) document.exitFullscreen().catch(() => {});
+
     const result = await handleSubmitResults(studentProfile, finalScore, detailedResponses);
+    
     if (result && result.status === 'success') {
       setSubmissionStatus('success');
     } else {
-      alert('Submission failed! Please contact invigilator.');
+      alert('Submission failed! Please contact the invigilator.');
       setSubmissionStatus('error');
     }
   };
@@ -70,12 +73,9 @@ function App() {
     setStudentProfile(null);
     setIsConfirmed(false);
     setSubmissionStatus('idle');
-    // Optional: Exit full screen on logout
-    if (document.exitFullscreen) document.exitFullscreen().catch(e => {});
   };
 
-  // --- 3. THE VIOLATION SCREEN (Blocks view if Full Screen is lost) ---
-  // Only show this if user IS logged in but NOT in full screen
+  // --- 3. STRICT MODE VIOLATION SCREEN ---
   if (studentProfile && !isFullScreen && submissionStatus !== 'success') {
     return (
       <div className="violation-overlay">
@@ -93,36 +93,49 @@ function App() {
 
   // --- NORMAL RENDERING LOGIC ---
 
+  // 1. Login Screen
   if (!studentProfile) {
     return <LoginScreen onLoginSuccess={handleLoginSuccess} />; 
   }
 
+  // 2. Confirmation / Hall Ticket
   if (studentProfile && !isConfirmed) {
     return <ConfirmationScreen studentProfile={studentProfile} onConfirmStart={handleStartQuiz} />;
   }
 
+  // 3. Submitting State (Styled with Ultimate UI)
   if (submissionStatus === 'submitting') {
     return (
-      <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}>
-        <h2>Submitting your results...</h2>
-        <p>Please do not close this window.</p>
+      <div className="ultimate-bg">
+        <div className="glass-panel animate-card-entry" style={{textAlign: 'center'}}>
+          <div className="spinner" style={{margin: '20px auto'}}></div> {/* Add a CSS spinner if you have one, or just text */}
+          <h2 style={{color: '#1e293b'}}>Submitting Results...</h2>
+          <p style={{color: '#64748b'}}>Please do not close this window.</p>
+        </div>
       </div>
     );
   }
 
+  // 4. Success State (Styled with Ultimate UI)
   if (submissionStatus === 'success') {
     return (
-      <div className="app-container" style={{textAlign: 'center', marginTop: '50px', fontFamily: 'Arial'}}>
-        <h1 style={{color: 'green'}}>Test Submitted Successfully!</h1>
-        <p>Thank you, <strong>{studentProfile.fullName}</strong>.</p>
-        <p>Your response has been recorded.</p>
-        <button onClick={handleLogout} style={{padding: '10px 20px', marginTop: '20px', cursor: 'pointer'}}>
-          Return to Home
-        </button>
+      <div className="ultimate-bg">
+        <div className="glass-panel animate-card-entry" style={{textAlign: 'center'}}>
+          <div style={{fontSize: '4rem', marginBottom: '20px'}}>🎉</div>
+          <h2 style={{color: '#10b981', fontWeight: '900', marginBottom: '10px'}}>Submission Successful!</h2>
+          <p style={{color: '#334155', fontSize: '1.1rem', marginBottom: '30px'}}>
+             Thank you, <strong>{studentProfile.fullName}</strong>.
+             <br/>Your exam responses have been securely recorded.
+          </p>
+          <button onClick={handleLogout} className="neon-button">
+            Return to Home
+          </button>
+        </div>
       </div>
     );
   }
 
+  // 5. Main Quiz App
   return <QuizApp studentProfile={studentProfile} onQuizFinish={handleQuizFinish} />;
 }
 
