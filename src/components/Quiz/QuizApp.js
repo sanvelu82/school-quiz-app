@@ -14,17 +14,14 @@ function QuizApp({ studentProfile, onQuizFinish }) {
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [allResponses, setAllResponses] = useState({}); 
   
-  // Mobile Sidebar State
   const [isPaletteOpen, setIsPaletteOpen] = useState(false); 
 
-  // Load Data
   useEffect(() => {
     fetchQuestions()
       .then(data => { setQuestions(data); setLoading(false); })
       .catch(() => setLoading(false));
   }, []);
 
-  // Timer & Submit
   const handleFinalSubmit = useCallback(() => {
     let score = 0;
     questions.forEach(q => {
@@ -43,7 +40,6 @@ function QuizApp({ studentProfile, onQuizFinish }) {
     return () => clearInterval(timer);
   }, [loading, timeRemaining, handleFinalSubmit]);
 
-  // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
   }, []);
@@ -59,11 +55,22 @@ function QuizApp({ studentProfile, onQuizFinish }) {
     });
   };
 
+  // --- NEW FUNCTION: Mark for Review ---
+  const handleMarkReview = () => {
+    const currentQId = questions[currentQIndex].id;
+    setAllResponses(prev => ({
+      ...prev,
+      [currentQId]: { 
+        ...prev[currentQId], 
+        // Keep the answer if it exists, just change status
+        status: 'marked_review' 
+      }
+    }));
+  };
+
   const handlePrevious = () => { if (currentQIndex > 0) setCurrentQIndex(prev => prev - 1); };
   const handleSaveNext = () => {
     if (currentQIndex < questions.length - 1) setCurrentQIndex(prev => prev + 1);
-    // Do NOT close palette automatically on "Save & Next" if you want it to stay open, 
-    // but usually for mobile it's better to close it to see the question.
     setIsPaletteOpen(false); 
   };
   const handleQuestionClick = (index) => {
@@ -84,18 +91,15 @@ function QuizApp({ studentProfile, onQuizFinish }) {
 
       <Header studentProfile={studentProfile} timeRemaining={timeRemaining} />
       
-      {/* Mobile Overlay */}
       <div className={`mobile-overlay ${isPaletteOpen ? 'active' : ''}`} onClick={() => setIsPaletteOpen(false)}></div>
 
       <div className="quiz-main-grid">
-        
-        {/* Left: Question Area */}
         <div className="quiz-panel">
            <div className="panel-top-bar">
               <h3>Question {currentQIndex + 1}</h3>
-              {/* ☰ THREE LINE BUTTON (Right of Q.No) */}
+              {/* UPDATED: Button text is now just 3 lines */}
               <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>
-                ☰ Grid
+                ☰
               </button>
            </div>
            
@@ -106,10 +110,7 @@ function QuizApp({ studentProfile, onQuizFinish }) {
            />
         </div>
         
-        {/* Right: Palette (Sidebar on Mobile) */}
         <div className={`navigator-panel ${isPaletteOpen ? 'mobile-visible' : ''}`}>
-          
-          {/* "X" Close Button for Mobile */}
           <div className="mobile-close-btn">
             <span>Question Palette</span>
             <button onClick={() => setIsPaletteOpen(false)}>✕</button>
@@ -128,7 +129,11 @@ function QuizApp({ studentProfile, onQuizFinish }) {
         <div className="bottom-left">
           <button className="quiz-btn btn-prev" onClick={handlePrevious} disabled={currentQIndex === 0}>←</button>
           <button className="quiz-btn btn-clear" onClick={handleClearSelection}>Clear</button>
+          
+          {/* NEW BUTTON: Mark for Review */}
+          <button className="quiz-btn btn-mark" onClick={handleMarkReview}>Review</button>
         </div>
+        
         <div className="bottom-right">
           <button className="quiz-btn btn-save" onClick={handleSaveNext}>Save & Next</button>
           {currentQIndex === questions.length - 1 && (
