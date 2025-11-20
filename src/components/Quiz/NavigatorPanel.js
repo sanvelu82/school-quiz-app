@@ -1,8 +1,10 @@
-// src/components/Quiz/NavigatorPanel.js
-import React from 'react';
+import React, { useState } from 'react';
 
 function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClick }) {
   
+  // State to track which section is open (default to first section)
+  const [openSection, setOpenSection] = useState(0);
+
   // Helper to get status of a specific question
   const getStatus = (qId) => {
     const response = allResponses[qId];
@@ -13,12 +15,11 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
   // Function to determine the CSS class based on the response status
   const getStatusClass = (qId) => {
     const status = getStatus(qId);
-    
     switch (status) {
       case 'marked_answered': return 'marked-answered'; // Purple
       case 'answered': return 'answered'; // Green
       case 'marked_review': return 'marked-review'; // Orange/Red
-      case 'visited': return 'not-answered'; // Red/Pink (defined in your CSS/logic)
+      case 'visited': return 'not-answered'; // Red/Pink
       default: return 'unvisited'; // Grey
     }
   };
@@ -36,10 +37,25 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
     }).length;
   };
 
+  // Helper to chunk questions into groups of 10
+  const chunkQuestions = (arr, size) => {
+    const chunks = [];
+    for (let i = 0; i < arr.length; i += size) {
+      chunks.push(arr.slice(i, i + size));
+    }
+    return chunks;
+  };
+
+  const questionChunks = chunkQuestions(questions, 10);
+
+  const toggleSection = (index) => {
+    setOpenSection(openSection === index ? null : index);
+  };
+
   return (
     <div className="navigator-panel-container">
       
-      {/* --- 1. LEGEND SECTION (Matches Image Layout) --- */}
+      {/* --- 1. LEGEND SECTION --- */}
       <div className="palette-legend">
         <div className="legend-row">
             <div className="legend-item">
@@ -50,7 +66,7 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
                 </div>
             </div>
             <div className="legend-item">
-                <span className="legend-box unvisited" style={{backgroundColor: '#ff4d4d', color:'white'}}></span> {/* Custom Red for Not Answered if needed */}
+                <span className="legend-box not-answered"></span>
                 <div className="legend-info">
                     <span className="legend-count">{getCount('not_answered')}</span>
                     <span className="legend-text">Not Answered</span>
@@ -86,30 +102,50 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
         </div>
       </div>
 
-      {/* --- 2. SECTION HEADERS --- */}
       <div className="palette-section-header">
           <h4>Choose a Question</h4>
       </div>
-      <h5 className="section-subheader">Section A</h5>
 
-      {/* --- 3. QUESTION GRID --- */}
-      <div className="question-grid">
-        {questions.map((q, index) => {
-          const qId = q.id;
-          const isCurrent = index === currentQIndex;
-          const statusClass = getStatusClass(qId);
-          
+      {/* --- 2. QUESTION SECTIONS --- */}
+      <div className="question-sections">
+        {questionChunks.map((chunk, sectionIndex) => {
+          const startNum = sectionIndex * 10 + 1;
+          const endNum = Math.min((sectionIndex + 1) * 10, questions.length);
+          const isOpen = openSection === sectionIndex;
+
           return (
-            <button
-              key={qId}
-              // Combine status class with 'current' class for border effect
-              className={`q-button ${statusClass} ${isCurrent ? 'current-q' : ''}`}
-              onClick={() => onQuestionClick(index)}
-            >
-              {index + 1}
-              {/* Optional: Add small dot for marked-answered if needed */}
-              {statusClass === 'marked-answered' && <span className="btn-dot"></span>}
-            </button>
+            <div key={sectionIndex} className="section-container">
+              {/* Section Header Button */}
+              <button 
+                className={`section-toggle-btn ${isOpen ? 'active' : ''}`}
+                onClick={() => toggleSection(sectionIndex)}
+              >
+                <span>Questions {startNum} - {endNum}</span>
+                <span className="toggle-icon">{isOpen ? '−' : '+'}</span>
+              </button>
+
+              {/* Section Grid (Collapsible) */}
+              {isOpen && (
+                <div className="section-grid">
+                  {chunk.map((q) => {
+                    const originalIndex = q.id - 1; 
+                    const statusClass = getStatusClass(q.id);
+                    const isCurrent = originalIndex === currentQIndex;
+
+                    return (
+                      <button
+                        key={q.id}
+                        className={`q-button ${statusClass} ${isCurrent ? 'current-q' : ''}`}
+                        onClick={() => onQuestionClick(originalIndex)}
+                      >
+                        {q.id}
+                        {statusClass === 'marked-answered' && <span className="btn-dot"></span>}
+                      </button>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           );
         })}
       </div>
