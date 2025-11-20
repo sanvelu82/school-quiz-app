@@ -1,31 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import LoginScreen from './components/Auth/LoginScreen';
 import ConfirmationScreen from './components/Auth/ConfirmationScreen';
 import QuizApp from './components/Quiz/QuizApp'; 
 import { handleSubmitResults } from './services/api';
 
+// 🔊 DEFINE AUDIO HERE (Ensure file exists in public folder)
+const BEEP_URL = "/beep.mp3"; 
+
 function App() {
   const [studentProfile, setStudentProfile] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState('idle');
-  const [isFullScreen, setIsFullScreen] = useState(true); 
-  
-  // 🆕 Session State
   const [currentSession, setCurrentSession] = useState(null);
+  const [isFullScreen, setIsFullScreen] = useState(true); 
 
-  // Full Screen Helper
+  // 🔊 CREATE AUDIO PLAYER ONCE
+  const beepAudio = useRef(new Audio(BEEP_URL));
+
   const enterFullScreen = () => {
     const elem = document.documentElement;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen().catch(err => console.log(err));
-    } else if (elem.webkitRequestFullscreen) { 
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { 
-      elem.msRequestFullscreen();
-    }
+    if (elem.requestFullscreen) elem.requestFullscreen().catch(err => console.log(err));
+    else if (elem.webkitRequestFullscreen) elem.webkitRequestFullscreen();
   };
 
-  // Strict Mode Listener
   useEffect(() => {
     const handleFullScreenChange = () => {
       const isFull = !!document.fullscreenElement || !!document.webkitFullscreenElement;
@@ -39,10 +36,9 @@ function App() {
     };
   }, []);
 
-  // Handle Login Success
   const handleLoginSuccess = (profileData, sessionData) => {
     setStudentProfile(profileData);
-    setCurrentSession(sessionData); // Store session data
+    setCurrentSession(sessionData); 
     setSubmissionStatus('idle');
     enterFullScreen();
   };
@@ -50,6 +46,17 @@ function App() {
   const handleStartQuiz = () => {
     setIsConfirmed(true);
     enterFullScreen();
+
+    // 🔊 UNLOCK AUDIO: Play and immediately pause
+    // This tells the browser "The user wants this sound," so the timer can play it later.
+    const audio = beepAudio.current;
+    if (audio) {
+      audio.volume = 1.0;
+      audio.play().then(() => {
+        audio.pause();
+        audio.currentTime = 0;
+      }).catch(error => console.log("Audio Unlock Failed (Check file path):", error));
+    }
   };
 
   const handleQuizFinish = async (finalScore, detailedResponses) => {
@@ -71,23 +78,18 @@ function App() {
     if (document.exitFullscreen) document.exitFullscreen().catch(e => {});
   };
 
-  // Violation Screen
   if (studentProfile && !isFullScreen && submissionStatus !== 'success') {
     return (
       <div className="violation-overlay">
         <div className="violation-box">
           <h1>⚠️ ACTION REQUIRED</h1>
-          <p>You are attempting to exit the secure exam environment.</p>
           <p>To continue the quiz, you must return to Full Screen mode.</p>
-          <button onClick={enterFullScreen} className="return-btn">
-            Return to Exam
-          </button>
+          <button onClick={enterFullScreen} className="return-btn">Return to Exam</button>
         </div>
       </div>
     );
   }
 
-  // Render Logic
   if (!studentProfile) {
     return <LoginScreen onLoginSuccess={handleLoginSuccess} />; 
   }
@@ -103,23 +105,14 @@ function App() {
   }
 
   if (submissionStatus === 'submitting') {
-    return (
-      <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}>
-        <h2>Submitting your results...</h2>
-        <p>Please do not close this window.</p>
-      </div>
-    );
+    return <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}><h2>Submitting...</h2></div>;
   }
 
   if (submissionStatus === 'success') {
     return (
-      <div className="app-container" style={{textAlign: 'center', marginTop: '50px', fontFamily: 'Arial'}}>
-        <h1 style={{color: 'green'}}>Test Submitted Successfully!</h1>
-        <p>Thank you, <strong>{studentProfile.fullName}</strong>.</p>
-        <p>Your response has been recorded.</p>
-        <button onClick={handleLogout} style={{padding: '10px 20px', marginTop: '20px', cursor: 'pointer'}}>
-          Return to Home
-        </button>
+      <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}>
+        <h1 style={{color: 'green'}}>Submitted Successfully!</h1>
+        <button onClick={handleLogout} style={{padding: '10px 20px', marginTop: '20px'}}>Return to Home</button>
       </div>
     );
   }
@@ -128,7 +121,8 @@ function App() {
     <QuizApp 
       studentProfile={studentProfile} 
       session={currentSession}
-      onQuizFinish={handleQuizFinish} 
+      onQuizFinish={handleQuizFinish}
+      beepAudio={beepAudio.current} // 🔊 PASS UNLOCKED AUDIO DOWN
     />
   );
 }

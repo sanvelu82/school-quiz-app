@@ -1,14 +1,12 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { fetchQuestions } from '../../services/data';
 import { getExamDurationSeconds } from '../../utils/scheduler';
 import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-// 🔊 UPDATE: Pointing to your file in the public folder
-const BEEP_URL = "/beep.mp3"; // Make sure your file is named exactly this in the public folder
-
-function QuizApp({ studentProfile, session, onQuizFinish }) {
+// 🔊 Receive 'beepAudio' as a prop
+function QuizApp({ studentProfile, session, onQuizFinish, beepAudio }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState(0);
@@ -16,10 +14,6 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [allResponses, setAllResponses] = useState({}); 
   const [isPaletteOpen, setIsPaletteOpen] = useState(false); 
 
-  // Audio Ref
-  const beepAudio = useRef(new Audio(BEEP_URL));
-
-  // 1. Load Questions & Timer
   useEffect(() => {
     if (session && session.questionFile) {
       fetchQuestions(session.questionFile)
@@ -47,7 +41,6 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     onQuizFinish(score, allResponses);
   }, [questions, allResponses, onQuizFinish]);
 
-  // 2. Timer & Beep Logic
   useEffect(() => {
     if (loading) return;
 
@@ -59,14 +52,14 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
           return 0;
         }
         
-        // 🔊 BEEP LOGIC (Last 10 seconds)
-        if (prev <= 11 && prev > 1) { 
-           if (beepAudio.current) {
-             // Reset to 0 to allow rapid replay of 1s clip
-             beepAudio.current.currentTime = 0; 
-             beepAudio.current.play().catch(e => {
-                 // Ignore play errors (usually due to no user interaction yet)
-             });
+        // 🔊 BEEP LOGIC (Uses unlocked audio)
+        // Play beep when 10s or less remaining (and not at 0)
+        if (prev <= 11 && prev > 1 && beepAudio) { 
+           try {
+             beepAudio.currentTime = 0;
+             beepAudio.play().catch(e => console.warn("Audio error:", e));
+           } catch (e) {
+             console.warn("Audio fail");
            }
         }
         
@@ -75,17 +68,9 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [loading, handleFinalSubmit]);
+  }, [loading, handleFinalSubmit, beepAudio]);
 
-  // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
-    // Audio Unlock Trick: Play/Pause on first interaction
-    if (beepAudio.current.paused) {
-        beepAudio.current.play().then(() => {
-            beepAudio.current.pause();
-            beepAudio.current.currentTime = 0;
-        }).catch(() => {});
-    }
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
   }, []);
 
