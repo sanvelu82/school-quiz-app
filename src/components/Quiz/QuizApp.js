@@ -1,26 +1,43 @@
-// src/components/Quiz/QuizApp.js
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchQuestions } from '../../services/data';
+import { getExamDurationSeconds } from '../../utils/scheduler';
 import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-const TOTAL_TIME_SECONDS = 30; 
+// Simple Beep Sound (Base64 MP3)
+const BEEP_URL = "data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//NExAAAAANIAAAAAExBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//NExAAAAANIAAAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//NExAAAAANIAAAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//NExAAAAANIAAAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
 
-function QuizApp({ studentProfile, onQuizFinish }) {
+function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [timeRemaining, setTimeRemaining] = useState(TOTAL_TIME_SECONDS);
+  const [timeRemaining, setTimeRemaining] = useState(0);
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [allResponses, setAllResponses] = useState({}); 
-  
   const [isPaletteOpen, setIsPaletteOpen] = useState(false); 
 
+  // Audio Ref
+  const beepAudio = useRef(new Audio(BEEP_URL));
+
+  // 1. Load Questions & Timer based on Session
   useEffect(() => {
-    fetchQuestions()
-      .then(data => { setQuestions(data); setLoading(false); })
-      .catch(() => setLoading(false));
-  }, []);
+    if (session && session.questionFile) {
+      fetchQuestions(session.questionFile)
+        .then(data => { 
+          setQuestions(data); 
+          
+          // Calculate remaining time until session end
+          const secondsLeft = getExamDurationSeconds(session);
+          setTimeRemaining(secondsLeft);
+          
+          setLoading(false); 
+        })
+        .catch(err => {
+          console.error(err);
+          setLoading(false);
+        });
+    }
+  }, [session]);
 
   const handleFinalSubmit = useCallback(() => {
     let score = 0;
@@ -33,12 +50,29 @@ function QuizApp({ studentProfile, onQuizFinish }) {
     onQuizFinish(score, allResponses);
   }, [questions, allResponses, onQuizFinish]);
 
+  // 2. Timer Loop & Beep Logic
   useEffect(() => {
     if (loading) return;
-    if (timeRemaining <= 0) { handleFinalSubmit(); return; }
-    const timer = setInterval(() => setTimeRemaining(p => p - 1), 1000);
+
+    const timer = setInterval(() => {
+      setTimeRemaining(prev => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleFinalSubmit();
+          return 0;
+        }
+        
+        // 🔊 BEEP during last 10 seconds
+        if (prev <= 11 && prev > 1) { 
+           beepAudio.current.play().catch(e => console.log("Audio play failed", e));
+        }
+        
+        return prev - 1;
+      });
+    }, 1000);
+
     return () => clearInterval(timer);
-  }, [loading, timeRemaining, handleFinalSubmit]);
+  }, [loading, handleFinalSubmit]);
 
   const handleAnswerChange = useCallback((qId, opt) => {
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
@@ -55,16 +89,11 @@ function QuizApp({ studentProfile, onQuizFinish }) {
     });
   };
 
-  // --- NEW FUNCTION: Mark for Review ---
   const handleMarkReview = () => {
     const currentQId = questions[currentQIndex].id;
     setAllResponses(prev => ({
       ...prev,
-      [currentQId]: { 
-        ...prev[currentQId], 
-        // Keep the answer if it exists, just change status
-        status: 'marked_review' 
-      }
+      [currentQId]: { ...prev[currentQId], status: 'marked_review' }
     }));
   };
 
@@ -78,13 +107,12 @@ function QuizApp({ studentProfile, onQuizFinish }) {
     setIsPaletteOpen(false);
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div style={{padding:50, textAlign:'center'}}>Loading Exam Paper...</div>;
   const currentQuestion = questions[currentQIndex];
   const currentSelectedAnswer = allResponses[currentQuestion?.id]?.answer || null;
 
   return (
     <div className="quiz-page">
-      
       <div className="watermark-container">
         {Array.from({ length: 50 }).map((_, i) => ( <span key={i} className="watermark-text">SVV HI-TECH</span> ))}
       </div>
@@ -97,17 +125,16 @@ function QuizApp({ studentProfile, onQuizFinish }) {
         <div className="quiz-panel">
            <div className="panel-top-bar">
               <h3>Question {currentQIndex + 1}</h3>
-              {/* UPDATED: Button text is now just 3 lines */}
-              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>
-                ☰
-              </button>
+              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>☰</button>
            </div>
            
-           <QuestionDisplay 
-              question={currentQuestion}
-              selectedAnswer={currentSelectedAnswer}
-              onAnswerChange={handleAnswerChange}
-           />
+           {currentQuestion && (
+             <QuestionDisplay 
+                question={currentQuestion}
+                selectedAnswer={currentSelectedAnswer}
+                onAnswerChange={handleAnswerChange}
+             />
+           )}
         </div>
         
         <div className={`navigator-panel ${isPaletteOpen ? 'mobile-visible' : ''}`}>
@@ -115,7 +142,6 @@ function QuizApp({ studentProfile, onQuizFinish }) {
             <span>Question Palette</span>
             <button onClick={() => setIsPaletteOpen(false)}>✕</button>
           </div>
-
           <NavigatorPanel 
             questions={questions}
             allResponses={allResponses}
@@ -129,11 +155,8 @@ function QuizApp({ studentProfile, onQuizFinish }) {
         <div className="bottom-left">
           <button className="quiz-btn btn-prev" onClick={handlePrevious} disabled={currentQIndex === 0}>←</button>
           <button className="quiz-btn btn-clear" onClick={handleClearSelection}>Clear</button>
-          
-          {/* NEW BUTTON: Mark for Review */}
           <button className="quiz-btn btn-mark" onClick={handleMarkReview}>Review</button>
         </div>
-        
         <div className="bottom-right">
           <button className="quiz-btn btn-save" onClick={handleSaveNext}>Save & Next</button>
           {currentQIndex === questions.length - 1 && (

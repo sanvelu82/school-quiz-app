@@ -9,10 +9,13 @@ function App() {
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState('idle');
   
-  // STRICT MODE STATE
-  const [isFullScreen, setIsFullScreen] = useState(true); // Default true so it doesn't block login
+  // Session State
+  const [currentSession, setCurrentSession] = useState(null);
+  
+  // Strict Mode State
+  const [isFullScreen, setIsFullScreen] = useState(true); 
 
-  // --- 1. Full Screen Helper Function ---
+  // Full Screen Helper
   const enterFullScreen = () => {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
@@ -24,15 +27,13 @@ function App() {
     }
   };
 
-  // --- 2. Strict Mode Listener ---
+  // Strict Mode Listener
   useEffect(() => {
     const handleFullScreenChange = () => {
-      // Check if document has a fullscreen element
       const isFull = !!document.fullscreenElement || !!document.webkitFullscreenElement;
       setIsFullScreen(isFull);
     };
 
-    // Listen for changes (ESC key, etc.)
     document.addEventListener('fullscreenchange', handleFullScreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
 
@@ -42,16 +43,16 @@ function App() {
     };
   }, []);
 
-  const handleLoginSuccess = (profileData) => {
+  // Login Success Handler (Now receives session data)
+  const handleLoginSuccess = (profileData, sessionData) => {
     setStudentProfile(profileData);
+    setCurrentSession(sessionData); 
     setSubmissionStatus('idle');
-    // Trigger Full Screen immediately on success
     enterFullScreen();
   };
   
   const handleStartQuiz = () => {
     setIsConfirmed(true);
-    // Re-trigger just in case
     enterFullScreen();
   };
 
@@ -68,14 +69,13 @@ function App() {
 
   const handleLogout = () => {
     setStudentProfile(null);
+    setCurrentSession(null);
     setIsConfirmed(false);
     setSubmissionStatus('idle');
-    // Optional: Exit full screen on logout
     if (document.exitFullscreen) document.exitFullscreen().catch(e => {});
   };
 
-  // --- 3. THE VIOLATION SCREEN (Blocks view if Full Screen is lost) ---
-  // Only show this if user IS logged in but NOT in full screen
+  // --- VIOLATION SCREEN ---
   if (studentProfile && !isFullScreen && submissionStatus !== 'success') {
     return (
       <div className="violation-overlay">
@@ -91,14 +91,20 @@ function App() {
     );
   }
 
-  // --- NORMAL RENDERING LOGIC ---
+  // --- RENDER LOGIC ---
 
   if (!studentProfile) {
     return <LoginScreen onLoginSuccess={handleLoginSuccess} />; 
   }
 
   if (studentProfile && !isConfirmed) {
-    return <ConfirmationScreen studentProfile={studentProfile} onConfirmStart={handleStartQuiz} />;
+    return (
+      <ConfirmationScreen 
+         studentProfile={studentProfile} 
+         session={currentSession}
+         onConfirmStart={handleStartQuiz} 
+      />
+    );
   }
 
   if (submissionStatus === 'submitting') {
@@ -123,7 +129,13 @@ function App() {
     );
   }
 
-  return <QuizApp studentProfile={studentProfile} onQuizFinish={handleQuizFinish} />;
+  return (
+    <QuizApp 
+      studentProfile={studentProfile} 
+      session={currentSession}
+      onQuizFinish={handleQuizFinish} 
+    />
+  );
 }
 
 export default App;

@@ -1,9 +1,14 @@
 // src/services/data.js
 
-export const fetchQuestions = async () => {
+// Now accepts a filename argument
+export const fetchQuestions = async (fileName) => {
   try {
-    // Looks for the questions.json file in the public folder
-    const response = await fetch('/questions.json'); 
+    // If no file provided, default to questions.json
+    const targetFile = fileName || '/questions.json'; 
+    
+    console.log(`Fetching questions from: ${targetFile}`);
+    
+    const response = await fetch(targetFile); 
     
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);

@@ -1,11 +1,25 @@
-// src/components/Auth/ConfirmationScreen.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getSecondsUntilStart } from '../../utils/scheduler';
 
-function ConfirmationScreen({ studentProfile, onConfirmStart }) {
+function ConfirmationScreen({ studentProfile, session, onConfirmStart }) {
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [secondsToStart, setSecondsToStart] = useState(0);
+
+  // Check start time every second
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (session) {
+        const remaining = getSecondsUntilStart(session); // Pass whole session object
+        setSecondsToStart(remaining);
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [session]);
+
+  const isExamStarted = secondsToStart <= 0;
 
   const handleStart = () => {
-    if (isConfirmed) {
+    if (isConfirmed && isExamStarted) {
       onConfirmStart();
     }
   };
@@ -14,17 +28,13 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
     <div className="ultimate-bg">
       <div className="glass-panel hall-ticket animate-card-entry">
         
-        {/* 1. Ticket Header */}
         <div className="ticket-header">
           <div className="ticket-badge">2025 EXAM SESSION</div>
           <h3>Candidate Verification</h3>
           <p>Please verify your identity before proceeding.</p>
         </div>
 
-        {/* 2. Candidate Grid */}
         <div className="candidate-grid">
-          
-          {/* Photo Column */}
           <div className="photo-section">
             <div className="photo-frame">
               <img 
@@ -36,7 +46,6 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
             </div>
           </div>
 
-          {/* Details Column */}
           <div className="details-section">
             <div className="detail-row">
               <label>Candidate Name</label>
@@ -50,23 +59,19 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
               </div>
               <div className="split-item">
                 <label>Class & Sec</label>
-                
-                {/* 🚨 FIX: Changed quizClass -> class and quizSection -> section */}
                 <div className="value-box">
                    {studentProfile.class || studentProfile.quizClass} - {studentProfile.section || studentProfile.quizSection}
                 </div>
-                
               </div>
             </div>
 
             <div className="detail-row">
-              <label>Exam Center</label>
-              <div className="value-box">Computer Lab 1 (Main Block)</div>
+              <label>Session</label>
+              <div className="value-box">{session ? session.name : 'Unknown'}</div>
             </div>
           </div>
         </div>
 
-        {/* 3. Instructions */}
         <div className="instruction-box">
           <h4>⚠️ Important Instructions:</h4>
           <ul>
@@ -76,23 +81,30 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
           </ul>
         </div>
 
-        {/* 4. Footer */}
         <div className="confirmation-footer">
-          <label className="checkbox-container">
-            <input
-              type="checkbox"
-              checked={isConfirmed}
-              onChange={(e) => setIsConfirmed(e.target.checked)}
-            />
-            I confirm that the details above are correct and I am ready to begin.
-          </label>
+          
+          {!isExamStarted ? (
+              <div style={{textAlign:'center', marginBottom:'20px', color:'#dc2626', fontWeight:'bold', background:'#fff0f0', padding:'10px', borderRadius:'8px'}}>
+                 ⏳ Exam starts in: {Math.floor(secondsToStart / 60)}m {secondsToStart % 60}s
+              </div>
+            ) : (
+              <label className="checkbox-container">
+                <input
+                  type="checkbox"
+                  checked={isConfirmed}
+                  onChange={(e) => setIsConfirmed(e.target.checked)}
+                />
+                I confirm that the details above are correct and I am ready to begin.
+              </label>
+            )}
 
           <button 
             onClick={handleStart} 
-            disabled={!isConfirmed}
+            disabled={!isConfirmed || !isExamStarted}
             className="start-btn"
+            style={{ opacity: (!isExamStarted || !isConfirmed) ? 0.6 : 1 }}
           >
-            Start Examination
+            {isExamStarted ? 'Start Examination' : `Wait for ${session.startTime}`}
           </button>
         </div>
 
