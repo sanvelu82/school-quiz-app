@@ -776,24 +776,44 @@ html, body {
 
 /* 1. The Watermark (Now Visible ON TOP) */
 .watermark-container {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 9999; pointer-events: none; overflow: hidden;
-  display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
-  opacity: 0.04; /* Very subtle */
-  transform: rotate(-15deg) scale(1.1);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; /* On top of everything */
+  pointer-events: none; /* Click through it */
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  opacity: 0.06; /* Subtle but visible */
+  transform: rotate(-15deg) scale(1.2);
 }
+
 .watermark-text {
-  font-size: 2rem; /* Smaller size */
-  font-weight: 900; color: #000;
-  margin: 30px; /* Closer spacing */
-  white-space: nowrap; user-select: none; text-transform: uppercase;
+  font-size: 4rem;
+  font-weight: 900;
+  color: #000;
+  margin: 50px;
+  white-space: nowrap;
+  user-select: none;
+  text-transform: uppercase;
 }
 
 /* 2. The Quiz Header */
 .quiz-header {
-  background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 10px 20px;
-  display: flex; justify-content: space-between; align-items: center;
-  height: 80px; position: relative; z-index: 100;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  position: relative;
+  z-index: 100; /* Above the grid */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
 }
 
 /* Left Side: Branding (Reusing EXACT Login Styles) */
