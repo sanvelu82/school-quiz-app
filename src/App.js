@@ -1,66 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import LoginScreen from './components/Auth/LoginScreen';
 import ConfirmationScreen from './components/Auth/ConfirmationScreen';
 import QuizApp from './components/Quiz/QuizApp'; 
-import { handleSubmitResults } from './services/api'; // Import the API submission function
+import { handleSubmitResults } from './services/api';
 
 function App() {
-  // State to track the student's session
   const [studentProfile, setStudentProfile] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
+  const [submissionStatus, setSubmissionStatus] = useState('idle');
   
-  // State to track the submission process
-  const [submissionStatus, setSubmissionStatus] = useState('idle'); // 'idle', 'submitting', 'success', 'error'
+  // STRICT MODE STATE
+  const [isFullScreen, setIsFullScreen] = useState(true); // Default true so it doesn't block login
+
+  // --- 1. Full Screen Helper Function ---
+  const enterFullScreen = () => {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen().catch(err => console.log(err));
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  };
+
+  // --- 2. Strict Mode Listener ---
+  useEffect(() => {
+    const handleFullScreenChange = () => {
+      // Check if document has a fullscreen element
+      const isFull = !!document.fullscreenElement || !!document.webkitFullscreenElement;
+      setIsFullScreen(isFull);
+    };
+
+    // Listen for changes (ESC key, etc.)
+    document.addEventListener('fullscreenchange', handleFullScreenChange);
+    document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
+
+    return () => {
+      document.removeEventListener('fullscreenchange', handleFullScreenChange);
+      document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
+    };
+  }, []);
 
   const handleLoginSuccess = (profileData) => {
     setStudentProfile(profileData);
-    setSubmissionStatus('idle'); // Reset status on new login
+    setSubmissionStatus('idle');
+    // Trigger Full Screen immediately on success
+    enterFullScreen();
   };
   
   const handleStartQuiz = () => {
-    setIsConfirmed(true); // Move to the quiz screen
+    setIsConfirmed(true);
+    // Re-trigger just in case
+    enterFullScreen();
   };
 
   const handleQuizFinish = async (finalScore, detailedResponses) => {
-    // 1. Update UI to show loading state
     setSubmissionStatus('submitting');
-
-    // 2. Send data to Google Sheets via Apps Script
     const result = await handleSubmitResults(studentProfile, finalScore, detailedResponses);
-
-    // 3. Handle the response
     if (result && result.status === 'success') {
       setSubmissionStatus('success');
     } else {
-      alert('Submission failed! Please try again or contact the invigilator.');
+      alert('Submission failed! Please contact invigilator.');
       setSubmissionStatus('error');
     }
-    
-    // We do NOT reset studentProfile immediately, so we can show the "Thank You" screen
   };
 
   const handleLogout = () => {
     setStudentProfile(null);
     setIsConfirmed(false);
     setSubmissionStatus('idle');
+    // Optional: Exit full screen on logout
+    if (document.exitFullscreen) document.exitFullscreen().catch(e => {});
   };
 
-  // --- RENDERING LOGIC ---
+  // --- 3. THE VIOLATION SCREEN (Blocks view if Full Screen is lost) ---
+  // Only show this if user IS logged in but NOT in full screen
+  if (studentProfile && !isFullScreen && submissionStatus !== 'success') {
+    return (
+      <div className="violation-overlay">
+        <div className="violation-box">
+          <h1>⚠️ ACTION REQUIRED</h1>
+          <p>You are attempting to exit the secure exam environment.</p>
+          <p>To continue the quiz, you must return to Full Screen mode.</p>
+          <button onClick={enterFullScreen} className="return-btn">
+            Return to Exam
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-  // 1. Show Login Screen if no student data
+  // --- NORMAL RENDERING LOGIC ---
+
   if (!studentProfile) {
     return <LoginScreen onLoginSuccess={handleLoginSuccess} />; 
   }
 
-  // 2. Show Confirmation Screen after login (before quiz starts)
   if (studentProfile && !isConfirmed) {
-    return <ConfirmationScreen 
-            studentProfile={studentProfile} 
-            onConfirmStart={handleStartQuiz} 
-          />;
+    return <ConfirmationScreen studentProfile={studentProfile} onConfirmStart={handleStartQuiz} />;
   }
 
-  // 3. Handle Submission States (Loading / Success / Error)
   if (submissionStatus === 'submitting') {
     return (
       <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}>
@@ -76,23 +116,14 @@ function App() {
         <h1 style={{color: 'green'}}>Test Submitted Successfully!</h1>
         <p>Thank you, <strong>{studentProfile.fullName}</strong>.</p>
         <p>Your response has been recorded.</p>
-        <button 
-          onClick={handleLogout} 
-          style={{padding: '10px 20px', marginTop: '20px', cursor: 'pointer'}}
-        >
+        <button onClick={handleLogout} style={{padding: '10px 20px', marginTop: '20px', cursor: 'pointer'}}>
           Return to Home
         </button>
       </div>
     );
   }
 
-  // 4. Show Quiz App (The Main Exam Interface)
-  return (
-    <QuizApp 
-      studentProfile={studentProfile} 
-      onQuizFinish={handleQuizFinish} 
-    />
-  );
+  return <QuizApp studentProfile={studentProfile} onQuizFinish={handleQuizFinish} />;
 }
 
 export default App;

@@ -666,3 +666,58 @@ button:disabled {
     padding-top: 10px;
   }
 }
+/* =========================================
+   STRICT MODE VIOLATION SCREEN
+   ========================================= */
+
+.violation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9); /* Dark opaque background */
+  z-index: 9999; /* Sit on top of EVERYTHING */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+}
+
+.violation-box {
+  background: #fff;
+  padding: 40px;
+  border-radius: 8px;
+  text-align: center;
+  max-width: 500px;
+  border-top: 6px solid #dc2626; /* Red warning bar */
+}
+
+.violation-box h1 {
+  color: #dc2626;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.violation-box p {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.return-btn {
+  margin-top: 20px;
+  padding: 15px 30px;
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: bold;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.return-btn:hover {
+  background-color: #1d4ed8;
+}
