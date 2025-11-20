@@ -677,7 +677,27 @@ html, body {
 
 /* 6. MOBILE SPECIFIC OVERRIDES */
 @media (max-width: 768px) {
-  
+  .ticket-header {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    padding: 20px;
+  }
+
+  /* 2. MOVE THE BADGE TO THE TOP (No longer overlapping) */
+  .ticket-badge {
+    position: relative; /* Stop floating absolutely */
+    top: auto;
+    right: auto;
+    align-self: flex-start; /* Align to the left */
+    margin-bottom: 10px; /* Push the title down */
+    background: #e0e7ff; /* Ensure background stays */
+  }
+
+  /* 3. Adjust Title Size for Mobile */
+  .ticket-header h3 {
+    font-size: 1.3rem;
+    margin-top: 5px;
+  }
   /* -- Scroll Fix for Mobile -- */
   .ultimate-bg {
     display: block; /* Allows scrolling */
