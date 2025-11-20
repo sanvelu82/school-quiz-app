@@ -1,8 +1,9 @@
+// src/components/Quiz/NavigatorPanel.js
 import React, { useState } from 'react';
 
 function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClick }) {
   
-  // State to track which section is open (default to first section)
+  // State to track which section is open (default to first section, index 0)
   const [openSection, setOpenSection] = useState(0);
 
   // Helper to get status of a specific question
@@ -49,6 +50,7 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
   const questionChunks = chunkQuestions(questions, 10);
 
   const toggleSection = (index) => {
+    // Toggle open/close. If clicking the open one, close it (set to null).
     setOpenSection(openSection === index ? null : index);
   };
 
@@ -106,16 +108,17 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
           <h4>Choose a Question</h4>
       </div>
 
-      {/* --- 2. QUESTION SECTIONS --- */}
+      {/* --- 2. QUESTION SECTIONS (Split Spaces) --- */}
       <div className="question-sections">
         {questionChunks.map((chunk, sectionIndex) => {
+          // Calculate range labels (e.g., 1-10, 11-20)
           const startNum = sectionIndex * 10 + 1;
           const endNum = Math.min((sectionIndex + 1) * 10, questions.length);
           const isOpen = openSection === sectionIndex;
 
           return (
             <div key={sectionIndex} className="section-container">
-              {/* Section Header Button */}
+              {/* Section Header Button (Clickable Range) */}
               <button 
                 className={`section-toggle-btn ${isOpen ? 'active' : ''}`}
                 onClick={() => toggleSection(sectionIndex)}
@@ -124,10 +127,11 @@ function NavigatorPanel({ questions, allResponses, currentQIndex, onQuestionClic
                 <span className="toggle-icon">{isOpen ? '−' : '+'}</span>
               </button>
 
-              {/* Section Grid (Collapsible) */}
+              {/* Section Grid (Collapsible Content) */}
               {isOpen && (
                 <div className="section-grid">
                   {chunk.map((q) => {
+                    // IMPORTANT: Calculate the correct index for the main array
                     const originalIndex = q.id - 1; 
                     const statusClass = getStatusClass(q.id);
                     const isCurrent = originalIndex === currentQIndex;
