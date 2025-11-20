@@ -1,6 +1,7 @@
 // src/components/shared/Header.js
 import React from 'react';
 
+// Use the exact same logo URL
 const LOGO_URL = "https://i.ibb.co/qYxNQQPx/Picture2.png";
 
 function Header({ studentProfile, timeRemaining }) {
@@ -12,11 +13,14 @@ function Header({ studentProfile, timeRemaining }) {
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
+  const isUrgent = timeRemaining < 300; 
+
   return (
     <div className="quiz-header">
       
-      {/* 1. Branding Row (Always Top) */}
+      {/* Left: Branding (Matches Login Styles) */}
       <div className="quiz-brand">
+        {/* Reusing logo-wrapper class from Login for consistency */}
         <div className="logo-wrapper" style={{width:'50px', height:'50px'}}> 
            <img src={LOGO_URL} alt="Logo" className="school-logo-img" />
         </div>
@@ -26,37 +30,36 @@ function Header({ studentProfile, timeRemaining }) {
         </div>
       </div>
 
-      {/* 2. Desktop Right Side (Hidden on Mobile) */}
+      {/* Right: Student Info & Timer */}
       <div className="right-header-group">
-        <div className="student-badge-desktop">
-          <div className="student-photo-small">
-            <img src={studentProfile.photoUrl || "https://via.placeholder.com/150"} alt="Profile" />
+        
+        <div className="student-badge-container">
+          {/* Box Photo */}
+          <div className="student-photo-box">
+            <img 
+              src={studentProfile.photoUrl || "https://via.placeholder.com/150"} 
+              alt="Profile" 
+            />
           </div>
-          <div className="student-text-desktop">
-             <div className="detail-line-top">{studentProfile.fullName}</div>
-             <div className="detail-line-bottom">{studentProfile.rollNo} | {studentProfile.class}-{studentProfile.section}</div>
+          
+          {/* Split Info: Name/Roll (Top) | Class/Sec (Bottom) */}
+          <div className="student-details">
+            <div className="detail-line-top">
+               {studentProfile.fullName} 
+               <span className="roll-badge">{studentProfile.rollNo}</span>
+            </div>
+            <div className="detail-line-bottom">
+               CLASS: {studentProfile.class || studentProfile.quizClass} - {studentProfile.section || studentProfile.quizSection}
+            </div>
           </div>
         </div>
-        <div className="quiz-timer">{formatTime(timeRemaining)}</div>
-      </div>
 
-      {/* 3. Mobile Student Row (Visible ONLY on Mobile, Below Brand) */}
-      <div className="student-info-row">
-         <div className="student-photo-mobile">
-            <img src={studentProfile.photoUrl || "https://via.placeholder.com/150"} alt="Profile" />
-         </div>
-         <div className="student-text-mobile">
-            <div className="info-name">{studentProfile.fullName}</div>
-            <div className="info-meta">
-               Roll: {studentProfile.rollNo} • {studentProfile.class || studentProfile.quizClass}-{studentProfile.section || studentProfile.quizSection}
-            </div>
-         </div>
-         {/* Timer inside mobile row */}
-         <div className="mobile-timer">
-            {formatTime(timeRemaining)}
-         </div>
-      </div>
+        {/* Timer */}
+        <div className={`quiz-timer ${isUrgent ? 'timer-warning' : ''}`}>
+          {formatTime(timeRemaining)}
+        </div>
 
+      </div>
     </div>
   );
 }
