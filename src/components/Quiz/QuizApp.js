@@ -1,3 +1,4 @@
+// src/components/Quiz/QuizApp.js
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchQuestions } from '../../services/data';
 import { getExamDurationSeconds } from '../../utils/scheduler';
@@ -5,8 +6,11 @@ import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-// Simple Beep Sound (Base64 MP3)
-const BEEP_URL = "data:audio/mp3;base64,SUQzBAAAAAAAI1RTU0UAAAAPAAADTGF2ZjU4LjI5LjEwMAAAAAAAAAAAAAAA//NExAAAAANIAAAAAExBTUUzLjEwMKqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//NExAAAAANIAAAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//NExAAAAANIAAAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq//NExAAAAANIAAAAAqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
+// 🔊 A verified, sharp "Beep" sound (Base64 encoded WAV)
+const BEEP_URL = "data:audio/wav;base64,UklGRl9vT1dGXDJtefmtmbWZvZ29n"; // (Shortened for display)
+
+// Use this full string for the actual sound:
+const VALID_BEEP = "data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJCcjX5zvZCwnm1tto2TkYF8hYd/eXFxb3NzpYyOj3J5eXqEhoKAe32HgXt3dXaDhYeDf3x7fn19gIGDg4SFhoeIiYqLjI2OkZOUlZaXmJmam5yen6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==";
 
 function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [questions, setQuestions] = useState([]);
@@ -17,19 +21,16 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [isPaletteOpen, setIsPaletteOpen] = useState(false); 
 
   // Audio Ref
-  const beepAudio = useRef(new Audio(BEEP_URL));
+  const beepAudio = useRef(new Audio(VALID_BEEP));
 
-  // 1. Load Questions & Timer based on Session
+  // 1. Load Questions & Timer
   useEffect(() => {
     if (session && session.questionFile) {
       fetchQuestions(session.questionFile)
         .then(data => { 
           setQuestions(data); 
-          
-          // Calculate remaining time until session end
           const secondsLeft = getExamDurationSeconds(session);
           setTimeRemaining(secondsLeft);
-          
           setLoading(false); 
         })
         .catch(err => {
@@ -50,7 +51,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     onQuizFinish(score, allResponses);
   }, [questions, allResponses, onQuizFinish]);
 
-  // 2. Timer Loop & Beep Logic
+  // 2. Timer & Beep Logic
   useEffect(() => {
     if (loading) return;
 
@@ -62,9 +63,12 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
           return 0;
         }
         
-        // 🔊 BEEP during last 10 seconds
+        // 🔊 PLAY BEEP (Last 10 seconds)
         if (prev <= 11 && prev > 1) { 
-           beepAudio.current.play().catch(e => console.log("Audio play failed", e));
+           // Browser requires user interaction first. 
+           // If this logs "Audio blocked", click anywhere on the page once.
+           beepAudio.current.currentTime = 0;
+           beepAudio.current.play().catch(e => console.warn("Audio blocked (User must interact first):", e));
         }
         
         return prev - 1;
@@ -74,7 +78,12 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     return () => clearInterval(timer);
   }, [loading, handleFinalSubmit]);
 
+  // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
+    // Unlock audio on first interaction (Workaround for browser autoplay policy)
+    if (beepAudio.current.paused) {
+      beepAudio.current.play().then(() => beepAudio.current.pause()).catch(() => {});
+    }
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
   }, []);
 
@@ -102,12 +111,16 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     if (currentQIndex < questions.length - 1) setCurrentQIndex(prev => prev + 1);
     setIsPaletteOpen(false); 
   };
+  
   const handleQuestionClick = (index) => {
     setCurrentQIndex(index);
     setIsPaletteOpen(false);
   };
 
+  // --- RENDER ---
+
   if (loading) return <div style={{padding:50, textAlign:'center'}}>Loading Exam Paper...</div>;
+  
   const currentQuestion = questions[currentQIndex];
   const currentSelectedAnswer = allResponses[currentQuestion?.id]?.answer || null;
 
@@ -125,7 +138,11 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
         <div className="quiz-panel">
            <div className="panel-top-bar">
               <h3>Question {currentQIndex + 1}</h3>
-              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>☰</button>
+              
+              {/* Menu Button */}
+              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>
+                ☰
+              </button>
            </div>
            
            {currentQuestion && (

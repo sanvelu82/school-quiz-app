@@ -6,9 +6,9 @@ export const EXAM_SESSIONS = [
     id: 1,
     name: "Physics & Chemistry (Morning)",
     date: "2025-11-20",   // 🗓️ YYYY-MM-DD Format
-    loginTime: "23:42",   // Can enter app
-    startTime: "23:45",   // Can click Start
-    endTime:   "23:50",   // Auto-submit
+    loginTime: "23:55",   // Can enter app
+    startTime: "23:55",   // Can click Start
+    endTime:   "23:56",   // Auto-submit
     questionFile: "/questions1.json"
   },
   {
