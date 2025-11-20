@@ -7,17 +7,17 @@
   padding: 0;
 }
 
-/* Force Body to fill 100% of the screen (including notch area) */
+/* Force Body to fill 100% of the screen */
 html, body {
   height: 100%;
   width: 100%;
-  /* CRITICAL FIX: Allow vertical scrolling, prevent horizontal */
+  /* Allow vertical scrolling if content overflows, but prevent horizontal scroll */
   overflow-y: auto; 
   overflow-x: hidden;
-  background-color: #ffffff; /* Pure White Base */
+  background-color: #ffffff;
   font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
-  color: #1e293b; /* Dark Slate Blue for better readability */
-  /* Fix for iOS height */
+  color: #1e293b;
+  /* Fix for iOS height to respect address bar */
   min-height: -webkit-fill-available;
 }
 
@@ -37,30 +37,25 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #ffffff; /* Pure White */
-  padding: 20px !important; /* Padding to prevent edge touching */
-  
-  /* CRITICAL FIX: Allow this container to scroll on mobile */
+  background-color: #ffffff;
+  padding: 20px !important;
+  /* Allow scrolling on small phones */
   overflow-y: auto; 
   -webkit-overflow-scrolling: touch; 
 }
 
-/* The Card */
+/* The Main Card */
 .glass-panel {
-  background: #ffffff; /* Pure White */
+  background: #ffffff;
   width: 100%;
   max-width: 450px;
   padding: 40px;
-  margin: auto; /* Center horizontally if flex fails */
+  margin: auto;
   
-  /* VISUAL SEPARATION: */
-  border: 1px solid #e0e7ff; /* Very light indigo border */
+  /* Visual Style */
+  border: 1px solid #e0e7ff;
   border-radius: 20px;
-  
-  /* Soft, wide shadow for a floating effect */
   box-shadow: 0 20px 40px -5px rgba(79, 70, 229, 0.1);
-  
-  /* VIBRANT ACCENT BAR (Left Side) */
   border-left: 6px solid #4f46e5; 
   position: relative;
 }
@@ -74,7 +69,7 @@ html, body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Header Section */
+/* Header */
 .id-header {
   display: flex;
   align-items: center;
@@ -82,18 +77,15 @@ html, body {
   margin-bottom: 30px;
 }
 
-/* --- LOGO FIX: INVISIBLE BOX --- */
+/* Logo Fix (Invisible Box) */
 .logo-wrapper {
   width: 85px; 
   height: 85px;
-  
-  /* CRITICAL: No background, No shadow, No border */
   background: transparent !important;
   box-shadow: none !important;
   border: none !important;
   border-radius: 0 !important;
   padding: 0 !important;
-  
   display: flex;
   align-items: center;
   justify-content: center;
@@ -103,30 +95,25 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Multiply ensures white corners blend into background */
   mix-blend-mode: multiply; 
-  /* Boost contrast slightly for vibrancy */
   filter: contrast(1.05);
 }
-/* ------------------------------- */
 
+/* School Name */
 .text-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-
 .school-line-1 {
   font-size: 1.6rem;
   font-weight: 900;
   line-height: 1;
   margin-bottom: 4px;
-  /* Gradient Text for "SVV HI-TECH" */
   background: linear-gradient(to right, #1e1b4b, #4f46e5);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-
 .school-line-2 {
   font-size: 0.75rem;
   color: #64748b;
@@ -135,13 +122,13 @@ html, body {
   letter-spacing: 1px;
 }
 
-/* Badge Styling ("Annual Quiz Contest") */
+/* Badge Styling */
 .portal-subtitle {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); /* Light Purple Gradient */
-  color: #4f46e5; /* Indigo Text */
+  background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%);
+  color: #4f46e5;
   font-size: 0.8rem;
   font-weight: 700;
   padding: 6px 16px;
@@ -153,7 +140,7 @@ html, body {
 
 /* Input Fields */
 .input-container {
-  background-color: #f8fafc; /* Light Grey Background */
+  background-color: #f8fafc;
   border-radius: 12px;
   padding: 12px 16px;
   margin-bottom: 20px;
@@ -162,26 +149,23 @@ html, body {
   border: 2px solid #f1f5f9;
   transition: all 0.3s ease;
 }
-
-/* Focused Input State (Vibrant Indigo) */
 .input-container.focused {
   background-color: #fff;
-  border-color: #4f46e5; /* Indigo Focus Border */
-  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); /* Soft Indigo Glow */
+  border-color: #4f46e5;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
 }
 
 .icon-box {
   width: 24px;
   height: 24px;
   margin-right: 15px;
-  color: #94a3b8; /* Grey Icon Default */
+  color: #94a3b8;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .input-container.focused .icon-box {
-  color: #4f46e5; /* Icon turns Indigo on Focus */
+  color: #4f46e5;
 }
 
 .field-wrapper {
@@ -189,14 +173,12 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-
 .field-wrapper label {
   font-size: 0.75rem;
   color: #64748b;
   font-weight: 600;
   margin-bottom: 2px;
 }
-
 .field-wrapper input {
   background: transparent;
   border: none;
@@ -207,12 +189,11 @@ html, body {
   width: 100%;
 }
 
-/* The Main Button (Vibrant Gradient) */
+/* Main Button */
 .neon-button {
   width: 100%;
   padding: 18px;
   margin-top: 10px;
-  /* Blue to Purple Gradient */
   background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   color: white;
   border: none;
@@ -224,23 +205,19 @@ html, body {
   transition: all 0.3s ease;
   box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
 }
-
 .neon-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.6);
   filter: brightness(1.1);
 }
-
 .neon-button:disabled {
   background: #cbd5e1;
   cursor: not-allowed;
   box-shadow: none;
 }
-
-/* Remove old flare */
 .btn-flare { display: none; }
 
-/* Error Message */
+/* Error & Footer */
 .error-toast {
   background: #fef2f2;
   color: #ef4444;
@@ -252,8 +229,6 @@ html, body {
   border: 1px solid #fecaca;
   text-align: center;
 }
-
-/* Footer */
 .panel-footer {
   margin-top: 30px;
   text-align: center;
@@ -269,24 +244,21 @@ html, body {
 /* ==========================================================================
    3. CONFIRMATION SCREEN (Hall Ticket)
    ========================================================================== */
-/* Wider Panel for Hall Ticket */
 .hall-ticket {
-  max-width: 700px !important; /* Wider than login for better layout */
-  padding: 0 !important; /* Remove default padding, we handle inside */
-  border-left: none; /* Remove side border */
-  border-top: 6px solid #4f46e5; /* Top border instead */
+  max-width: 700px !important;
+  padding: 0 !important;
+  border-left: none;
+  border-top: 6px solid #4f46e5;
   overflow: hidden;
-  margin-bottom: 40px; /* Space at bottom for scrolling */
+  margin-bottom: 40px;
 }
 
-/* 1. Header Section */
 .ticket-header {
   background: linear-gradient(to right, #f8fafc, #ffffff);
   padding: 25px 30px;
   border-bottom: 1px solid #e2e8f0;
   position: relative;
 }
-
 .ticket-badge {
   position: absolute;
   top: 20px;
@@ -299,57 +271,50 @@ html, body {
   border-radius: 4px;
   letter-spacing: 0.5px;
 }
-
 .ticket-header h3 {
   font-size: 1.5rem;
   color: #1e293b;
   margin: 0 0 5px 0;
   font-weight: 800;
 }
-
 .ticket-header p {
   color: #64748b;
   font-size: 0.9rem;
   margin: 0;
 }
 
-/* 2. The Grid (Photo Left, Info Right) */
+/* Candidate Grid */
 .candidate-grid {
   display: flex;
   padding: 30px;
   gap: 30px;
   background-color: #ffffff;
 }
-
-/* --- BOX TYPE PHOTO STYLES --- */
 .photo-section {
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .photo-frame {
   width: 140px;
-  height: 170px; /* 4:5 Ratio - Professional ID Standard */
+  height: 170px;
   background: #f1f5f9;
   border: 1px solid #cbd5e1;
   padding: 5px;
-  border-radius: 12px; /* Professional Rounded Corners */
+  border-radius: 12px;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .candidate-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px; /* Slightly tighter radius for inner image */
+  border-radius: 8px;
   background-color: #e2e8f0;
 }
-
 .photo-label {
   font-size: 0.65rem;
   color: #94a3b8;
@@ -358,14 +323,13 @@ html, body {
   letter-spacing: 1px;
 }
 
-/* Details Alignment */
+/* Details */
 .details-section {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   gap: 15px;
 }
-
 .detail-row label, .split-item label {
   display: block;
   font-size: 0.75rem;
@@ -374,7 +338,6 @@ html, body {
   font-weight: 700;
   margin-bottom: 4px;
 }
-
 .value-box {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
@@ -384,24 +347,16 @@ html, body {
   font-weight: 600;
   color: #334155;
 }
-
 .highlight-text {
   color: #1e293b;
   font-size: 1.2rem;
   font-weight: 700;
-  border-left: 4px solid #4f46e5; /* Indigo accent for Name */
+  border-left: 4px solid #4f46e5;
 }
+.detail-row-split { display: flex; gap: 15px; }
+.split-item { flex: 1; }
 
-.detail-row-split {
-  display: flex;
-  gap: 15px;
-}
-
-.split-item {
-  flex: 1;
-}
-
-/* 3. Instructions & Footer */
+/* Instructions */
 .instruction-box {
   margin: 0 30px 20px 30px;
   background: #fff1f2;
@@ -409,26 +364,22 @@ html, body {
   border-radius: 8px;
   padding: 15px;
 }
-
 .instruction-box h4 {
   color: #be123c;
   font-size: 0.9rem;
   margin: 0 0 5px 0;
 }
-
 .instruction-box ul {
   margin: 0;
   padding-left: 20px;
   color: #881337;
   font-size: 0.85rem;
 }
-
 .confirmation-footer {
   padding: 20px 30px 30px 30px;
   border-top: 1px solid #f1f5f9;
 }
 
-/* Checkbox Styling */
 .checkbox-container {
   display: flex;
   align-items: center;
@@ -439,23 +390,20 @@ html, body {
   margin-bottom: 20px;
   user-select: none;
 }
-
 .checkbox-container input {
   width: 18px;
   height: 18px;
   cursor: pointer;
   accent-color: #4f46e5;
 }
-
 .start-btn {
-  margin-top: 0;
   width: 100%;
-  font-size: 1.1rem;
   padding: 16px;
-  background: #10b981; /* Green for Go */
+  background-color: #10b981;
   color: white;
   border: none;
   border-radius: 12px;
+  font-size: 1rem;
   font-weight: 700;
   cursor: pointer;
 }
@@ -464,536 +412,140 @@ html, body {
   cursor: not-allowed;
 }
 
-
 /* ==========================================================================
-   4. QUIZ INTERFACE (Header & Layout)
+   4. QUIZ PAGE STYLES (Header, Watermark, Layout)
    ========================================================================== */
 
-/* Header */
-.app-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #fff;
-  padding: 10px 15px;
-  border-bottom: 1px solid #f1f5f9;
-  height: auto;
-  min-height: 60px;
-  position: sticky;
-  top: 0;
-  z-index: 100;
+/* Watermark (Subtle & Frequent) */
+.watermark-container {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 9999; pointer-events: none; overflow: hidden;
+  display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+  opacity: 0.04; transform: rotate(-15deg) scale(1.1);
+}
+.watermark-text {
+  font-size: 2rem; font-weight: 900; color: #000;
+  margin: 30px; white-space: nowrap; user-select: none; text-transform: uppercase;
 }
 
-.header-photo {
-  height: 45px;
-  width: 45px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 1px solid #eee;
-  margin-right: 10px;
+/* Quiz Header */
+.quiz-header {
+  background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 10px 20px;
+  display: flex; justify-content: space-between; align-items: center;
+  height: 80px; position: relative; z-index: 100;
 }
 
-.student-info {
-  display: flex;
-  flex-direction: column;
-  margin-right: auto;
-}
+.quiz-brand { display: flex; align-items: center; gap: 15px; }
+.right-header-group { display: flex; align-items: center; gap: 15px; }
 
-.student-info span {
-  font-size: 0.85rem;
-  font-weight: 600;
-  line-height: 1.2;
-}
+/* Desktop Badge */
+.student-badge-container { display: flex; align-items: center; gap: 12px; background: #f8fafc; padding: 5px 12px; border-radius: 8px; border: 1px solid #cbd5e1; }
+.student-photo-box { width: 40px; height: 50px; border-radius: 4px; overflow: hidden; border: 1px solid #94a3b8; background: #e2e8f0; flex-shrink: 0; }
+.student-photo-box img { width: 100%; height: 100%; object-fit: cover; }
+.student-details { display: flex; flex-direction: column; justify-content: center; gap: 2px; }
+.detail-line-top { font-size: 0.85rem; font-weight: 700; color: #1e293b; display: flex; gap: 5px; align-items: center;}
+.roll-badge { font-size: 0.65rem; background: #1e293b; color: #fff; padding: 1px 5px; border-radius: 4px; }
+.detail-line-bottom { font-size: 0.7rem; font-weight: 600; color: #64748b; text-transform: uppercase; border-top: 1px solid #cbd5e1; padding-top: 2px; width: 100%; }
 
-.timer {
-  font-size: 1rem;
-  font-weight: 700;
-  color: #dc3545;
-  background: #fff0f0;
-  padding: 6px 12px;
-  border-radius: 8px;
-}
+.quiz-timer { background: #2563eb; color: #fff; padding: 8px 15px; border-radius: 6px; font-weight: 700; font-size: 1.1rem; min-width: 100px; text-align: center; }
+.timer-warning { background: #dc2626; animation: pulse 1s infinite; }
 
-/* Main Quiz Layout */
-.quiz-page {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+/* Mobile Menu Button */
+.mobile-menu-btn { display: none; font-size: 1.8rem; cursor: pointer; padding: 5px; color: #1e293b; }
 
-.quiz-main-grid {
-  display: flex;
-  flex: 1;
-  height: 100%;
-  overflow: hidden;
-}
+/* Student Info Row (Mobile Only) */
+.student-info-row { display: none; } 
 
-/* Left Panel (Question) */
+/* ==========================================================================
+   5. QUIZ MAIN GRID (Layout)
+   ========================================================================== */
+.quiz-page { height: 100vh; display: flex; flex-direction: column; }
+.quiz-main-grid { display: flex; height: calc(100vh - 80px - 70px); position: relative; z-index: 5; }
+
+/* Left: Question Panel */
 .quiz-panel {
-  flex: 3;
-  padding: 20px;
-  overflow-y: auto;
-  background: white;
-  display: flex;
-  flex-direction: column;
-  padding-bottom: 80px; 
+  flex: 3; padding: 40px; overflow-y: auto;
+  background: rgba(255,255,255,0.96); padding-bottom: 80px; 
+  display: flex; flex-direction: column; 
 }
 
-.question-text {
-  font-size: 1.1rem;
-  margin: 15px 0 25px 0;
-  line-height: 1.6;
-  color: #111;
-  font-weight: 500;
+/* Top Bar inside Panel */
+.panel-top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.panel-top-bar h3 { margin: 0; color: #1e293b; }
+
+/* Toggle Button (Mobile) */
+.palette-toggle-btn {
+  display: none; /* Hidden on Desktop */
+  background: #f1f5f9; border: 1px solid #cbd5e1; color: #1e293b;
+  padding: 8px 12px; border-radius: 6px; font-weight: 700; font-size: 1rem; cursor: pointer;
 }
 
-.option-item {
-  margin: 10px 0;
-  padding: 15px;
-  border: 1px solid #e2e8f0;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  cursor: pointer;
-  background: #f8fafc;
-  transition: background 0.2s;
-}
+.question-text { font-size: 1.2rem; margin: 15px 0 25px 0; line-height: 1.6; color: #111; font-weight: 500; }
+.option-item { margin: 10px 0; padding: 15px; border: 1px solid #e2e8f0; border-radius: 12px; display: flex; align-items: center; gap: 12px; cursor: pointer; background: #f8fafc; transition: background 0.2s; }
+.option-item:hover { background-color: #f0f9ff; border-color: #2563eb; }
+.option-item input { width: 20px; height: 20px; }
 
-.option-item:hover {
-  background-color: #f0f9ff;
-  border-color: #2563eb;
-}
-
-.option-item input {
-  width: 20px;
-  height: 20px;
-}
-
-/* Action Buttons */
-.action-buttons {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 15px;
-  border-top: 1px solid #eee;
-  display: flex;
-  gap: 10px;
-  z-index: 50;
-}
-
-.btn-review {
-  flex: 1;
-  background-color: #f59e0b;
-  color: #fff;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-}
-
-.btn-save-next {
-  flex: 1;
-  background-color: #10b981;
-  color: white;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-}
-
-/* Right Panel (Navigator) */
+/* Right: Navigator Panel (Desktop Fixed) */
 .navigator-panel {
-  flex: 1;
-  background-color: #f8fafc;
-  padding: 15px;
-  overflow-y: auto;
-  border-left: 1px solid #eee;
+  flex: 1; max-width: 350px; background: #f8fafc; border-left: 1px solid #e2e8f0;
+  padding: 15px; overflow-y: auto; z-index: 10; position: static;
 }
 
-.question-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 8px;
-}
-
-.q-button {
-  width: 100%;
-  aspect-ratio: 1;
-  font-size: 0.9rem;
-  font-weight: 600;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-}
-
-/* Status Colors */
+.question-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.q-button { width: 100%; aspect-ratio: 1; font-size: 0.9rem; font-weight: 600; display: flex; justify-content: center; align-items: center; border-radius: 8px; border: none; cursor: pointer; }
 .unvisited { background-color: #e2e8f0; color: #64748b; }
 .answered { background-color: #10b981; color: white; }
 .marked-review { background-color: #f59e0b; color: white; }
 .marked-answered { background-color: #8b5cf6; color: white; }
 .current-q { border: 2px solid #4f46e5; transform: scale(1.1); }
 
-/* ==========================================================================
-   5. STRICT MODE & MOBILE FIXES
-   ========================================================================== */
-.violation-overlay {
-  position: fixed;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-color: rgba(0, 0, 0, 0.95);
-  z-index: 9999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
+/* Hidden Mobile Elements */
+.mobile-close-btn { display: none; }
+.mobile-overlay { display: none; }
 
-.violation-box {
-  background: #fff;
-  padding: 30px;
-  border-radius: 16px;
-  text-align: center;
-  width: 100%;
-  max-width: 400px;
-  border-top: 6px solid #dc2626;
-}
-
-.violation-box h1 { color: #dc2626; margin-bottom: 15px; }
-.return-btn {
-  margin-top: 20px;
-  padding: 14px;
-  width: 100%;
-  background-color: #2563eb;
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-weight: 700;
-}
-
-/* 6. MOBILE SPECIFIC OVERRIDES */
-@media (max-width: 768px) {
-  .ticket-header {
-    display: flex;
-    flex-direction: column; /* Stack items vertically */
-    padding: 20px;
-  }
-
-  /* 2. MOVE THE BADGE TO THE TOP (No longer overlapping) */
-  .ticket-badge {
-    position: relative; /* Stop floating absolutely */
-    top: auto;
-    right: auto;
-    align-self: flex-start; /* Align to the left */
-    margin-bottom: 10px; /* Push the title down */
-    background: #e0e7ff; /* Ensure background stays */
-  }
-
-  /* 3. Adjust Title Size for Mobile */
-  .ticket-header h3 {
-    font-size: 1.3rem;
-    margin-top: 5px;
-  }
-  /* -- Scroll Fix for Mobile -- */
-  .ultimate-bg {
-    display: block; /* Allows scrolling */
-    height: auto;
-    min-height: 100vh;
-    padding-top: calc(20px + env(safe-area-inset-top)) !important;
-    padding-bottom: 40px !important;
-  }
-
-  /* Login Screen Mobile */
-  .glass-panel {
-    border: none;
-    padding: 30px 20px;
-    max-width: 100%;
-    box-shadow: none;
-    /* Maintain the top gradient accent on mobile */
-    border-left: none;
-    border-top: 4px solid #4f46e5; 
-    border-radius: 0;
-  }
-  
-  /* Hall Ticket Mobile */
-  .hall-ticket {
-    margin-top: 10px;
-    border-radius: 12px;
-    border: 1px solid #e5e7eb;
-    border-top: 6px solid #4f46e5;
-  }
-  
-  .candidate-grid {
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .photo-frame { width: 120px; height: 150px; }
-  .detail-row label, .split-item label { text-align: left; }
-  .value-box { text-align: left; word-break: break-word; }
-  .school-line-1 { font-size: 1.4rem; }
-
-  /* Quiz Layout Mobile: Stack Vertical */
-  .quiz-main-grid {
-    flex-direction: column;
-  }
-  .quiz-panel {
-    flex: none;
-    height: 60vh;
-    width: 100%;
-    padding-bottom: 80px;
-  }
-  .navigator-panel {
-    flex: none;
-    height: 40vh;
-    width: 100%;
-    border-left: none;
-    border-top: 1px solid #eee;
-  }
-  .action-buttons {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-  }
-  .app-header {
-    flex-wrap: wrap;
-  }
-}
-
-/* NOTCH / CAMERA FIXES */
-.app-header { padding-top: calc(10px + env(safe-area-inset-top)); }
-.ultimate-bg { padding-top: env(safe-area-inset-top) !important; }
-.violation-overlay { padding-top: env(safe-area-inset-top); }
-
-/* =========================================
-   QUIZ PAGE SPECIFIC STYLES (Fixed)
-   ========================================= */
-
-/* 1. The Watermark (Now Visible ON TOP) */
-.watermark-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 9999; /* On top of everything */
-  pointer-events: none; /* Click through it */
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  justify-content: center;
-  opacity: 0.06; /* Subtle but visible */
-  transform: rotate(-15deg) scale(1.2);
-}
-
-.watermark-text {
-  font-size: 4rem;
-  font-weight: 900;
-  color: #000;
-  margin: 50px;
-  white-space: nowrap;
-  user-select: none;
-  text-transform: uppercase;
-}
-
-/* 2. The Quiz Header */
-.quiz-header {
-  background: #ffffff;
-  border-bottom: 1px solid #e2e8f0;
-  padding: 10px 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-  position: relative;
-  z-index: 100; /* Above the grid */
-  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
-}
-
-/* Left Side: Branding (Reusing EXACT Login Styles) */
-.quiz-brand {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-/* We reuse .school-line-1 and .school-line-2 from Login CSS here */
-
-/* Right Side: Student Info & Timer */
-.right-header-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.student-badge-container {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: #f1f5f9;
-  padding: 5px 15px 5px 5px;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-}
-
-/* Student Photo: Box Type */
-.student-photo-box {
-  width: 45px;
-  height: 55px; /* Box ratio */
-  border-radius: 4px;
-  overflow: hidden;
-  border: 1px solid #94a3b8;
-  background: #e2e8f0;
-  flex-shrink: 0;
-}
-.student-photo-box img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* Student Details Split */
-.student-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 2px;
-}
-
-/* Top Line: Name & Roll */
-.detail-line-top {
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: #1e293b;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.roll-badge {
-  font-size: 0.7rem;
-  background: #1e293b;
-  color: #fff;
-  padding: 1px 6px;
-  border-radius: 4px;
-}
-
-/* Bottom Line: Class & Sec */
-.detail-line-bottom {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #64748b;
-  text-transform: uppercase;
-  border-top: 1px solid #cbd5e1; /* The "Split" Line */
-  padding-top: 2px;
-  width: 100%;
-}
-
-/* Timer */
-.quiz-timer {
-  background: #2563eb; /* Blue Timer */
-  color: #fff;
-  padding: 10px 18px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 1.2rem;
-  min-width: 110px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
-}
-.timer-warning { background: #dc2626; animation: pulse 1s infinite; }
-
-/* 3. Layout Updates */
-.quiz-main-grid {
-  display: flex;
-  height: calc(100vh - 80px - 70px); /* Screen - Header - BottomBar */
-  position: relative;
-  z-index: 5;
-}
-
-/* Left: Question (Scrollable) */
-.quiz-panel {
-  flex: 3;
-  padding: 40px;
-  overflow-y: auto;
-  /* IMPORTANT: White background so text is readable over watermark */
-  background: rgba(255,255,255,0.95); 
-}
-
-/* Right: Palette */
-.navigator-panel {
-  flex: 1;
-  max-width: 320px;
-  background: #f8fafc;
-  border-left: 1px solid #e2e8f0;
-  padding: 15px;
-  overflow-y: auto;
-  z-index: 10;
-}
-
-/* 4. Bottom Action Bar */
+/* Bottom Bar */
 .bottom-bar {
-  height: 70px;
-  background: #ffffff;
-  border-top: 2px solid #e2e8f0;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 20px;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 20;
+  height: 70px; background: #ffffff; border-top: 2px solid #e2e8f0;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 20px; position: fixed; bottom: 0; width: 100%; z-index: 20;
 }
-
 .bottom-left, .bottom-right { display: flex; gap: 10px; }
-
-/* Buttons */
-.quiz-btn {
-  padding: 12px 20px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 0.9rem;
-  cursor: pointer;
-  border: 1px solid transparent;
-}
-
+.quiz-btn { padding: 12px 20px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer; border: 1px solid transparent; }
 .btn-prev { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
 .btn-clear { background: #fff; color: #ef4444; border: 1px solid #fecaca; }
 .btn-save { background: #10b981; color: white; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2); }
 
-/* Mobile Overrides */
+/* ==========================================================================
+   6. STRICT MODE
+   ========================================================================== */
+.violation-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; }
+.violation-box { background: #fff; padding: 30px; border-radius: 16px; text-align: center; width: 100%; max-width: 400px; border-top: 6px solid #dc2626; }
+.violation-box h1 { color: #dc2626; margin-bottom: 15px; }
+.return-btn { margin-top: 20px; padding: 14px; width: 100%; background: #2563eb; color: white; border: none; border-radius: 12px; font-weight: 700; }
+
+/* ==========================================================================
+   7. MOBILE RESPONSIVENESS (Sidebar & Layout Fixes)
+   ========================================================================== */
 @media (max-width: 768px) {
   
-  /* --- 1. Header Adjustments (Notch Fix) --- */
+  /* --- A. HEADER STACK --- */
   .quiz-header {
     height: auto;
-    /* Ensure items stack vertically (Top to Bottom) */
-    flex-direction: column !important; 
-    /* Push content down below camera notch */
+    flex-direction: column !important; /* Force vertical stack */
+    /* Push down to avoid camera notch */
     padding-top: calc(40px + env(safe-area-inset-top)); 
     padding-bottom: 15px;
-    align-items: center; /* Center align the content */
+    align-items: center;
     gap: 10px;
   }
   
-  /* Branding */
-  .quiz-brand { 
-    width: 100%; 
-    justify-content: center; 
-  }
-  
-  /* Hide Desktop Elements */
+  .quiz-brand { width: 100%; justify-content: center; }
   .student-badge-container { display: none; }
   .right-header-group { display: none; } 
 
-  /* --- 2. Mobile Student Row (Force Visible) --- */
+  /* --- B. MOBILE STUDENT INFO ROW --- */
   .student-info-row {
-    display: flex !important; /* Force display */
+    display: flex !important;
     align-items: center;
     justify-content: space-between;
     gap: 10px;
@@ -1005,92 +557,62 @@ html, body {
     margin-top: 5px;
   }
   
-  .student-photo-mobile { 
-    width: 45px; height: 55px; 
-    border-radius: 4px; overflow: hidden; 
-    border: 1px solid #cbd5e1; flex-shrink: 0; 
-  }
+  .student-photo-mobile { width: 45px; height: 55px; border-radius: 4px; overflow: hidden; border: 1px solid #cbd5e1; flex-shrink: 0; }
   .student-photo-mobile img { width: 100%; height: 100%; object-fit: cover; }
-
-  .student-text-mobile {
-    display: flex; flex-direction: column; gap: 2px; flex-grow: 1; text-align: left;
-  }
+  .student-text-mobile { display: flex; flex-direction: column; gap: 2px; flex-grow: 1; text-align: left; }
   .info-name { font-size: 0.9rem; font-weight: 800; color: #1e293b; }
   .info-meta { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; }
-  
-  .mobile-timer {
-    font-size: 0.9rem; font-weight: 700; color: #fff; 
-    background: #2563eb; padding: 6px 10px; border-radius: 6px;
-    white-space: nowrap;
-  }
+  .mobile-timer { font-size: 0.9rem; font-weight: 700; color: #fff; background: #2563eb; padding: 6px 10px; border-radius: 6px; white-space: nowrap; }
 
-  /* --- 3. Layout Stack --- */
+  /* --- C. LAYOUT --- */
   .quiz-main-grid {
     flex-direction: column;
-    /* Adjust height to account for taller header */
+    /* Reduce height to fit header + bottom bar */
     height: calc(100vh - 220px); 
   }
   .quiz-panel { width: 100%; padding: 20px; padding-bottom: 80px; }
   
-  /* --- 4. SIDEBAR DRAWER (Right to Left) --- */
+  /* --- D. SIDEBAR DRAWER (Right to Left) --- */
   .navigator-panel {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Hidden Off-screen */
-    width: 75%; 
-    height: 100%;
-    background: #ffffff;
-    z-index: 2000;
-    border-left: none;
+    position: fixed; top: 0; right: -100%; width: 75%; height: 100%;
+    background: #ffffff; z-index: 2000; border-left: none;
     box-shadow: -10px 0 30px rgba(0,0,0,0.2);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding-top: calc(40px + env(safe-area-inset-top));
-    display: flex; flex-direction: column;
+    display: flex !important; flex-direction: column;
   }
+  .navigator-panel.mobile-visible { right: 0 !important; }
 
-  .navigator-panel.mobile-visible {
-    right: 0; 
-  }
-
-  /* --- 5. Mobile Menu Trigger (Three Lines) --- */
+  /* --- E. MOBILE TOGGLES --- */
   .palette-toggle-btn {
-    display: inline-block;
-    background: #f1f5f9;
-    border: 1px solid #cbd5e1;
-    color: #1e293b;
-    padding: 6px 12px;
-    border-radius: 6px;
-    font-weight: 700;
-    font-size: 0.9rem;
-    cursor: pointer;
+    display: inline-block !important; background: #f1f5f9; border: 1px solid #cbd5e1; color: #1e293b;
+    padding: 6px 12px; border-radius: 6px; font-weight: 700; font-size: 0.9rem; cursor: pointer;
     margin-left: auto; 
   }
 
-  /* --- 6. Mobile Close Button ("X") --- */
   .mobile-close-btn {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex !important; justify-content: space-between; align-items: center;
     padding-bottom: 15px; border-bottom: 1px solid #eee; margin-bottom: 10px;
   }
-  .mobile-close-btn button {
-    background: none; border: none; font-size: 1.5rem; color: #ef4444; font-weight: bold; padding: 0 10px;
-  }
+  .mobile-close-btn button { background: none; border: none; font-size: 1.5rem; color: #ef4444; font-weight: bold; padding: 0 10px; }
   .mobile-close-btn span { font-weight: 700; color: #1e293b; font-size: 1.1rem; }
 
-  /* --- 7. Overlay --- */
-  .mobile-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.6); z-index: 1500; display: none;
-  }
-  .mobile-overlay.active { display: block; }
+  .mobile-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1500; display: none; }
+  .mobile-overlay.active { display: block !important; }
 
-  /* --- 8. Bottom Bar Mobile --- */
+  /* --- F. BOTTOM BAR --- */
   .bottom-bar { padding: 10px; height: auto; flex-wrap: wrap; gap: 5px; }
   .quiz-btn { padding: 10px; font-size: 0.8rem; flex: 1; }
-  
-  /* Hall Ticket Mobile Fixes */
+
+  /* --- G. CONFIRMATION SCREEN --- */
   .ticket-header { flex-direction: column; padding: 20px; }
   .ticket-badge { position: relative; top: auto; right: auto; align-self: flex-start; margin-bottom: 10px; }
   .candidate-grid { flex-direction: column; align-items: center; gap: 20px; }
   .detail-row-split { flex-direction: column; gap: 10px; }
   .school-line-1 { font-size: 1.4rem; }
 }
+
+/* NOTCH FIXES */
+.app-header { padding-top: calc(10px + env(safe-area-inset-top)); }
+.ultimate-bg { padding-top: env(safe-area-inset-top) !important; }
+.violation-overlay { padding-top: env(safe-area-inset-top); }

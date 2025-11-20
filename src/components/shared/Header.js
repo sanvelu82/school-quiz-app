@@ -1,7 +1,6 @@
 // src/components/shared/Header.js
 import React from 'react';
 
-// Use the exact same logo URL
 const LOGO_URL = "https://i.ibb.co/qYxNQQPx/Picture2.png";
 
 function Header({ studentProfile, timeRemaining }) {
@@ -13,14 +12,11 @@ function Header({ studentProfile, timeRemaining }) {
     return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
   };
 
-  const isUrgent = timeRemaining < 300; 
-
   return (
     <div className="quiz-header">
       
-      {/* Left: Branding (Matches Login Styles) */}
+      {/* 1. BRANDING ROW (Always Top) */}
       <div className="quiz-brand">
-        {/* Reusing logo-wrapper class from Login for consistency */}
         <div className="logo-wrapper" style={{width:'50px', height:'50px'}}> 
            <img src={LOGO_URL} alt="Logo" className="school-logo-img" />
         </div>
@@ -30,36 +26,37 @@ function Header({ studentProfile, timeRemaining }) {
         </div>
       </div>
 
-      {/* Right: Student Info & Timer */}
+      {/* 2. DESKTOP INFO (Hidden on Mobile via CSS) */}
       <div className="right-header-group">
-        
-        <div className="student-badge-container">
-          {/* Box Photo */}
-          <div className="student-photo-box">
-            <img 
-              src={studentProfile.photoUrl || "https://via.placeholder.com/150"} 
-              alt="Profile" 
-            />
+        <div className="student-badge-desktop">
+          <div className="student-photo-small">
+            <img src={studentProfile.photoUrl || "https://via.placeholder.com/150"} alt="Profile" />
           </div>
-          
-          {/* Split Info: Name/Roll (Top) | Class/Sec (Bottom) */}
-          <div className="student-details">
-            <div className="detail-line-top">
-               {studentProfile.fullName} 
-               <span className="roll-badge">{studentProfile.rollNo}</span>
-            </div>
-            <div className="detail-line-bottom">
-               CLASS: {studentProfile.class || studentProfile.quizClass} - {studentProfile.section || studentProfile.quizSection}
-            </div>
+          <div className="student-text-desktop">
+             <div className="detail-line-top">{studentProfile.fullName}</div>
+             <div className="detail-line-bottom">{studentProfile.rollNo}</div>
           </div>
         </div>
-
-        {/* Timer */}
-        <div className={`quiz-timer ${isUrgent ? 'timer-warning' : ''}`}>
-          {formatTime(timeRemaining)}
-        </div>
-
+        <div className="quiz-timer">{formatTime(timeRemaining)}</div>
       </div>
+
+      {/* 3. MOBILE INFO ROW (Visible ONLY on Mobile) */}
+      {/* This solves the "Hidden Info" issue */}
+      <div className="student-info-row">
+         <div className="student-photo-mobile">
+            <img src={studentProfile.photoUrl || "https://via.placeholder.com/150"} alt="Profile" />
+         </div>
+         <div className="student-text-mobile">
+            <div className="info-name">{studentProfile.fullName}</div>
+            <div className="info-meta">
+               {studentProfile.rollNo} • {studentProfile.class}-{studentProfile.section}
+            </div>
+         </div>
+         <div className="mobile-timer">
+            {formatTime(timeRemaining)}
+         </div>
+      </div>
+
     </div>
   );
 }
