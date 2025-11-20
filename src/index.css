@@ -968,12 +968,113 @@ html, body {
 
 /* Mobile Overrides */
 @media (max-width: 768px) {
-  .quiz-header { height: auto; flex-direction: column; gap: 10px; padding: 15px; align-items: stretch;}
-  .quiz-brand { justify-content: center; }
-  .right-header-group { justify-content: space-between; }
-  .quiz-main-grid { height: calc(100vh - 160px); flex-direction: column; }
-  .navigator-panel { display: none; }
-  .navigator-panel.mobile-visible { display: block; position: absolute; top: 0; width: 100%; height: 100%; }
-  .bottom-bar { padding: 10px; height: auto; flex-wrap: wrap; }
+  
+  /* --- 1. Header Adjustments (Notch Fix) --- */
+  .quiz-header {
+    height: auto;
+    /* Pushes content down to avoid camera */
+    padding-top: calc(40px + env(safe-area-inset-top)); 
+    padding-bottom: 10px;
+    align-items: flex-start;
+  }
+  
+  .quiz-brand { flex: 1; justify-content: center; }
+  .student-badge-container { display: none; } /* Save space on phone */
+  .right-header-group { display: none; } /* Hide desktop timer/info */
+
+  /* --- 2. New Mobile Student Row (Below Header) --- */
+  .student-info-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f8fafc;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+    width: 100%;
+    margin-top: 5px;
+  }
+  
+  .student-photo-mobile { width: 50px; height: 60px; border-radius: 6px; overflow: hidden; border: 1px solid #cbd5e1; flex-shrink: 0; }
+  .student-photo-mobile img { width: 100%; height: 100%; object-fit: cover; }
+
+  .student-text-mobile {
+    display: flex; flex-direction: column; gap: 2px; flex-grow: 1;
+  }
+  .info-name { font-size: 0.95rem; font-weight: 800; color: #1e293b; }
+  .info-meta { font-size: 0.75rem; font-weight: 600; color: #64748b; text-transform: uppercase; }
+  
+  .mobile-timer {
+    font-size: 0.9rem; font-weight: 700; color: #fff; background: #2563eb; padding: 5px 10px; border-radius: 6px;
+  }
+
+  /* --- 3. Layout Stack --- */
+  .quiz-main-grid {
+    flex-direction: column;
+    height: calc(100vh - 140px); /* Adjust for header + bottom bar */
+  }
+  .quiz-panel { width: 100%; padding: 20px; padding-bottom: 80px; }
+  
+  /* --- 4. SIDEBAR DRAWER (Right to Left) --- */
+  .navigator-panel {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Hidden Off-screen */
+    width: 75%; /* 3/4 Screen width */
+    height: 100%;
+    background: #ffffff;
+    z-index: 2000; /* Highest Z-Index */
+    border-left: none;
+    box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+    transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    padding-top: calc(40px + env(safe-area-inset-top)); /* Match header padding */
+    display: flex; flex-direction: column;
+  }
+
+  /* Slide In Class */
+  .navigator-panel.mobile-visible {
+    right: 0; 
+  }
+
+  /* --- 5. Mobile Menu Trigger (Three Lines) --- */
+  .palette-toggle-btn {
+    display: inline-block;
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #1e293b;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-left: auto; 
+  }
+
+  /* --- 6. Mobile Close Button ("X") --- */
+  .mobile-close-btn {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-bottom: 15px; border-bottom: 1px solid #eee; margin-bottom: 10px;
+  }
+  .mobile-close-btn button {
+    background: none; border: none; font-size: 1.5rem; color: #ef4444; font-weight: bold; padding: 0 10px;
+  }
+  .mobile-close-btn span { font-weight: 700; color: #1e293b; font-size: 1.1rem; }
+
+  /* --- 7. Overlay (Darken Background) --- */
+  .mobile-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); z-index: 1500; display: none;
+  }
+  .mobile-overlay.active { display: block; }
+
+  /* --- 8. Bottom Bar Mobile --- */
+  .bottom-bar { padding: 10px; height: auto; flex-wrap: wrap; gap: 5px; }
   .quiz-btn { padding: 10px; font-size: 0.8rem; flex: 1; }
+  
+  /* Hall Ticket Mobile Fixes */
+  .ticket-header { flex-direction: column; padding: 20px; }
+  .ticket-badge { position: relative; top: auto; right: auto; align-self: flex-start; margin-bottom: 10px; }
+  .candidate-grid { flex-direction: column; align-items: center; gap: 20px; }
+  .detail-row-split { flex-direction: column; gap: 10px; }
+  .school-line-1 { font-size: 1.4rem; }
 }
