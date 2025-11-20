@@ -12,7 +12,6 @@ function LoginScreen({ onLoginSuccess }) {
   // CONFIGURATION
   const LOGO_URL = "https://i.ibb.co/qYxNQQPx/Picture2.png";
 
-  // Helper to trigger Full Screen
   const enterFullScreen = () => {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
@@ -26,9 +25,7 @@ function LoginScreen({ onLoginSuccess }) {
     e.preventDefault();
     setError('');
     setLoading(true);
-    
-    // Attempt Full Screen on Click
-    enterFullScreen();
+    enterFullScreen(); // Trigger full screen on click
 
     if (!rollNo || !password) {
       setError('Please enter valid credentials.');
@@ -50,10 +47,10 @@ function LoginScreen({ onLoginSuccess }) {
     <div className="ultimate-bg">
       <div className="glass-panel animate-card-entry">
         
-        {/* Header: Box Style Logo + Bold Text */}
+        {/* Header */}
         <div className="id-header">
           <div className="logo-wrapper">
-            <img src={LOGO_URL} alt="SVV Logo" className="school-logo-img" />
+            <img src={LOGO_URL} alt="Logo" className="school-logo-img" />
           </div>
           <div className="text-wrapper">
             <h1 className="school-line-1">SVV HI-TECH</h1>
@@ -61,16 +58,22 @@ function LoginScreen({ onLoginSuccess }) {
           </div>
         </div>
 
-        {/* Pill Badge */}
+        {/* Contest Badge */}
         <div className="portal-subtitle">
-           ● Secure Portal
+           🏆 Annual Quiz Contest 2025
         </div>
 
         <form onSubmit={handleSubmit}>
           
-          {/* Roll Number */}
+          {/* Roll Number Input */}
           <div className={`input-container ${focusedInput === 'roll' ? 'focused' : ''}`}>
-            <div className="icon-box">🆔</div>
+            <div className="icon-box">
+              {/* SVG User Icon */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
             <div className="field-wrapper">
               <label>Roll Number</label>
               <input 
@@ -85,15 +88,21 @@ function LoginScreen({ onLoginSuccess }) {
             </div>
           </div>
           
-          {/* Password */}
+          {/* Password Input */}
           <div className={`input-container ${focusedInput === 'pass' ? 'focused' : ''}`}>
-            <div className="icon-box">🔐</div>
+            <div className="icon-box">
+              {/* SVG Lock Icon */}
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+              </svg>
+            </div>
             <div className="field-wrapper">
               <label>Password</label>
               <input 
                 type="password" 
                 value={password} 
-                placeholder="••••••••"
+                placeholder="Enter Password"
                 onChange={(e) => setPassword(e.target.value)} 
                 onFocus={() => setFocusedInput('pass')}
                 onBlur={() => setFocusedInput(null)}
@@ -109,12 +118,12 @@ function LoginScreen({ onLoginSuccess }) {
           )}
           
           <button type="submit" className="neon-button" disabled={loading}>
-            {loading ? 'Authenticating...' : 'Login to Assessment'}
+            {loading ? 'Checking details...' : 'Start Contest >'}
           </button>
         </form>
         
         <div className="panel-footer">
-          <p>Locked Exam Environment • v2.4</p>
+          <p>Official Contest Portal • Secure Mode</p>
         </div>
       </div>
     </div>

@@ -7,14 +7,14 @@
   padding: 0;
 }
 
-/* Force Body to fill 100% of the screen */
+/* Force Body to fill 100% of the screen (including notch area) */
 html, body {
   height: 100%;
   width: 100%;
-  overflow: hidden; /* Prevent bounce scrolling */
+  overflow: hidden; /* Prevent bounce scrolling on main container */
   background-color: #ffffff; /* Pure White Base */
   font-family: 'Inter', 'Segoe UI', 'Roboto', sans-serif;
-  color: #1c1c1c;
+  color: #1e293b; /* Dark Slate Blue for better readability */
   /* Fix for iOS height */
   min-height: -webkit-fill-available;
 }
@@ -25,7 +25,7 @@ html, body {
 }
 
 /* ==========================================================================
-   2. LOGIN SCREEN (Pure White Professional)
+   2. LOGIN SCREEN (Vibrant Contest Style)
    ========================================================================== */
 
 /* The Background Wrapper */
@@ -47,15 +47,14 @@ html, body {
   padding: 40px;
   
   /* VISUAL SEPARATION: */
-  /* Since background is white, we use a clean grey border to define the card */
-  border: 1px solid #e5e7eb; 
-  border-radius: 16px;
+  border: 1px solid #e0e7ff; /* Very light indigo border */
+  border-radius: 20px;
   
-  /* Very soft shadow to lift it slightly */
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  /* Soft, wide shadow for a floating effect */
+  box-shadow: 0 20px 40px -5px rgba(79, 70, 229, 0.1);
   
-  /* Tech Accent Bar on the left */
-  border-left: 6px solid #000000; 
+  /* VIBRANT ACCENT BAR (Left Side) */
+  border-left: 6px solid #4f46e5; 
   position: relative;
 }
 
@@ -78,8 +77,8 @@ html, body {
 
 /* --- LOGO FIX: INVISIBLE BOX --- */
 .logo-wrapper {
-  width: 90px; 
-  height: 90px;
+  width: 85px; 
+  height: 85px;
   
   /* CRITICAL: No background, No shadow, No border */
   background: transparent !important;
@@ -97,8 +96,10 @@ html, body {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  /* Multiply ensures any off-white pixels blend into the background */
+  /* Multiply ensures white corners blend into background */
   mix-blend-mode: multiply; 
+  /* Boost contrast slightly for vibrancy */
+  filter: contrast(1.05);
 }
 /* ------------------------------- */
 
@@ -109,62 +110,71 @@ html, body {
 }
 
 .school-line-1 {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: 900;
-  color: #000;
-  letter-spacing: -0.5px;
   line-height: 1;
   margin-bottom: 4px;
+  /* Gradient Text for "SVV HI-TECH" */
+  background: linear-gradient(to right, #1e1b4b, #4f46e5);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .school-line-2 {
-  font-size: 0.8rem;
-  color: #666;
+  font-size: 0.75rem;
+  color: #64748b;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* Badge Styling */
+/* Badge Styling ("Annual Quiz Contest") */
 .portal-subtitle {
   display: inline-flex;
   align-items: center;
-  background-color: #f3f4f6; /* Light Grey pill */
-  color: #374151;
+  gap: 8px;
+  background: linear-gradient(135deg, #e0e7ff 0%, #ede9fe 100%); /* Light Purple Gradient */
+  color: #4f46e5; /* Indigo Text */
   font-size: 0.8rem;
-  font-weight: 600;
-  padding: 6px 14px;
+  font-weight: 700;
+  padding: 6px 16px;
   border-radius: 100px;
   margin-bottom: 30px;
   text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Input Fields */
 .input-container {
-  background-color: #f8fafc; /* Very light grey to stand out on white */
+  background-color: #f8fafc; /* Light Grey Background */
   border-radius: 12px;
   padding: 12px 16px;
   margin-bottom: 20px;
   display: flex;
   align-items: center;
-  border: 1px solid #e2e8f0;
-  transition: all 0.2s ease;
+  border: 2px solid #f1f5f9;
+  transition: all 0.3s ease;
 }
 
+/* Focused Input State (Vibrant Indigo) */
 .input-container.focused {
   background-color: #fff;
-  border-color: #000; /* Black focus */
-  box-shadow: 0 0 0 1px #000;
+  border-color: #4f46e5; /* Indigo Focus Border */
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); /* Soft Indigo Glow */
 }
 
 .icon-box {
-  font-size: 1.2rem;
+  width: 24px;
+  height: 24px;
   margin-right: 15px;
-  opacity: 0.5;
+  color: #94a3b8; /* Grey Icon Default */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .input-container.focused .icon-box {
-  opacity: 1;
+  color: #4f46e5; /* Icon turns Indigo on Focus */
 }
 
 .field-wrapper {
@@ -185,17 +195,18 @@ html, body {
   border: none;
   outline: none;
   font-size: 1.05rem;
-  color: #0f172a;
+  color: #1e293b;
   font-weight: 600;
   width: 100%;
 }
 
-/* The Main Button */
+/* The Main Button (Vibrant Gradient) */
 .neon-button {
   width: 100%;
   padding: 18px;
   margin-top: 10px;
-  background-color: #000000; /* Deep Black */
+  /* Blue to Purple Gradient */
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
   color: white;
   border: none;
   border-radius: 12px;
@@ -203,33 +214,35 @@ html, body {
   font-weight: 700;
   letter-spacing: 0.5px;
   cursor: pointer;
-  transition: transform 0.1s;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
 }
 
 .neon-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 15px 25px rgba(0,0,0,0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.6);
+  filter: brightness(1.1);
 }
 
 .neon-button:disabled {
-  background-color: #ccc;
+  background: #cbd5e1;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
-/* Remove flare for clean look */
+/* Remove old flare */
 .btn-flare { display: none; }
 
 /* Error Message */
 .error-toast {
-  background: #fff1f2;
-  color: #e11d48;
+  background: #fef2f2;
+  color: #ef4444;
   font-size: 0.9rem;
   font-weight: 600;
   padding: 14px;
   border-radius: 12px;
   margin-bottom: 20px;
-  border: 1px solid #fecdd3;
+  border: 1px solid #fecaca;
   text-align: center;
 }
 
@@ -303,7 +316,7 @@ html, body {
   align-items: center;
   background-color: #fff;
   padding: 10px 15px;
-  border-bottom: 1px solid #eee;
+  border-bottom: 1px solid #f1f5f9;
   height: auto;
   min-height: 60px;
   position: sticky;
@@ -377,18 +390,19 @@ html, body {
 .option-item {
   margin: 10px 0;
   padding: 15px;
-  border: 1px solid #e5e7eb;
+  border: 1px solid #e2e8f0;
   border-radius: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
   cursor: pointer;
-  background: #f9fafb;
+  background: #f8fafc;
   transition: background 0.2s;
 }
 
 .option-item:hover {
   background-color: #f0f9ff;
+  border-color: #2563eb;
 }
 
 .option-item input {
@@ -463,7 +477,7 @@ html, body {
 .answered { background-color: #10b981; color: white; }
 .marked-review { background-color: #f59e0b; color: white; }
 .marked-answered { background-color: #8b5cf6; color: white; }
-.current-q { border: 2px solid #2563eb; transform: scale(1.1); }
+.current-q { border: 2px solid #4f46e5; transform: scale(1.1); }
 
 /* ==========================================================================
    5. STRICT MODE & MOBILE FIXES
@@ -505,15 +519,20 @@ html, body {
   /* Login Screen Mobile */
   .glass-panel {
     border: none;
-    padding: 20px;
+    padding: 30px 20px;
     max-width: 100%;
     box-shadow: none;
+    /* Maintain the top gradient accent on mobile */
     border-left: none;
-    border-top: 4px solid #000;
+    border-top: 4px solid #4f46e5; 
+    border-radius: 0;
   }
   .ultimate-bg {
     align-items: flex-start;
     padding-top: 10px;
+  }
+  .school-line-1 {
+    font-size: 1.4rem;
   }
 
   /* Quiz Layout Mobile: Stack Vertical */
