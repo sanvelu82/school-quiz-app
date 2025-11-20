@@ -12,7 +12,6 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
 
   return (
     <div className="ultimate-bg">
-      {/* Reusing glass-panel but adding 'hall-ticket' class for specific width */}
       <div className="glass-panel hall-ticket animate-card-entry">
         
         {/* 1. Ticket Header */}
@@ -22,12 +21,10 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
           <p>Please verify your identity before proceeding.</p>
         </div>
 
-        <div className="ticket-divider"></div>
-
-        {/* 2. Candidate Grid (Photo + Details) */}
+        {/* 2. Candidate Grid */}
         <div className="candidate-grid">
           
-          {/* Photo Column: Box Type with Radius */}
+          {/* Photo Column */}
           <div className="photo-section">
             <div className="photo-frame">
               <img 
@@ -39,7 +36,7 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
             </div>
           </div>
 
-          {/* Details Column: Professional Alignment */}
+          {/* Details Column */}
           <div className="details-section">
             <div className="detail-row">
               <label>Candidate Name</label>
@@ -53,7 +50,12 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
               </div>
               <div className="split-item">
                 <label>Class & Sec</label>
-                <div className="value-box">{studentProfile.quizClass} - {studentProfile.quizSection}</div>
+                
+                {/* 🚨 FIX: Changed quizClass -> class and quizSection -> section */}
+                <div className="value-box">
+                   {studentProfile.class || studentProfile.quizClass} - {studentProfile.section || studentProfile.quizSection}
+                </div>
+                
               </div>
             </div>
 
@@ -64,17 +66,17 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
           </div>
         </div>
 
-        {/* 3. Instructions Box */}
+        {/* 3. Instructions */}
         <div className="instruction-box">
           <h4>⚠️ Important Instructions:</h4>
           <ul>
             <li>Do not close or refresh the browser window.</li>
-            <li>Using strict mode: Exiting full screen will pause the exam.</li>
+            <li>Full Screen is monitored. Exiting may submit the test.</li>
             <li>Click "Submit" only after answering all questions.</li>
           </ul>
         </div>
 
-        {/* 4. Confirmation & Button */}
+        {/* 4. Footer */}
         <div className="confirmation-footer">
           <label className="checkbox-container">
             <input
@@ -82,14 +84,13 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
               checked={isConfirmed}
               onChange={(e) => setIsConfirmed(e.target.checked)}
             />
-            <span className="checkmark"></span>
             I confirm that the details above are correct and I am ready to begin.
           </label>
 
           <button 
             onClick={handleStart} 
             disabled={!isConfirmed}
-            className="neon-button start-btn"
+            className="start-btn"
           >
             Start Examination
           </button>
