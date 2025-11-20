@@ -1,39 +1,29 @@
 // src/utils/scheduler.js
 
-// 📅 DEFINE YOUR SESSIONS WITH DATES
+// 📅 DEFINE YOUR SESSIONS HERE
 export const EXAM_SESSIONS = [
   {
     id: 1,
     name: "Physics & Chemistry (Morning)",
-    date: "2025-11-20",   // 🗓️ YYYY-MM-DD Format
-    loginTime: "23:55",   // Can enter app
-    startTime: "23:55",   // Can click Start
-    endTime:   "23:56",   // Auto-submit
+    date: "2025-11-21",   // ⚠️ CHANGE THIS TO TODAY'S DATE TO TEST
+    loginTime: "00:08",   // HH:MM (24-hour format)
+    startTime: "00:09",   
+    endTime:   "00:10",   
     questionFile: "/questions1.json"
   },
   {
     id: 2,
     name: "Biology & Maths (Afternoon)",
-    date: "2025-11-25",
+    date: "2025-11-25",   // ⚠️ CHANGE THIS TO TODAY'S DATE TO TEST
     loginTime: "11:30",
     startTime: "12:00",
     endTime:   "13:00",
     questionFile: "/questions2.json"
-  },
-  // You can add future dates here...
-  {
-    id: 3,
-    name: "Computer Science (Next Day)",
-    date: "2025-11-26",
-    loginTime: "09:30",
-    startTime: "10:00",
-    endTime:   "11:00",
-    questionFile: "/questions3.json"
   }
 ];
 
 /**
- * Helper: Combines Date string ("2023-11-25") and Time string ("09:00")
+ * Helper: Combines Date string ("2025-11-25") and Time string ("09:00")
  * into a Javascript Date Object.
  */
 const parseDateTime = (dateStr, timeStr) => {
@@ -66,22 +56,17 @@ export const getCurrentSession = () => {
 
 /**
  * Returns seconds remaining until the exam START time.
- * Used by Confirmation Screen.
  */
 export const getSecondsUntilStart = (session) => {
   if (!session) return 0;
   const now = new Date();
   const start = parseDateTime(session.date, session.startTime);
-  
-  // 🚨 FIXED LINE BELOW (Removed typo "WX")
-  const diff = start - now;
-  
+  const diff = start - now; 
   return Math.floor(diff / 1000); 
 };
 
 /**
  * Returns seconds remaining until the exam END time.
- * Used by Quiz Timer.
  */
 export const getExamDurationSeconds = (session) => {
   if (!session) return 0;

@@ -8,21 +8,19 @@ function App() {
   const [studentProfile, setStudentProfile] = useState(null);
   const [isConfirmed, setIsConfirmed] = useState(false);
   const [submissionStatus, setSubmissionStatus] = useState('idle');
-  
-  // Session State
-  const [currentSession, setCurrentSession] = useState(null);
-  
-  // Strict Mode State
   const [isFullScreen, setIsFullScreen] = useState(true); 
+  
+  // 🆕 Session State
+  const [currentSession, setCurrentSession] = useState(null);
 
   // Full Screen Helper
   const enterFullScreen = () => {
     const elem = document.documentElement;
     if (elem.requestFullscreen) {
       elem.requestFullscreen().catch(err => console.log(err));
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
+    } else if (elem.webkitRequestFullscreen) { 
       elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
+    } else if (elem.msRequestFullscreen) { 
       elem.msRequestFullscreen();
     }
   };
@@ -33,20 +31,18 @@ function App() {
       const isFull = !!document.fullscreenElement || !!document.webkitFullscreenElement;
       setIsFullScreen(isFull);
     };
-
     document.addEventListener('fullscreenchange', handleFullScreenChange);
     document.addEventListener('webkitfullscreenchange', handleFullScreenChange);
-
     return () => {
       document.removeEventListener('fullscreenchange', handleFullScreenChange);
       document.removeEventListener('webkitfullscreenchange', handleFullScreenChange);
     };
   }, []);
 
-  // Login Success Handler (Now receives session data)
+  // Handle Login Success
   const handleLoginSuccess = (profileData, sessionData) => {
     setStudentProfile(profileData);
-    setCurrentSession(sessionData); 
+    setCurrentSession(sessionData); // Store session data
     setSubmissionStatus('idle');
     enterFullScreen();
   };
@@ -75,7 +71,7 @@ function App() {
     if (document.exitFullscreen) document.exitFullscreen().catch(e => {});
   };
 
-  // --- VIOLATION SCREEN ---
+  // Violation Screen
   if (studentProfile && !isFullScreen && submissionStatus !== 'success') {
     return (
       <div className="violation-overlay">
@@ -91,8 +87,7 @@ function App() {
     );
   }
 
-  // --- RENDER LOGIC ---
-
+  // Render Logic
   if (!studentProfile) {
     return <LoginScreen onLoginSuccess={handleLoginSuccess} />; 
   }

@@ -1,9 +1,8 @@
 // src/services/data.js
 
-// Now accepts a filename argument
 export const fetchQuestions = async (fileName) => {
   try {
-    // If no file provided, default to questions.json
+    // Use the filename provided by the session, or default to 'questions.json'
     const targetFile = fileName || '/questions.json'; 
     
     console.log(`Fetching questions from: ${targetFile}`);

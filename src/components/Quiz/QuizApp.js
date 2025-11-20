@@ -1,4 +1,3 @@
-// src/components/Quiz/QuizApp.js
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchQuestions } from '../../services/data';
 import { getExamDurationSeconds } from '../../utils/scheduler';
@@ -6,11 +5,8 @@ import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-// 🔊 A verified, sharp "Beep" sound (Base64 encoded WAV)
-const BEEP_URL = "data:audio/wav;base64,UklGRl9vT1dGXDJtefmtmbWZvZ29n"; // (Shortened for display)
-
-// Use this full string for the actual sound:
-const VALID_BEEP = "data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJCcjX5zvZCwnm1tto2TkYF8hYd/eXFxb3NzpYyOj3J5eXqEhoKAe32HgXt3dXaDhYeDf3x7fn19gIGDg4SFhoeIiYqLjI2OkZOUlZaXmJmam5yen6ChoqOkpaanqKmqq6ytrq+wsbKztLW2t7i5uru8vb6/wMHCw8TFxsfIycrLzM3Oz9DR0tPU1dbX2Nna29zd3t/g4eLj5OXm5+jp6uvs7e7v8PHy8/T19vf4+fr7/P3+/w==";
+// 🔊 UPDATE: Pointing to your file in the public folder
+const BEEP_URL = "/beep.mp3"; // Make sure your file is named exactly this in the public folder
 
 function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [questions, setQuestions] = useState([]);
@@ -21,7 +17,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [isPaletteOpen, setIsPaletteOpen] = useState(false); 
 
   // Audio Ref
-  const beepAudio = useRef(new Audio(VALID_BEEP));
+  const beepAudio = useRef(new Audio(BEEP_URL));
 
   // 1. Load Questions & Timer
   useEffect(() => {
@@ -63,12 +59,15 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
           return 0;
         }
         
-        // 🔊 PLAY BEEP (Last 10 seconds)
+        // 🔊 BEEP LOGIC (Last 10 seconds)
         if (prev <= 11 && prev > 1) { 
-           // Browser requires user interaction first. 
-           // If this logs "Audio blocked", click anywhere on the page once.
-           beepAudio.current.currentTime = 0;
-           beepAudio.current.play().catch(e => console.warn("Audio blocked (User must interact first):", e));
+           if (beepAudio.current) {
+             // Reset to 0 to allow rapid replay of 1s clip
+             beepAudio.current.currentTime = 0; 
+             beepAudio.current.play().catch(e => {
+                 // Ignore play errors (usually due to no user interaction yet)
+             });
+           }
         }
         
         return prev - 1;
@@ -80,9 +79,12 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
 
   // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
-    // Unlock audio on first interaction (Workaround for browser autoplay policy)
+    // Audio Unlock Trick: Play/Pause on first interaction
     if (beepAudio.current.paused) {
-      beepAudio.current.play().then(() => beepAudio.current.pause()).catch(() => {});
+        beepAudio.current.play().then(() => {
+            beepAudio.current.pause();
+            beepAudio.current.currentTime = 0;
+        }).catch(() => {});
     }
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
   }, []);
@@ -111,13 +113,10 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     if (currentQIndex < questions.length - 1) setCurrentQIndex(prev => prev + 1);
     setIsPaletteOpen(false); 
   };
-  
   const handleQuestionClick = (index) => {
     setCurrentQIndex(index);
     setIsPaletteOpen(false);
   };
-
-  // --- RENDER ---
 
   if (loading) return <div style={{padding:50, textAlign:'center'}}>Loading Exam Paper...</div>;
   
@@ -138,11 +137,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
         <div className="quiz-panel">
            <div className="panel-top-bar">
               <h3>Question {currentQIndex + 1}</h3>
-              
-              {/* Menu Button */}
-              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>
-                ☰
-              </button>
+              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>☰</button>
            </div>
            
            {currentQuestion && (
