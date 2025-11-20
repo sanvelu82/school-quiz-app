@@ -723,46 +723,45 @@ button:disabled {
 }
 
 /* =========================================
-   MOBILE NOTCH / SAFE AREA FIXES
+   TRUE IMMERSIVE FULLSCREEN FIX
    ========================================= */
 
-/* 1. Fix the Login Screen Background */
-.ultimate-bg {
-  /* Add padding equal to the notch height */
-  padding-top: env(safe-area-inset-top); 
-  padding-bottom: env(safe-area-inset-bottom);
-  /* Ensure it doesn't overflow */
-  box-sizing: border-box;
+/* 1. Force Body to fill 100% of the screen (including notch area) */
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Prevent bounce scrolling */
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* Match your theme */
 }
 
-/* 2. Fix the Quiz Header (Timer & Name) */
-.app-header {
-  /* Push the header content down below the camera */
-  padding-top: calc(10px + env(safe-area-inset-top));
-  padding-left: calc(10px + env(safe-area-inset-left));
-  padding-right: calc(10px + env(safe-area-inset-right));
-  /* Ensure the height adjusts automatically */
-  height: auto;
-  min-height: 60px;
-}
-
-/* 3. Fix the Violation/Warning Screen */
-.violation-overlay {
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-}
-
-/* 4. Fix the Navigator Panel (Mobile Menu) */
-.navigator-panel.mobile-visible {
-  padding-top: calc(20px + env(safe-area-inset-top));
-}
-
-/* 5. Ensure the body fills the screen correctly */
-body {
+/* 2. Ensure the App Container fills the viewport */
+#root, .ultimate-bg, .split-screen-container {
   min-height: 100vh;
-  min-height: -webkit-fill-available; /* Fix for iOS Safari height bug */
+  width: 100%;
 }
 
-html {
-  height: -webkit-fill-available;
+/* 3. Remove any padding causing gaps */
+.ultimate-bg {
+  padding-top: 0 !important; /* Force content to touch the top edge */
+  padding-bottom: 0 !important;
+}
+
+.app-header {
+  /* If you want the text to be barely readable under the camera, keep 0 */
+  /* Or add just a tiny bit so text isn't physically cut by the hardware lens */
+  padding-top: 5px; 
+}
+
+/* 4. Force Full Height on Mobile */
+@media (max-width: 768px) {
+  .quiz-page {
+    height: 100vh; /* Uses standard viewport height */
+    height: -webkit-fill-available; /* iOS Safari Fix */
+  }
+  
+  .quiz-main-grid {
+    height: 100%;
+  }
 }
