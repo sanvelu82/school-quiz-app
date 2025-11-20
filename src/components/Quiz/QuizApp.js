@@ -5,154 +5,126 @@ import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-const TOTAL_TIME_SECONDS = 30; // Set to 30 seconds for testing
+const TOTAL_TIME_SECONDS = 30; 
 
 function QuizApp({ studentProfile, onQuizFinish }) {
-  // 1. Define State Variables FIRST
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [timeRemaining, setTimeRemaining] = useState(TOTAL_TIME_SECONDS);
   const [currentQIndex, setCurrentQIndex] = useState(0);
   const [allResponses, setAllResponses] = useState({}); 
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false); // Mobile Toggle
 
-  // 2. Load Questions Effect
+  // --- 1. Load Data ---
   useEffect(() => {
     fetchQuestions()
-      .then(data => {
-        setQuestions(data);
-        setLoading(false);
-      })
-      .catch(error => {
-        console.error("Failed to load questions:", error);
-        setLoading(false);
-      });
+      .then(data => { setQuestions(data); setLoading(false); })
+      .catch(() => setLoading(false));
   }, []);
 
-  // 3. Define Final Scoring Logic
+  // --- 2. Timer & Auto Submit ---
   const handleFinalSubmit = useCallback(() => {
     let score = 0;
-    
     questions.forEach(q => {
       const response = allResponses[q.id];
-      if (response && response.answer) {
-        // Check correctness
-        // Note: Ensure your questions.json 'correctAnswer' matches the option text exactly
-        if (response.answer === q.correctAnswer) {
-          score += 4; // Correct
-        } else {
-          score -= 1; // Incorrect
-        }
+      if (response?.answer) {
+        score += (response.answer === q.correctAnswer) ? 4 : -1;
       }
-      // Unattempted gets 0
     });
-
-    // Call the parent handler (App.js) to submit to Google Sheets
     onQuizFinish(score, allResponses);
   }, [questions, allResponses, onQuizFinish]);
 
-  // 4. Timer Effect (Now calls handleFinalSubmit)
   useEffect(() => {
-    if (loading ) return;
-    if (timeRemaining <= 0) {
-      handleFinalSubmit(); // Trigger submission
-      return; // Stop the timer logic
-    }
-    const timer = setInterval(() => {
-      setTimeRemaining(prevTime => prevTime - 1);
-    }, 1000);
-
-    if (timeRemaining <= 0) {
-      clearInterval(timer);
-      handleFinalSubmit(); // Auto-submit on timeout
-    }
-
+    if (loading) return;
+    if (timeRemaining <= 0) { handleFinalSubmit(); return; }
+    const timer = setInterval(() => setTimeRemaining(p => p - 1), 1000);
     return () => clearInterval(timer);
   }, [loading, timeRemaining, handleFinalSubmit]);
 
-  // 5. Handlers
-  const handleAnswerChange = useCallback((questionId, selectedOption) => {
-    setAllResponses(prevResponses => {
-      const existing = prevResponses[questionId] || {};
-      return {
-        ...prevResponses,
-        [questionId]: {
-          ...existing,
-          answer: selectedOption,
-          status: existing.status === 'marked_review' ? 'marked_answered' : 'answered', 
-        }
-      };
-    });
-  }, []); 
+  // --- 3. Handlers ---
 
-  const handleNext = (save) => {
-    // Move to next question
-    const nextIndex = (currentQIndex + 1) % questions.length;
-    setCurrentQIndex(nextIndex);
-  };
-  
-  const handleMarkForReview = () => {
-    const currentQId = questions[currentQIndex].id;
-    setAllResponses(prevResponses => ({
-        ...prevResponses,
-        [currentQId]: {
-            ...(prevResponses[currentQId] || {}),
-            status: prevResponses[currentQId]?.answer ? 'marked_answered' : 'marked_review', 
-        }
+  // Save Answer
+  const handleAnswerChange = useCallback((qId, opt) => {
+    setAllResponses(prev => ({
+      ...prev,
+      [qId]: { ...prev[qId], answer: opt, status: 'answered' }
     }));
-    handleNext(false); 
+  }, []);
+
+  // Clear Selection
+  const handleClearSelection = () => {
+    const currentQId = questions[currentQIndex].id;
+    setAllResponses(prev => {
+      const newResponses = { ...prev };
+      // We keep the object but remove the answer and reset status to visited
+      if (newResponses[currentQId]) {
+        newResponses[currentQId] = { ...newResponses[currentQId], answer: null, status: 'visited' };
+      }
+      return newResponses;
+    });
   };
 
+  // Navigation: Previous
+  const handlePrevious = () => {
+    if (currentQIndex > 0) {
+      setCurrentQIndex(prev => prev - 1);
+    }
+  };
+
+  // Navigation: Save & Next
+  const handleSaveNext = () => {
+    // Logic: Ensure current question is marked as answered or visited
+    if (currentQIndex < questions.length - 1) {
+      setCurrentQIndex(prev => prev + 1);
+    }
+    setIsPaletteOpen(false);
+  };
+
+  // Navigation: Palette Click
   const handleQuestionClick = (index) => {
     setCurrentQIndex(index);
+    setIsPaletteOpen(false);
   };
 
-  // 6. Render Logic
-  if (loading) {
-    return <div style={{padding: '20px'}}>Loading Quiz Questions...</div>;
-  }
-
-  // Safety check if questions failed to load
-  if (questions.length === 0) {
-    return <div>Error: No questions loaded.</div>;
-  }
+  if (loading) return <div>Loading...</div>;
 
   const currentQuestion = questions[currentQIndex];
   const currentSelectedAnswer = allResponses[currentQuestion?.id]?.answer || null;
-  
+
   return (
     <div className="quiz-page">
+      
+      {/* --- WATERMARK LAYER --- */}
+      <div className="watermark-container">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <span key={i} className="watermark-text">SVV HI-TECH</span>
+        ))}
+      </div>
+
+      {/* --- HEADER --- */}
       <Header studentProfile={studentProfile} timeRemaining={timeRemaining} />
       
+      {/* --- MAIN GRID --- */}
       <div className="quiz-main-grid">
-        <div className="quiz-panel">
-          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-            <h3>Question {currentQIndex + 1} of {questions.length}</h3>
-            {/* Final Submit Button (Top Right) */}
-            <button 
-                onClick={handleFinalSubmit}
-                style={{backgroundColor: 'green', color: 'white', padding: '5px 10px', border: 'none', cursor:'pointer'}}
-            >
-                Final Submit
-            </button>
-          </div>
-          
-          <QuestionDisplay 
-            question={currentQuestion}
-            selectedAnswer={currentSelectedAnswer}
-            onAnswerChange={handleAnswerChange}
-          />
-
-          <div className="action-buttons">
-            <button onClick={handleMarkForReview} className="btn-review">
-              Mark for Review & Next
-            </button>
-            <button onClick={() => handleNext(true)} className="btn-save-next">
-              Save & Next
-            </button>
-          </div>
+        
+        {/* Left: Question Area */}
+        <div className={`quiz-panel ${isPaletteOpen ? 'mobile-hidden' : ''}`}>
+           <div style={{display:'flex', justifyContent:'space-between'}}>
+              <h3>Question {currentQIndex + 1}</h3>
+              {/* Mobile Only: Palette Toggle */}
+              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>🔢 View Palette</button>
+           </div>
+           
+           <QuestionDisplay 
+              question={currentQuestion}
+              selectedAnswer={currentSelectedAnswer}
+              onAnswerChange={handleAnswerChange}
+           />
         </div>
         
-        <div className="navigator-panel">
+        {/* Right: Palette */}
+        <div className={`navigator-panel ${isPaletteOpen ? 'mobile-visible' : ''}`}>
+          {isPaletteOpen && <button onClick={() => setIsPaletteOpen(false)}>Close</button>}
           <NavigatorPanel 
             questions={questions}
             allResponses={allResponses}
@@ -161,6 +133,45 @@ function QuizApp({ studentProfile, onQuizFinish }) {
           />
         </div>
       </div>
+
+      {/* --- BOTTOM ACTION BAR --- */}
+      <div className="bottom-bar">
+        <div className="bottom-left">
+          <button 
+            className="quiz-btn btn-prev" 
+            onClick={handlePrevious}
+            disabled={currentQIndex === 0}
+          >
+            ← Previous
+          </button>
+          <button 
+            className="quiz-btn btn-clear" 
+            onClick={handleClearSelection}
+          >
+            Clear Selection
+          </button>
+        </div>
+
+        <div className="bottom-right">
+          <button 
+             className="quiz-btn btn-save" 
+             onClick={handleSaveNext}
+          >
+            Save & Next →
+          </button>
+          {/* Only show Final Submit on last question or via Palette */}
+          {currentQIndex === questions.length - 1 && (
+             <button 
+               onClick={handleFinalSubmit}
+               style={{background:'red', color:'white'}} 
+               className="quiz-btn"
+             >
+               Final Submit
+             </button>
+          )}
+        </div>
+      </div>
+
     </div>
   );
 }

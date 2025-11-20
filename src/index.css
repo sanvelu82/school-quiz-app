@@ -769,3 +769,211 @@ html, body {
 .app-header { padding-top: calc(10px + env(safe-area-inset-top)); }
 .ultimate-bg { padding-top: env(safe-area-inset-top) !important; }
 .violation-overlay { padding-top: env(safe-area-inset-top); }
+
+/* =========================================
+   QUIZ PAGE SPECIFIC STYLES (Fixed)
+   ========================================= */
+
+/* 1. The Watermark (Now Visible ON TOP) */
+.watermark-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999; /* On top of everything */
+  pointer-events: none; /* Click through it */
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  opacity: 0.06; /* Subtle but visible */
+  transform: rotate(-15deg) scale(1.2);
+}
+
+.watermark-text {
+  font-size: 4rem;
+  font-weight: 900;
+  color: #000;
+  margin: 50px;
+  white-space: nowrap;
+  user-select: none;
+  text-transform: uppercase;
+}
+
+/* 2. The Quiz Header */
+.quiz-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  position: relative;
+  z-index: 100; /* Above the grid */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+/* Left Side: Branding (Reusing EXACT Login Styles) */
+.quiz-brand {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+/* We reuse .school-line-1 and .school-line-2 from Login CSS here */
+
+/* Right Side: Student Info & Timer */
+.right-header-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.student-badge-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #f1f5f9;
+  padding: 5px 15px 5px 5px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+}
+
+/* Student Photo: Box Type */
+.student-photo-box {
+  width: 45px;
+  height: 55px; /* Box ratio */
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid #94a3b8;
+  background: #e2e8f0;
+  flex-shrink: 0;
+}
+.student-photo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Student Details Split */
+.student-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+/* Top Line: Name & Roll */
+.detail-line-top {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.roll-badge {
+  font-size: 0.7rem;
+  background: #1e293b;
+  color: #fff;
+  padding: 1px 6px;
+  border-radius: 4px;
+}
+
+/* Bottom Line: Class & Sec */
+.detail-line-bottom {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  border-top: 1px solid #cbd5e1; /* The "Split" Line */
+  padding-top: 2px;
+  width: 100%;
+}
+
+/* Timer */
+.quiz-timer {
+  background: #2563eb; /* Blue Timer */
+  color: #fff;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 1.2rem;
+  min-width: 110px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.2);
+}
+.timer-warning { background: #dc2626; animation: pulse 1s infinite; }
+
+/* 3. Layout Updates */
+.quiz-main-grid {
+  display: flex;
+  height: calc(100vh - 80px - 70px); /* Screen - Header - BottomBar */
+  position: relative;
+  z-index: 5;
+}
+
+/* Left: Question (Scrollable) */
+.quiz-panel {
+  flex: 3;
+  padding: 40px;
+  overflow-y: auto;
+  /* IMPORTANT: White background so text is readable over watermark */
+  background: rgba(255,255,255,0.95); 
+}
+
+/* Right: Palette */
+.navigator-panel {
+  flex: 1;
+  max-width: 320px;
+  background: #f8fafc;
+  border-left: 1px solid #e2e8f0;
+  padding: 15px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+/* 4. Bottom Action Bar */
+.bottom-bar {
+  height: 70px;
+  background: #ffffff;
+  border-top: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 20;
+}
+
+.bottom-left, .bottom-right { display: flex; gap: 10px; }
+
+/* Buttons */
+.quiz-btn {
+  padding: 12px 20px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-prev { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+.btn-clear { background: #fff; color: #ef4444; border: 1px solid #fecaca; }
+.btn-save { background: #10b981; color: white; box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2); }
+
+/* Mobile Overrides */
+@media (max-width: 768px) {
+  .quiz-header { height: auto; flex-direction: column; gap: 10px; padding: 15px; align-items: stretch;}
+  .quiz-brand { justify-content: center; }
+  .right-header-group { justify-content: space-between; }
+  .quiz-main-grid { height: calc(100vh - 160px); flex-direction: column; }
+  .navigator-panel { display: none; }
+  .navigator-panel.mobile-visible { display: block; position: absolute; top: 0; width: 100%; height: 100%; }
+  .bottom-bar { padding: 10px; height: auto; flex-wrap: wrap; }
+  .quiz-btn { padding: 10px; font-size: 0.8rem; flex: 1; }
+}
