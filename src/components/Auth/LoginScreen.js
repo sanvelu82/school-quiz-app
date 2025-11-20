@@ -12,10 +12,23 @@ function LoginScreen({ onLoginSuccess }) {
   // CONFIGURATION
   const LOGO_URL = "https://i.ibb.co/qYxNQQPx/Picture2.png";
 
+  // Helper to trigger Full Screen
+  const enterFullScreen = () => {
+    const elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen().catch((err) => console.log(err));
+    } else if (elem.webkitRequestFullscreen) {
+      elem.webkitRequestFullscreen();
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
+    
+    // Attempt Full Screen on Click
+    enterFullScreen();
 
     if (!rollNo || !password) {
       setError('Please enter valid credentials.');
@@ -37,20 +50,20 @@ function LoginScreen({ onLoginSuccess }) {
     <div className="ultimate-bg">
       <div className="glass-panel animate-card-entry">
         
-        {/* Header */}
+        {/* Header: Box Style Logo + Bold Text */}
         <div className="id-header">
           <div className="logo-wrapper">
-            <img src={LOGO_URL} alt="Logo" className="school-logo-img" />
+            <img src={LOGO_URL} alt="SVV Logo" className="school-logo-img" />
           </div>
           <div className="text-wrapper">
             <h1 className="school-line-1">SVV HI-TECH</h1>
-            <h2 className="school-line-2">SRI VINAYAGA VIDYALAYA SCHOOL</h2>
+            <h2 className="school-line-2">Sri Vinayaga Vidyalaya School</h2>
           </div>
         </div>
 
-        {/* Badge */}
+        {/* Pill Badge */}
         <div className="portal-subtitle">
-           Student Portal
+           ● Secure Portal
         </div>
 
         <form onSubmit={handleSubmit}>
@@ -80,7 +93,7 @@ function LoginScreen({ onLoginSuccess }) {
               <input 
                 type="password" 
                 value={password} 
-                placeholder="Enter Password"
+                placeholder="••••••••"
                 onChange={(e) => setPassword(e.target.value)} 
                 onFocus={() => setFocusedInput('pass')}
                 onBlur={() => setFocusedInput(null)}
@@ -96,12 +109,12 @@ function LoginScreen({ onLoginSuccess }) {
           )}
           
           <button type="submit" className="neon-button" disabled={loading}>
-            {loading ? 'Checking...' : 'Secure Login >'}
+            {loading ? 'Authenticating...' : 'Login to Assessment'}
           </button>
         </form>
         
         <div className="panel-footer">
-          <p>100% Secure Exam Environment</p>
+          <p>Locked Exam Environment • v2.4</p>
         </div>
       </div>
     </div>
