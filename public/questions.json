@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "subject": "Physics",
+    "text": "A block slides down a 30° incline. The coefficient of kinetic friction is 0.2. What is the acceleration of the block? (Use g=10 m/s²)",
+    "options": ["A. 3.27 m/s²", "B. 5.00 m/s²", "C. 4.12 m/s²", "D. 5.86 m/s²"],
+    "correctAnswer": "A. 3.27 m/s²",
+    "marks": 4
+  },
+  {
+    "id": 2,
+    "subject": "Chemistry",
+    "text": "Which of the following molecules has a trigonal planar geometry?",
+    "options": ["A. NH3", "B. H2O", "C. BF3", "D. CH4"],
+    "correctAnswer": "C. BF3",
+    "marks": 4
+  }
+]

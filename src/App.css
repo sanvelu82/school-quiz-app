@@ -1,0 +1,668 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* General Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+/* --- Login & Confirmation Screens --- */
+.login-container, .confirmation-page {
+  max-width: 500px;
+  margin: 50px auto;
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.login-container h2, .confirmation-box h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #0056b3;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  width: 100%;
+  padding: 12px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* --- Confirmation Specifics --- */
+.detail-list p {
+  margin: 8px 0;
+  font-size: 1.1em;
+}
+
+.confirmation-checkbox {
+  margin: 20px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.confirmation-checkbox input {
+  width: auto;
+}
+
+/* --- Header --- */
+.app-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 10px 20px;
+  border-bottom: 2px solid #007bff;
+  height: 80px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-photo {
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+}
+
+.student-info {
+  display: flex;
+  flex-direction: column;
+  margin-left: 15px;
+  margin-right: auto;
+}
+
+.student-info span {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.timer {
+  font-size: 1.5em;
+  color: #dc3545; /* Red text for timer */
+  background: #fff0f0;
+  padding: 5px 15px;
+  border-radius: 4px;
+  border: 1px solid #fabebf;
+}
+
+/* --- Quiz Layout (Split Screen) --- */
+.quiz-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-main-grid {
+  display: flex;
+  flex: 1;
+  height: calc(100vh - 80px); /* Subtract header height */
+  overflow: hidden;
+}
+
+/* Left Panel: Question Area */
+.quiz-panel {
+  flex: 3; /* Takes up 75% of width */
+  padding: 20px;
+  overflow-y: auto;
+  background: white;
+  border-right: 1px solid #ddd;
+  display: flex;
+  flex-direction: column;
+}
+
+.question-display {
+  margin-bottom: 20px;
+}
+
+.subject-tag {
+  background: #e7f1ff;
+  color: #007bff;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.question-text {
+  font-size: 1.2em;
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.option-item {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #eee;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.option-item:hover {
+  background-color: #f9f9f9;
+}
+
+/* Action Buttons */
+.action-buttons {
+  margin-top: auto;
+  display: flex;
+  gap: 15px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+.btn-review {
+  background-color: #ffc107;
+  color: #333;
+  flex: 1;
+}
+.btn-review:hover { background-color: #e0a800; }
+
+.btn-save-next {
+  background-color: #28a745;
+  flex: 1;
+}
+.btn-save-next:hover { background-color: #218838; }
+
+
+/* Right Panel: Navigator */
+.navigator-panel {
+  flex: 1; /* Takes up 25% of width */
+  background-color: #f1f6fa;
+  padding: 15px;
+  overflow-y: auto;
+  border-left: 1px solid #ccc;
+}
+
+.navigator-panel h3 {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  text-align: center;
+  background: #007bff;
+  color: white;
+  padding: 5px;
+}
+
+.question-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 buttons per row */
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.q-button {
+  width: 100%;
+  aspect-ratio: 1;
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  padding: 0;
+}
+
+/* --- Status Colors (Critical for JEE Look) --- */
+.unvisited { background-color: #e0e0e0; color: #333; border: 1px solid #ccc;}
+.answered { background-color: #28a745; color: white; border: 1px solid #1e7e34;}
+.marked-review { background-color: #dc3545; color: white; border: 1px solid #bd2130;}
+.marked-answered { background-color: #6f42c1; color: white; border: 1px solid #59359a;}
+
+.current-q {
+  border: 3px solid #007bff; /* Thick blue border */
+  transform: scale(1.05);
+}
+
+/* Legend */
+.legend {
+  font-size: 0.85rem;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+.legend-item span {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+}
+/* =========================================
+   ULTIMATE LOGIN UI STYLES
+   ========================================= */
+
+/* 1. The Full Page Background */
+.login-wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #007bff 0%, #0056b3 100%); /* Professional Blue Gradient */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+/* 2. The White Card */
+.login-card {
+  background: white;
+  width: 100%;
+  max-width: 420px; /* Good width for desktop */
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Soft floating shadow */
+  text-align: center;
+  transition: transform 0.3s ease;
+}
+
+/* 3. Branding Section */
+.school-branding {
+  margin-bottom: 30px;
+}
+
+.school-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 15px;
+}
+
+.school-name {
+  font-size: 1.5rem;
+  color: #333;
+  font-weight: 700;
+  margin-bottom: 5px;
+  line-height: 1.2;
+}
+
+.exam-title {
+  color: #666;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 4. Form Inputs */
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.9rem;
+  color: #555;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 15px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  background-color: #f9fafb;
+}
+
+.input-group input:focus {
+  border-color: #007bff;
+  outline: none;
+  background-color: #fff;
+}
+
+/* 5. Buttons & Messages */
+.login-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(to right, #007bff, #0062cc);
+  color: white;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.error-banner {
+  background-color: #fee2e2;
+  color: #dc2626;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  border: 1px solid #fecaca;
+}
+
+.login-footer {
+  margin-top: 20px;
+  font-size: 0.85rem;
+  color: #888;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 25px;
+    max-width: 100%;
+  }
+  .school-name {
+    font-size: 1.2rem;
+  }
+}
+
+/* Simple Loader Animation */
+.loader {
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #fff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* =========================================
+   THE "FINTECH MINIMALIST" UI (Navi Style)
+   ========================================= */
+
+/* 1. The Background: Pure White, No Distractions */
+.ultimate-bg {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff; /* Pure White */
+  font-family: 'Inter', 'Roboto', sans-serif; /* Clean sans-serif */
+  color: #1c1c1c;
+}
+
+/* 2. The Login Container (No shadow, just clean spacing) */
+.glass-panel {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  padding: 30px;
+  /* On desktop, we add a very subtle border to frame it */
+  border: 1px solid #e7e7e7;
+  border-radius: 24px; 
+  position: relative;
+}
+
+/* Animation */
+.animate-card-entry {
+  animation: slideUp 0.4s ease-out;
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Header: Clean & Bold */
+.id-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.logo-wrapper {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  /* Soft border circle like the user profile icon in your image */
+  border: 1px solid #f0f0f0; 
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.school-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.text-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.school-line-1 {
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #000000; /* Stark Black */
+  margin: 0;
+  line-height: 1.2;
+}
+
+.school-line-2 {
+  font-size: 0.8rem;
+  color: #666666; /* Dark Grey */
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Badge styling (Like the "Win up to" or "New" badges) */
+.portal-subtitle {
+  display: inline-block;
+  background-color: #f0fdf4; /* Light Mint Green background */
+  color: #15803d; /* Dark Green text */
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 20px; /* Pill shape */
+  margin-bottom: 25px;
+  text-transform: uppercase;
+}
+
+/* 4. Inputs: Soft Grey Boxes (Like the icons/boxes in your image) */
+.input-container {
+  background-color: #f5f7f9; /* Very light grey-blue tint */
+  border-radius: 16px; /* Soft rounded corners */
+  padding: 15px;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent; /* Invisible border normally */
+  transition: all 0.2s ease;
+}
+
+/* Focus State: Darker border */
+.input-container.focused {
+  background-color: #ffffff;
+  border-color: #000000; /* Black border on focus */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.icon-box {
+  font-size: 1.2rem;
+  margin-right: 15px;
+  color: #888;
+}
+
+.field-wrapper {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.field-wrapper label {
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.field-wrapper input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  color: #000;
+  font-weight: 600;
+  width: 100%;
+}
+
+/* 5. The Button: Bold Dark Block (Like "Scan & Pay") */
+.neon-button {
+  width: 100%;
+  padding: 18px;
+  margin-top: 15px;
+  background-color: #2e0c41; /* That deep dark purple/black from the "Scan & Pay" button */
+  color: white;
+  border: none;
+  border-radius: 16px; /* Matching rounded corners */
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  transition: transform 0.1s;
+}
+
+.neon-button:hover {
+  transform: scale(0.98); /* Subtle press effect */
+  opacity: 0.95;
+}
+
+/* Remove extra flare */
+.btn-flare { display: none; }
+
+/* Error Toast */
+.error-toast {
+  background: #fff1f2;
+  color: #e11d48;
+  font-size: 0.85rem;
+  font-weight: 600;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Footer */
+.panel-footer {
+  margin-top: 30px;
+  text-align: center;
+}
+.panel-footer p {
+  font-size: 0.8rem;
+  color: #999;
+  font-weight: 500;
+}
+
+/* --- Mobile Tweaks --- */
+@media (max-width: 480px) {
+  .glass-panel {
+    border: none; /* No border on mobile */
+    padding: 20px;
+    max-width: 100%;
+  }
+  .ultimate-bg {
+    align-items: flex-start; /* Start from top on mobile */
+    padding-top: 10px;
+  }
+}
