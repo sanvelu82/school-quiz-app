@@ -269,7 +269,7 @@ html, body {
   /* D. SIDEBAR DRAWER (Right to Left, 75%, Scrollable) */
   .navigator-panel {
     position: fixed; top: 0; right: -100%; width: 75%; height: 100%;
-    background: #ffffff; z-index: 2000; border-left: none;
+    background: #ffffff; z-index: 1500; border-left: none;
     box-shadow: -10px 0 30px rgba(0,0,0,0.2);
     transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding-top: calc(30px + env(safe-area-inset-top));
