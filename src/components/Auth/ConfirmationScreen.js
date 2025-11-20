@@ -1,12 +1,8 @@
 // src/components/Auth/ConfirmationScreen.js
 import React, { useState } from 'react';
-import Header from '../shared/Header'; // Reusing the header component for consistent display
 
 function ConfirmationScreen({ studentProfile, onConfirmStart }) {
   const [isConfirmed, setIsConfirmed] = useState(false);
-
-  // Use a fake time since the timer hasn't started yet
-  const FAKE_TIME = 9999; 
 
   const handleStart = () => {
     if (isConfirmed) {
@@ -15,37 +11,90 @@ function ConfirmationScreen({ studentProfile, onConfirmStart }) {
   };
 
   return (
-    <div className="confirmation-page">
-      {/* Display info using the Header component structure */}
-      <Header studentProfile={studentProfile} timeRemaining={FAKE_TIME} isConfirmation={true} />
-      
-      <div className="confirmation-box">
-        <h3>Candidate Verification</h3>
-        <p>Please review the details below before starting the examination.</p>
+    <div className="ultimate-bg">
+      {/* Reusing glass-panel but adding 'hall-ticket' class for specific width */}
+      <div className="glass-panel hall-ticket animate-card-entry">
         
-        <div className="detail-list">
-          <p><strong>Roll No:</strong> {studentProfile.rollNo}</p>
-          <p><strong>Name:</strong> {studentProfile.fullName}</p>
-          <p><strong>Class:</strong> {studentProfile.class}-{studentProfile.section}</p>
+        {/* 1. Ticket Header */}
+        <div className="ticket-header">
+          <div className="ticket-badge">2025 EXAM SESSION</div>
+          <h3>Candidate Verification</h3>
+          <p>Please verify your identity before proceeding.</p>
         </div>
 
-        <div className="confirmation-checkbox">
-          <input
-            type="checkbox"
-            id="confirm"
-            checked={isConfirmed}
-            onChange={(e) => setIsConfirmed(e.target.checked)}
-          />
-          <label htmlFor="confirm">The above details are mine and confirmed.</label>
+        <div className="ticket-divider"></div>
+
+        {/* 2. Candidate Grid (Photo + Details) */}
+        <div className="candidate-grid">
+          
+          {/* Photo Column: Box Type with Radius */}
+          <div className="photo-section">
+            <div className="photo-frame">
+              <img 
+                src={studentProfile.photoUrl || "https://via.placeholder.com/150"} 
+                alt="Candidate" 
+                className="candidate-img" 
+              />
+              <span className="photo-label">LIVE PHOTO</span>
+            </div>
+          </div>
+
+          {/* Details Column: Professional Alignment */}
+          <div className="details-section">
+            <div className="detail-row">
+              <label>Candidate Name</label>
+              <div className="value-box highlight-text">{studentProfile.fullName}</div>
+            </div>
+            
+            <div className="detail-row-split">
+              <div className="split-item">
+                <label>Roll Number</label>
+                <div className="value-box">{studentProfile.rollNo}</div>
+              </div>
+              <div className="split-item">
+                <label>Class & Sec</label>
+                <div className="value-box">{studentProfile.quizClass} - {studentProfile.quizSection}</div>
+              </div>
+            </div>
+
+            <div className="detail-row">
+              <label>Exam Center</label>
+              <div className="value-box">Computer Lab 1 (Main Block)</div>
+            </div>
+          </div>
         </div>
 
-        <button 
-          onClick={handleStart} 
-          disabled={!isConfirmed}
-          className="start-button"
-        >
-          Start Quiz
-        </button>
+        {/* 3. Instructions Box */}
+        <div className="instruction-box">
+          <h4>⚠️ Important Instructions:</h4>
+          <ul>
+            <li>Do not close or refresh the browser window.</li>
+            <li>Using strict mode: Exiting full screen will pause the exam.</li>
+            <li>Click "Submit" only after answering all questions.</li>
+          </ul>
+        </div>
+
+        {/* 4. Confirmation & Button */}
+        <div className="confirmation-footer">
+          <label className="checkbox-container">
+            <input
+              type="checkbox"
+              checked={isConfirmed}
+              onChange={(e) => setIsConfirmed(e.target.checked)}
+            />
+            <span className="checkmark"></span>
+            I confirm that the details above are correct and I am ready to begin.
+          </label>
+
+          <button 
+            onClick={handleStart} 
+            disabled={!isConfirmed}
+            className="neon-button start-btn"
+          >
+            Start Examination
+          </button>
+        </div>
+
       </div>
     </div>
   );
