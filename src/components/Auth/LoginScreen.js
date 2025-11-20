@@ -43,8 +43,8 @@ function LoginScreen({ onLoginSuccess }) {
             <img src={LOGO_URL} alt="Logo" className="school-logo-img" />
           </div>
           <div className="text-wrapper">
-            <h1 className="school-line-1">S.V. HIGH SCHOOL</h1>
-            <h2 className="school-line-2">& JUNIOR COLLEGE</h2>
+            <h1 className="school-line-1">SVV HI-TECH</h1>
+            <h2 className="school-line-2">SRI VINAYAGA VIDYALAYA SCHOOL</h2>
           </div>
         </div>
 
