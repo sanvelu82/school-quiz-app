@@ -6,9 +6,9 @@ export const EXAM_SESSIONS = [
     id: 1,
     name: "Physics & Chemistry (Morning)",
     date: "2025-11-21",   // ⚠️ CHANGE THIS TO TODAY'S DATE TO TEST
-    loginTime: "00:08",   // HH:MM (24-hour format)
-    startTime: "00:10",   
-    endTime:   "00:12",   
+    loginTime: "00:15",   // HH:MM (24-hour format)
+    startTime: "00:16",   
+    endTime:   "00:17",   
     questionFile: "/questions1.json"
   },
   {
