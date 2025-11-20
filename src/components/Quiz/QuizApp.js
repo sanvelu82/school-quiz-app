@@ -42,8 +42,6 @@ function QuizApp({ studentProfile, onQuizFinish }) {
   }, [loading, timeRemaining, handleFinalSubmit]);
 
   // --- 3. Handlers ---
-
-  // Save Answer
   const handleAnswerChange = useCallback((qId, opt) => {
     setAllResponses(prev => ({
       ...prev,
@@ -51,12 +49,10 @@ function QuizApp({ studentProfile, onQuizFinish }) {
     }));
   }, []);
 
-  // Clear Selection
   const handleClearSelection = () => {
     const currentQId = questions[currentQIndex].id;
     setAllResponses(prev => {
       const newResponses = { ...prev };
-      // We keep the object but remove the answer and reset status to visited
       if (newResponses[currentQId]) {
         newResponses[currentQId] = { ...newResponses[currentQId], answer: null, status: 'visited' };
       }
@@ -64,23 +60,13 @@ function QuizApp({ studentProfile, onQuizFinish }) {
     });
   };
 
-  // Navigation: Previous
-  const handlePrevious = () => {
-    if (currentQIndex > 0) {
-      setCurrentQIndex(prev => prev - 1);
-    }
-  };
-
-  // Navigation: Save & Next
+  const handlePrevious = () => { if (currentQIndex > 0) setCurrentQIndex(prev => prev - 1); };
+  
   const handleSaveNext = () => {
-    // Logic: Ensure current question is marked as answered or visited
-    if (currentQIndex < questions.length - 1) {
-      setCurrentQIndex(prev => prev + 1);
-    }
+    if (currentQIndex < questions.length - 1) setCurrentQIndex(prev => prev + 1);
     setIsPaletteOpen(false);
   };
 
-  // Navigation: Palette Click
   const handleQuestionClick = (index) => {
     setCurrentQIndex(index);
     setIsPaletteOpen(false);
@@ -94,25 +80,33 @@ function QuizApp({ studentProfile, onQuizFinish }) {
   return (
     <div className="quiz-page">
       
-      {/* --- WATERMARK LAYER --- */}
+      {/* --- WATERMARK LAYER (Denser Loop) --- */}
       <div className="watermark-container">
-        {Array.from({ length: 20 }).map((_, i) => (
+        {Array.from({ length: 50 }).map((_, i) => (
           <span key={i} className="watermark-text">SVV HI-TECH</span>
         ))}
       </div>
 
-      {/* --- HEADER --- */}
-      <Header studentProfile={studentProfile} timeRemaining={timeRemaining} />
+      {/* --- HEADER (Pass toggle function) --- */}
+      <Header 
+        studentProfile={studentProfile} 
+        timeRemaining={timeRemaining} 
+        onOpenPalette={() => setIsPaletteOpen(true)} 
+      />
       
+      {/* --- MOBILE OVERLAY --- */}
+      <div 
+        className={`mobile-overlay ${isPaletteOpen ? 'active' : ''}`} 
+        onClick={() => setIsPaletteOpen(false)}
+      ></div>
+
       {/* --- MAIN GRID --- */}
       <div className="quiz-main-grid">
         
         {/* Left: Question Area */}
-        <div className={`quiz-panel ${isPaletteOpen ? 'mobile-hidden' : ''}`}>
-           <div style={{display:'flex', justifyContent:'space-between'}}>
+        <div className="quiz-panel">
+           <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'10px'}}>
               <h3>Question {currentQIndex + 1}</h3>
-              {/* Mobile Only: Palette Toggle */}
-              <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>🔢 View Palette</button>
            </div>
            
            <QuestionDisplay 
@@ -122,9 +116,14 @@ function QuizApp({ studentProfile, onQuizFinish }) {
            />
         </div>
         
-        {/* Right: Palette */}
+        {/* Right: Palette (Sidebar on Mobile) */}
         <div className={`navigator-panel ${isPaletteOpen ? 'mobile-visible' : ''}`}>
-          {isPaletteOpen && <button onClick={() => setIsPaletteOpen(false)}>Close</button>}
+          
+          {/* Mobile Close Button */}
+          <div className="mobile-close-btn">
+            <button onClick={() => setIsPaletteOpen(false)}>✕ CLOSE</button>
+          </div>
+
           <NavigatorPanel 
             questions={questions}
             allResponses={allResponses}
@@ -148,7 +147,7 @@ function QuizApp({ studentProfile, onQuizFinish }) {
             className="quiz-btn btn-clear" 
             onClick={handleClearSelection}
           >
-            Clear Selection
+            Clear
           </button>
         </div>
 
@@ -159,11 +158,10 @@ function QuizApp({ studentProfile, onQuizFinish }) {
           >
             Save & Next →
           </button>
-          {/* Only show Final Submit on last question or via Palette */}
           {currentQIndex === questions.length - 1 && (
              <button 
                onClick={handleFinalSubmit}
-               style={{background:'red', color:'white'}} 
+               style={{background:'#dc2626', color:'white', border:'none'}} 
                className="quiz-btn"
              >
                Final Submit
