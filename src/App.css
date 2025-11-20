@@ -721,3 +721,48 @@ button:disabled {
 .return-btn:hover {
   background-color: #1d4ed8;
 }
+
+/* =========================================
+   MOBILE NOTCH / SAFE AREA FIXES
+   ========================================= */
+
+/* 1. Fix the Login Screen Background */
+.ultimate-bg {
+  /* Add padding equal to the notch height */
+  padding-top: env(safe-area-inset-top); 
+  padding-bottom: env(safe-area-inset-bottom);
+  /* Ensure it doesn't overflow */
+  box-sizing: border-box;
+}
+
+/* 2. Fix the Quiz Header (Timer & Name) */
+.app-header {
+  /* Push the header content down below the camera */
+  padding-top: calc(10px + env(safe-area-inset-top));
+  padding-left: calc(10px + env(safe-area-inset-left));
+  padding-right: calc(10px + env(safe-area-inset-right));
+  /* Ensure the height adjusts automatically */
+  height: auto;
+  min-height: 60px;
+}
+
+/* 3. Fix the Violation/Warning Screen */
+.violation-overlay {
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 4. Fix the Navigator Panel (Mobile Menu) */
+.navigator-panel.mobile-visible {
+  padding-top: calc(20px + env(safe-area-inset-top));
+}
+
+/* 5. Ensure the body fills the screen correctly */
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available; /* Fix for iOS Safari height bug */
+}
+
+html {
+  height: -webkit-fill-available;
+}
