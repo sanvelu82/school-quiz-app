@@ -1,3 +1,4 @@
+// src/App.js
 import React, { useState, useEffect } from 'react';
 import LoginScreen from './components/Auth/LoginScreen';
 import ConfirmationScreen from './components/Auth/ConfirmationScreen';
@@ -118,13 +119,28 @@ function App() {
 
   if (submissionStatus === 'success') {
     return (
-      <div className="app-container" style={{textAlign: 'center', marginTop: '50px', fontFamily: 'Arial'}}>
-        <h1 style={{color: 'green'}}>Test Submitted Successfully!</h1>
-        <p>Thank you, <strong>{studentProfile.fullName}</strong>.</p>
-        <p>Your response has been recorded.</p>
-        <button onClick={handleLogout} style={{padding: '10px 20px', marginTop: '20px', cursor: 'pointer'}}>
-          Return to Home
-        </button>
+      <div className="ultimate-bg">
+        <div className="glass-panel animate-card-entry" style={{textAlign: 'center', maxWidth: '500px'}}>
+          
+          <div style={{fontSize: '4rem', marginBottom: '20px'}}>🎉</div>
+          
+          <h2 className="school-line-1" style={{fontSize: '2rem', marginBottom: '10px'}}>
+            Test Submitted!
+          </h2>
+          
+          <p style={{fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '5px'}}>
+            Thank you, {studentProfile.fullName}
+          </p>
+          
+          <div className="portal-subtitle" style={{marginTop: '15px', marginBottom: '25px'}}>
+            Response Recorded Securely
+          </div>
+
+          <button onClick={handleLogout} className="neon-button">
+            Return to Home
+          </button>
+          
+        </div>
       </div>
     );
   }

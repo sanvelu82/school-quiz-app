@@ -37,7 +37,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     }
   }, [session]);
 
-const handleFinalSubmit = useCallback(() => {
+  const handleFinalSubmit = useCallback(() => {
     let score = 0;
     questions.forEach(q => {
       const response = allResponses[q.id];
@@ -46,6 +46,7 @@ const handleFinalSubmit = useCallback(() => {
         const positiveMark = q.marks !== undefined ? q.marks : 4;
         const negativeMark = q.negativeMarks !== undefined ? q.negativeMarks : 1; // Default to 1 if not specified
 
+        // ✅ FIXED: Removed the typo "?Tb"
         score += (response.answer === q.correctAnswer) ? positiveMark : -negativeMark;
       }
     });
@@ -65,12 +66,10 @@ const handleFinalSubmit = useCallback(() => {
         }
         
         // 🔊 PLAY ONCE at 9 Seconds
-        // Since the clip is 9s long, playing it at 9s will end exactly at 0s.
         if (prev === 9) { 
            if (beepAudio.current) {
              beepAudio.current.currentTime = 0;
              beepAudio.current.play().catch(e => {
-                 // This catches errors if the user hasn't clicked anything yet
                  console.warn("Audio blocked - user interaction needed first");
              });
            }
@@ -132,7 +131,8 @@ const handleFinalSubmit = useCallback(() => {
   return (
     <div className="quiz-page">
       <div className="watermark-container">
-        {Array.from({ length: 50 }).map((_, i) => ( <span key={i} className="watermark-text">SVV HI-TECH</span> ))}
+        {/* ✅ UPDATED: Increased count to 150 */}
+        {Array.from({ length: 150 }).map((_, i) => ( <span key={i} className="watermark-text">SVV HI-TECH</span> ))}
       </div>
 
       <Header studentProfile={studentProfile} timeRemaining={timeRemaining} />
@@ -142,7 +142,16 @@ const handleFinalSubmit = useCallback(() => {
       <div className="quiz-main-grid">
         <div className="quiz-panel">
            <div className="panel-top-bar">
-              <h3>Question {currentQIndex + 1}</h3>
+              <h3>
+                Question {currentQIndex + 1}
+                
+                {/* ✅ NEW: Show marks if negative marking exists */}
+                {currentQuestion && currentQuestion.negativeMarks > 0 && (
+                  <span style={{fontSize: '0.85rem', color: '#dc2626', marginLeft: '12px', fontWeight: '600'}}>
+                    (+{currentQuestion.marks || 4}, -{currentQuestion.negativeMarks})
+                  </span>
+                )}
+              </h3>
               <button className="palette-toggle-btn" onClick={() => setIsPaletteOpen(true)}>☰</button>
            </div>
            
