@@ -37,12 +37,16 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     }
   }, [session]);
 
-  const handleFinalSubmit = useCallback(() => {
+const handleFinalSubmit = useCallback(() => {
     let score = 0;
     questions.forEach(q => {
       const response = allResponses[q.id];
       if (response?.answer) {
-        score += (response.answer === q.correctAnswer) ? 4 : -1;
+        // Determine points for this question
+        const positiveMark = q.marks !== undefined ? q.marks : 4;
+        const negativeMark = q.negativeMarks !== undefined ? q.negativeMarks : 1; // Default to 1 if not specified
+
+        score += (response.answer === q.correctAnswer) ? positiveMark : -negativeMark;
       }
     });
     onQuizFinish(score, allResponses);
