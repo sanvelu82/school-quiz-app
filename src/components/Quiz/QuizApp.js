@@ -46,7 +46,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
         const positiveMark = q.marks !== undefined ? q.marks : 4;
         const negativeMark = q.negativeMarks !== undefined ? q.negativeMarks : 1; // Default to 1 if not specified
 
-        // ✅ FIXED: Removed the typo "?Tb"
+        // Calculate Score
         score += (response.answer === q.correctAnswer) ? positiveMark : -negativeMark;
       }
     });
@@ -131,7 +131,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   return (
     <div className="quiz-page">
       <div className="watermark-container">
-        {/* ✅ UPDATED: Increased count to 150 */}
+        {/* Watermark count set to 150 */}
         {Array.from({ length: 150 }).map((_, i) => ( <span key={i} className="watermark-text">SVV HI-TECH</span> ))}
       </div>
 
@@ -145,10 +145,12 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
               <h3>
                 Question {currentQIndex + 1}
                 
-                {/* ✅ NEW: Show marks if negative marking exists */}
-                {currentQuestion && currentQuestion.negativeMarks > 0 && (
-                  <span style={{fontSize: '0.85rem', color: '#dc2626', marginLeft: '12px', fontWeight: '600'}}>
-                    (+{currentQuestion.marks || 4}, -{currentQuestion.negativeMarks})
+                {/* ✅ NEW: Marks Display Logic (Green for Positive, Red for Negative) */}
+                {currentQuestion && (
+                  <span style={{fontSize: '0.85rem', marginLeft: '12px', fontWeight: '700'}}>
+                    <span style={{color: '#16a34a'}}>(+{currentQuestion.marks || 4}</span>
+                    <span style={{color: '#94a3b8'}}>, </span>
+                    <span style={{color: '#dc2626'}}>-{currentQuestion.negativeMarks !== undefined ? currentQuestion.negativeMarks : 1})</span>
                   </span>
                 )}
               </h3>
