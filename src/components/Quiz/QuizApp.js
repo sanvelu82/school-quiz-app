@@ -82,6 +82,25 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     return () => clearInterval(timer);
   }, [loading, handleFinalSubmit]);
 
+  // ✅ NEW FIX: Automatically mark current question as 'visited' (Red) on entry
+  useEffect(() => {
+    if (!loading && questions.length > 0) {
+      const currentQId = questions[currentQIndex]?.id;
+      if (currentQId) {
+        setAllResponses((prev) => {
+          // If we already have a record (answered, marked, etc.), don't overwrite it
+          if (prev[currentQId]) return prev;
+
+          // Otherwise, mark as 'visited' so it shows as Red (Not Answered) in sidebar
+          return {
+            ...prev,
+            [currentQId]: { answer: null, status: 'visited' }
+          };
+        });
+      }
+    }
+  }, [currentQIndex, questions, loading]);
+
   // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
     // Unlock audio on first interaction (Safety measure)
@@ -94,15 +113,17 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
   }, []);
 
+  // ✅ ENHANCED: Clear Selection now explicitly sets status to 'visited' (Red)
   const handleClearSelection = () => {
     const currentQId = questions[currentQIndex].id;
-    setAllResponses(prev => {
-      const newResponses = { ...prev };
-      if (newResponses[currentQId]) {
-        newResponses[currentQId] = { ...newResponses[currentQId], answer: null, status: 'visited' };
+    setAllResponses(prev => ({
+      ...prev,
+      [currentQId]: { 
+        ...(prev[currentQId] || {}), // Preserve other props if any
+        answer: null, 
+        status: 'visited' // Forces the "Not Answered" red color
       }
-      return newResponses;
-    });
+    }));
   };
 
   const handleMarkReview = () => {
@@ -114,10 +135,12 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   };
 
   const handlePrevious = () => { if (currentQIndex > 0) setCurrentQIndex(prev => prev - 1); };
+  
   const handleSaveNext = () => {
     if (currentQIndex < questions.length - 1) setCurrentQIndex(prev => prev + 1);
     setIsPaletteOpen(false); 
   };
+  
   const handleQuestionClick = (index) => {
     setCurrentQIndex(index);
     setIsPaletteOpen(false);
@@ -145,7 +168,7 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
               <h3>
                 Question {currentQIndex + 1}
                 
-                {/* ✅ NEW: Marks Display Logic (Green for Positive, Red for Negative) */}
+                {/* Marks Display Logic */}
                 {currentQuestion && (
                   <span style={{fontSize: '0.85rem', marginLeft: '12px', fontWeight: '700'}}>
                     <span style={{color: '#16a34a'}}>(+{currentQuestion.marks || 4}</span>
