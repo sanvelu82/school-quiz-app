@@ -8,7 +8,7 @@ export const EXAM_SESSIONS = [
     date: "2025-11-22",   // 🗓️ Update this to your test date
     loginTime: "15:25",   // Can enter app
     startTime: "15:26",   // Can click Start
-    endTime:   "15:28",   // Auto-submit
+    endTime:   "15:35",   // Auto-submit
     questionFile: "/questions1.json"
   },
   {
