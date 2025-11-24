@@ -2,701 +2,281 @@
   {
     "id": 1,
     "subject": "Mathematics",
-    "text": "What is 542 - 530?",
+    "text": "If you start at 0 and make 4 jumps of 3 steps each, what number do you land on?",
     "options": [
-      "A. -24",
-      "B. -5",
-      "C. 12",
-      "D. 44"
+      "A. 7",
+      "B. 12",
+      "C. 9",
+      "D. 15"
     ],
-    "correctAnswer": "C. 12",
+    "correctAnswer": "B. 12",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 2,
     "subject": "Mathematics",
-    "text": "Convert 3 centimeters to millimeters.",
+    "text": "Which multiplication sentence represents 7 + 7 + 7 + 7 + 7?",
     "options": [
-      "A. 20",
-      "B. 130",
-      "C. 40",
-      "D. 30"
+      "A. 7 x 4",
+      "B. 5 x 7",
+      "C. 7 + 5",
+      "D. 35 x 1"
     ],
-    "correctAnswer": "D. 30",
+    "correctAnswer": "B. 5 x 7",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
+{
+  "id": 3,
+  "subject": "Mathematics",
+  "text": "Which expression shows the correct way to break down '43 x 25'?",
+  "options": [
+    "A. (40 x 20) + (3 x 5)",
+    "B. (40 x 25) + (3 x 25)",
+    "C. 43 x (20 x 5)",
+    "D. (40 + 25) x (3 + 25)"
+  ],
+  "correctAnswer": "B. (40 x 25) + (3 x 25)",
+  "marks": 4,
+  "negativeMarks": 0
+},
   {
-    "id": 3,
+    "id": 4,
     "subject": "Mathematics",
-    "text": "What is 88 \u00f7 4?",
+    "text": "To divide 24 by 6 using repeated subtraction, how many times must you subtract 6 from 24 to reach 0?",
     "options": [
-      "A. 22",
-      "B. 17",
-      "C. 32",
-      "D. 29"
+      "A. 3",
+      "B. 6",
+      "C. 4",
+      "D. 5"
     ],
-    "correctAnswer": "A. 22",
+    "correctAnswer": "C. 4",
     "marks": 4,
     "negativeMarks": 0
   },
   {
-    "id": 4,
-    "subject": "Mathematics",
-    "text": "What is 172 \u00f7 4?",
-    "options": [
-      "A. 50",
-      "B. 42",
-      "C. 44",
-      "D. 43"
-    ],
-    "correctAnswer": "D. 43",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
     "id": 5,
     "subject": "Mathematics",
-    "text": "How many sides does a Triangle have?",
+    "text": "Division Facts: What is 36 / 6?",
     "options": [
-      "A. 10",
-      "B. 5",
-      "C. 3",
-      "D. 6"
+      "A. 5",
+      "B. 7",
+      "C. 6",
+      "D. 8"
     ],
-    "correctAnswer": "C. 3",
+    "correctAnswer": "C. 6",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 6,
     "subject": "Mathematics",
-    "text": "Convert 18 liters to milliliters.",
+    "text": "Divide and Check: Divide 85 by 5.",
     "options": [
-      "A. 18000",
-      "B. 17900",
-      "C. 18010",
-      "D. 17990"
+      "A. 15",
+      "B. 17",
+      "C. 19",
+      "D. 13"
     ],
-    "correctAnswer": "A. 18000",
+    "correctAnswer": "B. 17",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
   {
     "id": 7,
     "subject": "Mathematics",
-    "text": "Convert 12 centimeters to millimeters.",
+    "text": "Time: If the hour hand is between 4 and 5, and the minute hand is pointing at 6, what time is it?",
     "options": [
-      "A. 120",
-      "B. 20",
-      "C. 220",
-      "D. 110"
+      "A. 4:06",
+      "B. 5:30",
+      "C. 4:30",
+      "D. 5:06"
     ],
-    "correctAnswer": "A. 120",
+    "correctAnswer": "C. 4:30",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 8,
     "subject": "Mathematics",
-    "text": "What is 840 - 162?",
+    "text": "Calendar: How many days are there in 4 weeks?",
     "options": [
-      "A. 661",
-      "B. 646",
-      "C. 678",
-      "D. 655"
+      "A. 24 days",
+      "B. 28 days",
+      "C. 30 days",
+      "D. 21 days"
     ],
-    "correctAnswer": "C. 678",
+    "correctAnswer": "B. 28 days",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
   {
     "id": 9,
     "subject": "Mathematics",
-    "text": "Convert 17 meters to centimeters.",
+    "text": "Convert to Minutes: How many minutes are in 3 hours?",
     "options": [
-      "A. 1700",
-      "B. 1710",
-      "C. 1600",
-      "D. 1690"
+      "A. 180 minutes",
+      "B. 120 minutes",
+      "C. 300 minutes",
+      "D. 150 minutes"
     ],
-    "correctAnswer": "A. 1700",
+    "correctAnswer": "A. 180 minutes",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 10,
     "subject": "Mathematics",
-    "text": "Convert 13 kilograms to grams.",
+    "text": "Word Problem: A packet contains 8 chocolates. How many chocolates are in 9 packets?",
     "options": [
-      "A. 13000",
-      "B. 12990",
-      "C. 13100",
-      "D. 12900"
+      "A. 72",
+      "B. 64",
+      "C. 81",
+      "D. 17"
     ],
-    "correctAnswer": "A. 13000",
+    "correctAnswer": "A. 72",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
   {
     "id": 11,
     "subject": "Mathematics",
-    "text": "What is 895 + 540?",
+    "text": "Hard Word Problem: A factory produces 1,250 toys a day. How many toys are produced in 6 days?",
     "options": [
-      "A. 1433",
-      "B. 1411",
-      "C. 1406",
-      "D. 1435"
+      "A. 6,500",
+      "B. 7,500",
+      "C. 7,250",
+      "D. 7,000"
     ],
-    "correctAnswer": "D. 1435",
+    "correctAnswer": "B. 7,500",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 12,
     "subject": "Mathematics",
-    "text": "What is 772 + 729?",
+    "text": "Division of 4-Digit Number: Calculate 6489 / 3.",
     "options": [
-      "A. 1532",
-      "B. 1531",
-      "C. 1512",
-      "D. 1501"
+      "A. 2163",
+      "B. 2123",
+      "C. 2263",
+      "D. 2161"
     ],
-    "correctAnswer": "D. 1501",
+    "correctAnswer": "A. 2163",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
   {
     "id": 13,
     "subject": "Mathematics",
-    "text": "What is 726 + 581?",
+    "text": "Verification: If Quotient = 1131, Divisor = 4, and Remainder = 2, what is the Dividend?",
     "options": [
-      "A. 1307",
-      "B. 1324",
-      "C. 1301",
-      "D. 1353"
+      "A. 4524",
+      "B. 4526",
+      "C. 4528",
+      "D. 4530"
     ],
-    "correctAnswer": "A. 1307",
+    "correctAnswer": "B. 4526",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 14,
     "subject": "Mathematics",
-    "text": "What is 676 - 260?",
+    "text": "Mixed Time Conversion: Convert 5 hours and 25 minutes entirely into minutes.",
     "options": [
-      "A. 441",
-      "B. 416",
-      "C. 376",
-      "D. 409"
+      "A. 305 minutes",
+      "B. 325 minutes",
+      "C. 525 minutes",
+      "D. 350 minutes"
     ],
-    "correctAnswer": "B. 416",
+    "correctAnswer": "B. 325 minutes",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
   {
     "id": 15,
     "subject": "Mathematics",
-    "text": "What is 196 \u00f7 4?",
+    "text": "Convert to Seconds: How many seconds are in 15 minutes?",
     "options": [
-      "A. 52",
-      "B. 45",
-      "C. 49",
-      "D. 48"
+      "A. 600 seconds",
+      "B. 900 seconds",
+      "C. 1500 seconds",
+      "D. 90 seconds"
     ],
-    "correctAnswer": "C. 49",
+    "correctAnswer": "B. 900 seconds",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 16,
     "subject": "Mathematics",
-    "text": "What is 100 \u00f7 5?",
+    "text": "Quarter Hours: Which digital time represents \"Quarter to 9\"?",
     "options": [
-      "A. 17",
-      "B. 30",
-      "C. 20",
-      "D. 15"
+      "A. 9:15",
+      "B. 8:45",
+      "C. 9:45",
+      "D. 8:15"
     ],
-    "correctAnswer": "C. 20",
+    "correctAnswer": "B. 8:45",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
   {
     "id": 17,
     "subject": "Mathematics",
-    "text": "How many sides does a Hexagon have?",
+    "text": "Division Remainder: A farmer packs 2,450 apples into 8 boxes equally. How many apples are left over?",
     "options": [
-      "A. 6",
-      "B. 10",
-      "C. 7",
-      "D. 8"
+      "A. 0",
+      "B. 2",
+      "C. 4",
+      "D. 6"
     ],
-    "correctAnswer": "A. 6",
+    "correctAnswer": "B. 2",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 18,
     "subject": "Mathematics",
-    "text": "What is 657 + 534?",
+    "text": "Logic: Compare \"12 groups of 15\" and \"15 groups of 12\".",
     "options": [
-      "A. 1191",
-      "B. 1168",
-      "C. 1192",
-      "D. 1171"
+      "A. Equal",
+      "B. First is larger",
+      "C. Second is larger",
+      "D. Cannot determine"
     ],
-    "correctAnswer": "A. 1191",
+    "correctAnswer": "A. Equal",
     "marks": 4,
-    "negativeMarks": 1
+    "negativeMarks": 0
   },
   {
     "id": 19,
     "subject": "Mathematics",
-    "text": "What is 68 x 8?",
+    "text": "Calendar Conversion: A camp lasts 6 weeks and 3 days. How many total days is this?",
     "options": [
-      "A. 543",
-      "B. 544",
-      "C. 541",
-      "D. 545"
+      "A. 45 days",
+      "B. 42 days",
+      "C. 63 days",
+      "D. 39 days"
     ],
-    "correctAnswer": "B. 544",
+    "correctAnswer": "A. 45 days",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 20,
     "subject": "Mathematics",
-    "text": "What is 257 + 959?",
-    "options": [
-      "A. 1210",
-      "B. 1216",
-      "C. 1264",
-      "D. 1179"
-    ],
-    "correctAnswer": "B. 1216",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 21,
-    "subject": "Mathematics",
-    "text": "What is 98 x 6?",
-    "options": [
-      "A. 588",
-      "B. 595",
-      "C. 596",
-      "D. 592"
-    ],
-    "correctAnswer": "A. 588",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 22,
-    "subject": "Mathematics",
-    "text": "What is 416 - 283?",
-    "options": [
-      "A. 133",
-      "B. 119",
-      "C. 167",
-      "D. 144"
-    ],
-    "correctAnswer": "A. 133",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 23,
-    "subject": "Mathematics",
-    "text": "What is 858 - 608?",
-    "options": [
-      "A. 212",
-      "B. 206",
-      "C. 250",
-      "D. 226"
-    ],
-    "correctAnswer": "C. 250",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 24,
-    "subject": "Mathematics",
-    "text": "What is 93 x 7?",
-    "options": [
-      "A. 660",
-      "B. 657",
-      "C. 651",
-      "D. 648"
-    ],
-    "correctAnswer": "C. 651",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 25,
-    "subject": "Mathematics",
-    "text": "How many sides does a Square have?",
+    "text": "Missing Fact: Find the missing number: 63 / ? = 7",
     "options": [
       "A. 8",
       "B. 9",
-      "C. 10",
-      "D. 4"
-    ],
-    "correctAnswer": "D. 4",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 26,
-    "subject": "Mathematics",
-    "text": "What is 420 \u00f7 7?",
-    "options": [
-      "A. 50",
-      "B. 53",
-      "C. 60",
-      "D. 62"
-    ],
-    "correctAnswer": "C. 60",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 27,
-    "subject": "Mathematics",
-    "text": "What is 771 + 203?",
-    "options": [
-      "A. 1017",
-      "B. 1023",
-      "C. 974",
-      "D. 1021"
-    ],
-    "correctAnswer": "C. 974",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 28,
-    "subject": "Mathematics",
-    "text": "What is 609 \u00f7 7?",
-    "options": [
-      "A. 87",
-      "B. 92",
-      "C. 88",
-      "D. 94"
-    ],
-    "correctAnswer": "A. 87",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 29,
-    "subject": "Mathematics",
-    "text": "Convert 2 liters to milliliters.",
-    "options": [
-      "A. 1990",
-      "B. 1900",
-      "C. 2000",
-      "D. 2010"
-    ],
-    "correctAnswer": "C. 2000",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 30,
-    "subject": "Mathematics",
-    "text": "What is 48 x 5?",
-    "options": [
-      "A. 249",
-      "B. 232",
-      "C. 248",
-      "D. 240"
-    ],
-    "correctAnswer": "D. 240",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 31,
-    "subject": "Mathematics",
-    "text": "How many sides does a Hexagon have?",
-    "options": [
-      "A. 3",
-      "B. 10",
-      "C. 8",
+      "C. 7",
       "D. 6"
     ],
-    "correctAnswer": "D. 6",
+    "correctAnswer": "B. 9",
     "marks": 4,
     "negativeMarks": 0
-  },
-  {
-    "id": 32,
-    "subject": "Mathematics",
-    "text": "What is 724 - 627?",
-    "options": [
-      "A. 71",
-      "B. 97",
-      "C. 90",
-      "D. 80"
-    ],
-    "correctAnswer": "B. 97",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 33,
-    "subject": "Mathematics",
-    "text": "What is 778 - 157?",
-    "options": [
-      "A. 571",
-      "B. 652",
-      "C. 639",
-      "D. 621"
-    ],
-    "correctAnswer": "D. 621",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 34,
-    "subject": "Mathematics",
-    "text": "What is 420 \u00f7 7?",
-    "options": [
-      "A. 57",
-      "B. 60",
-      "C. 68",
-      "D. 54"
-    ],
-    "correctAnswer": "B. 60",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 35,
-    "subject": "Mathematics",
-    "text": "What is 302 + 751?",
-    "options": [
-      "A. 1029",
-      "B. 1006",
-      "C. 1081",
-      "D. 1053"
-    ],
-    "correctAnswer": "D. 1053",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 36,
-    "subject": "Mathematics",
-    "text": "Convert 18 kilograms to grams.",
-    "options": [
-      "A. 18010",
-      "B. 17990",
-      "C. 18000",
-      "D. 18100"
-    ],
-    "correctAnswer": "C. 18000",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 37,
-    "subject": "Mathematics",
-    "text": "What is 377 - 173?",
-    "options": [
-      "A. 180",
-      "B. 242",
-      "C. 204",
-      "D. 209"
-    ],
-    "correctAnswer": "C. 204",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 38,
-    "subject": "Mathematics",
-    "text": "What is 582 - 484?",
-    "options": [
-      "A. 98",
-      "B. 52",
-      "C. 148",
-      "D. 131"
-    ],
-    "correctAnswer": "A. 98",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 39,
-    "subject": "Mathematics",
-    "text": "What is 690 - 602?",
-    "options": [
-      "A. 122",
-      "B. 126",
-      "C. 43",
-      "D. 88"
-    ],
-    "correctAnswer": "D. 88",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 40,
-    "subject": "Mathematics",
-    "text": "What is 252 + 673?",
-    "options": [
-      "A. 918",
-      "B. 969",
-      "C. 925",
-      "D. 890"
-    ],
-    "correctAnswer": "C. 925",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 41,
-    "subject": "Mathematics",
-    "text": "How many sides does a Octagon have?",
-    "options": [
-      "A. 8",
-      "B. 3",
-      "C. 4",
-      "D. 5"
-    ],
-    "correctAnswer": "A. 8",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 42,
-    "subject": "Mathematics",
-    "text": "What is 985 - 809?",
-    "options": [
-      "A. 176",
-      "B. 178",
-      "C. 162",
-      "D. 171"
-    ],
-    "correctAnswer": "A. 176",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 43,
-    "subject": "Mathematics",
-    "text": "What is 18 x 9?",
-    "options": [
-      "A. 158",
-      "B. 153",
-      "C. 162",
-      "D. 157"
-    ],
-    "correctAnswer": "C. 162",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 44,
-    "subject": "Mathematics",
-    "text": "What is 916 + 871?",
-    "options": [
-      "A. 1814",
-      "B. 1748",
-      "C. 1820",
-      "D. 1787"
-    ],
-    "correctAnswer": "D. 1787",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 45,
-    "subject": "Mathematics",
-    "text": "What is 852 + 406?",
-    "options": [
-      "A. 1305",
-      "B. 1258",
-      "C. 1274",
-      "D. 1209"
-    ],
-    "correctAnswer": "B. 1258",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 46,
-    "subject": "Mathematics",
-    "text": "How many sides does a Hexagon have?",
-    "options": [
-      "A. 10",
-      "B. 6",
-      "C. 9",
-      "D. 3"
-    ],
-    "correctAnswer": "B. 6",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 47,
-    "subject": "Mathematics",
-    "text": "What is 657 \u00f7 9?",
-    "options": [
-      "A. 74",
-      "B. 63",
-      "C. 73",
-      "D. 75"
-    ],
-    "correctAnswer": "C. 73",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 48,
-    "subject": "Mathematics",
-    "text": "Convert 4 kilograms to grams.",
-    "options": [
-      "A. 4100",
-      "B. 4000",
-      "C. 3900",
-      "D. 4010"
-    ],
-    "correctAnswer": "B. 4000",
-    "marks": 4,
-    "negativeMarks": 1
-  },
-  {
-    "id": 49,
-    "subject": "Mathematics",
-    "text": "What is 966 + 121?",
-    "options": [
-      "A. 1074",
-      "B. 1124",
-      "C. 1087",
-      "D. 1127"
-    ],
-    "correctAnswer": "C. 1087",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 50,
-    "subject": "Mathematics",
-    "text": "What is 394 - 307?",
-    "options": [
-      "A. 102",
-      "B. 73",
-      "C. 83",
-      "D. 87"
-    ],
-    "correctAnswer": "D. 87",
-    "marks": 4,
-    "negativeMarks": 1
   }
 ]
