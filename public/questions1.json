@@ -2,273 +2,105 @@
   {
     "id": 1,
     "subject": "Mathematics",
-    "text": "If you start at 0 and make 4 jumps of 3 steps each, what number do you land on?",
+    "text": "Addition: What is 125 + 50?",
     "options": [
-      "A. 7",
-      "B. 12",
-      "C. 9",
-      "D. 15"
+      "A. 170",
+      "B. 175",
+      "C. 180",
+      "D. 165"
     ],
-    "correctAnswer": "B. 12",
+    "correctAnswer": "B. 175",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 2,
     "subject": "Mathematics",
-    "text": "Which multiplication sentence represents 7 + 7 + 7 + 7 + 7?",
+    "text": "Subtraction: What is 200 - 45?",
     "options": [
-      "A. 7 x 4",
-      "B. 5 x 7",
-      "C. 7 + 5",
-      "D. 35 x 1"
+      "A. 145",
+      "B. 165",
+      "C. 155",
+      "D. 135"
     ],
-    "correctAnswer": "B. 5 x 7",
+    "correctAnswer": "C. 155",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 3,
+    "subject": "Mathematics",
+    "text": "Multiplication: Solve 12 x 5.",
+    "options": [
+      "A. 50",
+      "B. 55",
+      "C. 65",
+      "D. 60"
+    ],
+    "correctAnswer": "D. 60",
     "marks": 4,
     "negativeMarks": 0
   },
-{
-  "id": 3,
-  "subject": "Mathematics",
-  "text": "Which expression shows the correct way to break down '43 x 25'?",
-  "options": [
-    "A. (40 x 20) + (3 x 5)",
-    "B. (40 x 25) + (3 x 25)",
-    "C. 43 x (20 x 5)",
-    "D. (40 + 25) x (3 + 25)"
-  ],
-  "correctAnswer": "B. (40 x 25) + (3 x 25)",
-  "marks": 4,
-  "negativeMarks": 0
-},
   {
     "id": 4,
     "subject": "Mathematics",
-    "text": "To divide 24 by 6 using repeated subtraction, how many times must you subtract 6 from 24 to reach 0?",
+    "text": "Division: Divide 48 by 4.",
     "options": [
-      "A. 3",
-      "B. 6",
-      "C. 4",
-      "D. 5"
+      "A. 14",
+      "B. 11",
+      "C. 12",
+      "D. 10"
     ],
-    "correctAnswer": "C. 4",
+    "correctAnswer": "C. 12",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 5,
     "subject": "Mathematics",
-    "text": "Division Facts: What is 36 / 6?",
+    "text": "Word Problem (Add): Ravi has 25 pencils and buys 15 more. How many pencils does he have in total?",
     "options": [
-      "A. 5",
-      "B. 7",
-      "C. 6",
-      "D. 8"
+      "A. 30",
+      "B. 40",
+      "C. 35",
+      "D. 45"
     ],
-    "correctAnswer": "C. 6",
+    "correctAnswer": "B. 40",
     "marks": 4,
-    "negativeMarks": 0
+    "negativeMarks": -1
   },
   {
     "id": 6,
     "subject": "Mathematics",
-    "text": "Divide and Check: Divide 85 by 5.",
+    "text": "Word Problem (Sub): A box had 50 candies. The students ate 20. How many are left?",
     "options": [
-      "A. 15",
-      "B. 17",
-      "C. 19",
-      "D. 13"
+      "A. 30",
+      "B. 20",
+      "C. 25",
+      "D. 35"
     ],
-    "correctAnswer": "B. 17",
+    "correctAnswer": "A. 30",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 7,
     "subject": "Mathematics",
-    "text": "Time: If the hour hand is between 4 and 5, and the minute hand is pointing at 6, what time is it?",
+    "text": "Multiplication: What is 8 x 7?",
     "options": [
-      "A. 4:06",
-      "B. 5:30",
-      "C. 4:30",
-      "D. 5:06"
+      "A. 54",
+      "B. 58",
+      "C. 63",
+      "D. 56"
     ],
-    "correctAnswer": "C. 4:30",
+    "correctAnswer": "D. 56",
     "marks": 4,
     "negativeMarks": 0
   },
   {
     "id": 8,
     "subject": "Mathematics",
-    "text": "Calendar: How many days are there in 4 weeks?",
-    "options": [
-      "A. 24 days",
-      "B. 28 days",
-      "C. 30 days",
-      "D. 21 days"
-    ],
-    "correctAnswer": "B. 28 days",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 9,
-    "subject": "Mathematics",
-    "text": "Convert to Minutes: How many minutes are in 3 hours?",
-    "options": [
-      "A. 180 minutes",
-      "B. 120 minutes",
-      "C. 300 minutes",
-      "D. 150 minutes"
-    ],
-    "correctAnswer": "A. 180 minutes",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 10,
-    "subject": "Mathematics",
-    "text": "Word Problem: A packet contains 8 chocolates. How many chocolates are in 9 packets?",
-    "options": [
-      "A. 72",
-      "B. 64",
-      "C. 81",
-      "D. 17"
-    ],
-    "correctAnswer": "A. 72",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 11,
-    "subject": "Mathematics",
-    "text": "Hard Word Problem: A factory produces 1,250 toys a day. How many toys are produced in 6 days?",
-    "options": [
-      "A. 6,500",
-      "B. 7,500",
-      "C. 7,250",
-      "D. 7,000"
-    ],
-    "correctAnswer": "B. 7,500",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 12,
-    "subject": "Mathematics",
-    "text": "Division of 4-Digit Number: Calculate 6489 / 3.",
-    "options": [
-      "A. 2163",
-      "B. 2123",
-      "C. 2263",
-      "D. 2161"
-    ],
-    "correctAnswer": "A. 2163",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 13,
-    "subject": "Mathematics",
-    "text": "Verification: If Quotient = 1131, Divisor = 4, and Remainder = 2, what is the Dividend?",
-    "options": [
-      "A. 4524",
-      "B. 4526",
-      "C. 4528",
-      "D. 4530"
-    ],
-    "correctAnswer": "B. 4526",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 14,
-    "subject": "Mathematics",
-    "text": "Mixed Time Conversion: Convert 5 hours and 25 minutes entirely into minutes.",
-    "options": [
-      "A. 305 minutes",
-      "B. 325 minutes",
-      "C. 525 minutes",
-      "D. 350 minutes"
-    ],
-    "correctAnswer": "B. 325 minutes",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 15,
-    "subject": "Mathematics",
-    "text": "Convert to Seconds: How many seconds are in 15 minutes?",
-    "options": [
-      "A. 600 seconds",
-      "B. 900 seconds",
-      "C. 1500 seconds",
-      "D. 90 seconds"
-    ],
-    "correctAnswer": "B. 900 seconds",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 16,
-    "subject": "Mathematics",
-    "text": "Quarter Hours: Which digital time represents \"Quarter to 9\"?",
-    "options": [
-      "A. 9:15",
-      "B. 8:45",
-      "C. 9:45",
-      "D. 8:15"
-    ],
-    "correctAnswer": "B. 8:45",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 17,
-    "subject": "Mathematics",
-    "text": "Division Remainder: A farmer packs 2,450 apples into 8 boxes equally. How many apples are left over?",
-    "options": [
-      "A. 0",
-      "B. 2",
-      "C. 4",
-      "D. 6"
-    ],
-    "correctAnswer": "B. 2",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 18,
-    "subject": "Mathematics",
-    "text": "Logic: Compare \"12 groups of 15\" and \"15 groups of 12\".",
-    "options": [
-      "A. Equal",
-      "B. First is larger",
-      "C. Second is larger",
-      "D. Cannot determine"
-    ],
-    "correctAnswer": "A. Equal",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 19,
-    "subject": "Mathematics",
-    "text": "Calendar Conversion: A camp lasts 6 weeks and 3 days. How many total days is this?",
-    "options": [
-      "A. 45 days",
-      "B. 42 days",
-      "C. 63 days",
-      "D. 39 days"
-    ],
-    "correctAnswer": "A. 45 days",
-    "marks": 4,
-    "negativeMarks": 0
-  },
-  {
-    "id": 20,
-    "subject": "Mathematics",
-    "text": "Missing Fact: Find the missing number: 63 / ? = 7",
+    "text": "Division: What is 81 divided by 9?",
     "options": [
       "A. 8",
       "B. 9",
@@ -276,6 +108,34 @@
       "D. 6"
     ],
     "correctAnswer": "B. 9",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 9,
+    "subject": "Mathematics",
+    "text": "Mixed: Solve (10 + 10) - 5.",
+    "options": [
+      "A. 25",
+      "B. 10",
+      "C. 15",
+      "D. 20"
+    ],
+    "correctAnswer": "C. 15",
+    "marks": 4,
+    "negativeMarks": 0
+  },
+  {
+    "id": 10,
+    "subject": "Mathematics",
+    "text": "Large Addition: What is 500 + 500?",
+    "options": [
+      "A. 100",
+      "B. 550",
+      "C. 900",
+      "D. 1000"
+    ],
+    "correctAnswer": "D. 1000",
     "marks": 4,
     "negativeMarks": 0
   }
