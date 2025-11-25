@@ -5,28 +5,28 @@ export const EXAM_SESSIONS = [
   {
     id: 1,
     name: "QUIZ CONTEST (ROUND 1)",
-    date: "2025-11-24",   // 🗓️ Update this to your test date
-    loginTime: "13:29",   // Can enter app
-    startTime: "13:31",   // Can click Start
-    endTime:   "13:34",   // Auto-submit
+    date: "2025-11-25",   // 🗓️ Update this to your test date
+    loginTime: "01:29",   // Can enter app
+    startTime: "01:31",   // Can click Start
+    endTime:   "23:34",   // Auto-submit
     questionFile: "/questions1.json"
   },
   {
     id: 2,
-    name: "Biology & Maths (Afternoon)",
-    date: "2025-11-25",
-    loginTime: "11:30",
-    startTime: "12:00",
-    endTime:   "13:00",
+    name: "Maths (Afternoon)",
+    date: "2025-11-26",
+    loginTime: "01:29",   // Can enter app
+    startTime: "01:31",   // Can click Start
+    endTime:   "23:34",
     questionFile: "/questions2.json"
   },
   {
     id: 3,
     name: "Computer Science (Next Day)",
-    date: "2025-11-26",
-    loginTime: "09:30",
-    startTime: "10:00",
-    endTime:   "11:00",
+    date: "2025-11-27",
+    loginTime: "01:29",   // Can enter app
+    startTime: "01:31",   // Can click Start
+    endTime:   "23:34",
     questionFile: "/questions3.json"
   }
 ];
