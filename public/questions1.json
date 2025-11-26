@@ -2,141 +2,281 @@
   {
     "id": 1,
     "subject": "Mathematics",
-    "text": "Addition: What is 125 + 50?",
+    "text": "What is 5 + 4?",
     "options": [
-      "A. 170",
-      "B. 175",
-      "C. 180",
-      "D. 165"
+      "A. 8",
+      "B. 9",
+      "C. 10",
+      "D. 7"
     ],
-    "correctAnswer": "B. 175",
-    "marks": 4,
+    "correctAnswer": "B. 9",
+    "marks": 1,
     "negativeMarks": 0
   },
   {
     "id": 2,
     "subject": "Mathematics",
-    "text": "Subtraction: What is 200 - 45?",
+    "text": "What is 10 - 3?",
     "options": [
-      "A. 145",
-      "B. 165",
-      "C. 155",
-      "D. 135"
+      "A. 6",
+      "B. 8",
+      "C. 7",
+      "D. 5"
     ],
-    "correctAnswer": "C. 155",
-    "marks": 4,
-    "negativeMarks": -1
+    "correctAnswer": "C. 7",
+    "marks": 1,
+    "negativeMarks": 0
   },
   {
     "id": 3,
     "subject": "Mathematics",
-    "text": "Multiplication: Solve 12 x 5.",
+    "text": "Solve: 3 x 3",
     "options": [
-      "A. 50",
-      "B. 55",
-      "C. 65",
-      "D. 60"
+      "A. 6",
+      "B. 9",
+      "C. 12",
+      "D. 8"
     ],
-    "correctAnswer": "D. 60",
-    "marks": 4,
+    "correctAnswer": "B. 9",
+    "marks": 1,
     "negativeMarks": 0
   },
   {
     "id": 4,
     "subject": "Mathematics",
-    "text": "Division: Divide 48 by 4.",
+    "text": "Divide: 10 / 2",
     "options": [
-      "A. 14",
-      "B. 11",
-      "C. 12",
-      "D. 10"
+      "A. 5",
+      "B. 4",
+      "C. 6",
+      "D. 2"
     ],
-    "correctAnswer": "C. 12",
-    "marks": 4,
+    "correctAnswer": "A. 5",
+    "marks": 1,
     "negativeMarks": 0
   },
   {
     "id": 5,
     "subject": "Mathematics",
-    "text": "Word Problem (Add): Ravi has 25 pencils and buys 15 more. How many pencils does he have in total?",
+    "text": "What is 20 + 20?",
     "options": [
       "A. 30",
-      "B. 40",
-      "C. 35",
+      "B. 50",
+      "C. 40",
       "D. 45"
     ],
-    "correctAnswer": "B. 40",
-    "marks": 4,
-    "negativeMarks": -1
+    "correctAnswer": "C. 40",
+    "marks": 1,
+    "negativeMarks": 0
   },
   {
     "id": 6,
     "subject": "Mathematics",
-    "text": "Word Problem (Sub): A box had 50 candies. The students ate 20. How many are left?",
+    "text": "Solve: 50 - 25",
     "options": [
-      "A. 30",
-      "B. 20",
+      "A. 20",
+      "B. 30",
       "C. 25",
-      "D. 35"
+      "D. 15"
     ],
-    "correctAnswer": "A. 30",
-    "marks": 4,
+    "correctAnswer": "C. 25",
+    "marks": 1,
     "negativeMarks": 0
   },
   {
     "id": 7,
     "subject": "Mathematics",
-    "text": "Multiplication: What is 8 x 7?",
+    "text": "What is 5 x 4?",
     "options": [
-      "A. 54",
-      "B. 58",
-      "C. 63",
-      "D. 56"
+      "A. 20",
+      "B. 25",
+      "C. 15",
+      "D. 18"
     ],
-    "correctAnswer": "D. 56",
-    "marks": 4,
+    "correctAnswer": "A. 20",
+    "marks": 1,
     "negativeMarks": 0
   },
   {
     "id": 8,
     "subject": "Mathematics",
-    "text": "Division: What is 81 divided by 9?",
+    "text": "Divide: 30 / 5",
     "options": [
-      "A. 8",
-      "B. 9",
-      "C. 7",
-      "D. 6"
+      "A. 5",
+      "B. 7",
+      "C. 6",
+      "D. 8"
     ],
-    "correctAnswer": "B. 9",
-    "marks": 4,
-    "negativeMarks": -1
+    "correctAnswer": "C. 6",
+    "marks": 1,
+    "negativeMarks": 0
   },
   {
     "id": 9,
     "subject": "Mathematics",
-    "text": "Mixed: Solve (10 + 10) - 5.",
+    "text": "Identify the number: Fifty-two",
     "options": [
       "A. 25",
-      "B. 10",
-      "C. 15",
-      "D. 20"
+      "B. 502",
+      "C. 52",
+      "D. 520"
     ],
-    "correctAnswer": "C. 15",
-    "marks": 4,
+    "correctAnswer": "C. 52",
+    "marks": 1,
     "negativeMarks": 0
   },
   {
     "id": 10,
     "subject": "Mathematics",
-    "text": "Large Addition: What is 500 + 500?",
+    "text": "What comes after 99?",
     "options": [
-      "A. 100",
-      "B. 550",
-      "C. 900",
-      "D. 1000"
+      "A. 98",
+      "B. 110",
+      "C. 101",
+      "D. 100"
     ],
-    "correctAnswer": "D. 1000",
-    "marks": 4,
+    "correctAnswer": "D. 100",
+    "marks": 1,
     "negativeMarks": 0
+  },
+  {
+    "id": 11,
+    "subject": "Mathematics",
+    "text": "Complex Addition: 345 + 167",
+    "options": [
+      "A. 502",
+      "B. 512",
+      "C. 412",
+      "D. 522"
+    ],
+    "correctAnswer": "B. 512",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 12,
+    "subject": "Mathematics",
+    "text": "Complex Subtraction: 500 - 138",
+    "options": [
+      "A. 362",
+      "B. 462",
+      "C. 372",
+      "D. 352"
+    ],
+    "correctAnswer": "A. 362",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 13,
+    "subject": "Mathematics",
+    "text": "Multiplication: 15 x 12",
+    "options": [
+      "A. 170",
+      "B. 180",
+      "C. 160",
+      "D. 150"
+    ],
+    "correctAnswer": "B. 180",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 14,
+    "subject": "Mathematics",
+    "text": "Division: 225 / 15",
+    "options": [
+      "A. 12",
+      "B. 13",
+      "C. 15",
+      "D. 10"
+    ],
+    "correctAnswer": "C. 15",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 15,
+    "subject": "Mathematics",
+    "text": "Word Problem: A library has 12 shelves. Each shelf holds 24 books. How many books in total?",
+    "options": [
+      "A. 288",
+      "B. 240",
+      "C. 300",
+      "D. 264"
+    ],
+    "correctAnswer": "A. 288",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 16,
+    "subject": "Mathematics",
+    "text": "Mixed Operations: (20 x 5) + (50 - 10)",
+    "options": [
+      "A. 130",
+      "B. 140",
+      "C. 150",
+      "D. 160"
+    ],
+    "correctAnswer": "B. 140",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 17,
+    "subject": "Mathematics",
+    "text": "Time Calculation: How many minutes are in 4 hours and 45 minutes?",
+    "options": [
+      "A. 265",
+      "B. 285",
+      "C. 245",
+      "D. 305"
+    ],
+    "correctAnswer": "B. 285",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 18,
+    "subject": "Mathematics",
+    "text": "Large Division: 1000 / 8",
+    "options": [
+      "A. 120",
+      "B. 115",
+      "C. 125",
+      "D. 135"
+    ],
+    "correctAnswer": "C. 125",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 19,
+    "subject": "Mathematics",
+    "text": "Missing Number: ? - 150 = 350",
+    "options": [
+      "A. 400",
+      "B. 500",
+      "C. 450",
+      "D. 550"
+    ],
+    "correctAnswer": "B. 500",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 20,
+    "subject": "Mathematics",
+    "text": "Logic: If 1 car has 4 wheels, how many wheels do 15 cars have?",
+    "options": [
+      "A. 45",
+      "B. 50",
+      "C. 60",
+      "D. 55"
+    ],
+    "correctAnswer": "C. 60",
+    "marks": 4,
+    "negativeMarks": 1
   }
 ]
