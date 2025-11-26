@@ -18,7 +18,7 @@ export const EXAM_SESSIONS = [
     loginTime: "01:29",   // Can enter app
     startTime: "01:31",   // Can click Start
     endTime:   "23:34",
-    questionFile: "/questions2.json"
+    questionFile: "/questions1.json"
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ export const EXAM_SESSIONS = [
     loginTime: "01:29",   // Can enter app
     startTime: "01:31",   // Can click Start
     endTime:   "23:34",
-    questionFile: "/questions3.json"
+    questionFile: "/questions1.json"
   }
 ];
 
