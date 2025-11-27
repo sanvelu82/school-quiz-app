@@ -1,0 +1,452 @@
+[
+  {
+    "id": 1,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is 6 + 6 + 6 + 6 + 6?",
+    "options": [
+      "A. 6 × 4",
+      "B. 6 × 5",
+      "C. 6 × 6",
+      "D. 5 × 5"
+    ],
+    "correctAnswer": "B. 6 × 5",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 2,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "A rabbit jumps 4 steps at a time. After 3 jumps, where is the rabbit?",
+    "options": [
+      "A. 7",
+      "B. 10",
+      "C. 12",
+      "D. 15"
+    ],
+    "correctAnswer": "C. 12",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 3,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is 42 ÷ 7?",
+    "options": [
+      "A. 5",
+      "B. 7",
+      "C. 6",
+      "D. 8"
+    ],
+    "correctAnswer": "C. 6",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 4,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What time is 'Quarter past 3'?",
+    "options": [
+      "A. 3:15",
+      "B. 3:30",
+      "C. 3:45",
+      "D. 2:45"
+    ],
+    "correctAnswer": "A. 3:15",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 5,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Any number divided by itself is always _____.",
+    "options": [
+      "A. 0",
+      "B. 1",
+      "C. The number",
+      "D. Cannot calculate"
+    ],
+    "correctAnswer": "B. 1",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 6,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "How many minutes are in 2 hours?",
+    "options": [
+      "A. 60",
+      "B. 100",
+      "C. 120",
+      "D. 90"
+    ],
+    "correctAnswer": "C. 120",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 7,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "8 × ? = 64",
+    "options": [
+      "A. 7",
+      "B. 9",
+      "C. 6",
+      "D. 8"
+    ],
+    "correctAnswer": "D. 8",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 8,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "A spider has 8 legs. How many legs do 10 spiders have?",
+    "options": [
+      "A. 18",
+      "B. 88",
+      "C. 80",
+      "D. 72"
+    ],
+    "correctAnswer": "C. 80",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 9,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "How many days are in a Leap Year?",
+    "options": [
+      "A. 364",
+      "B. 365",
+      "C. 366",
+      "D. 360"
+    ],
+    "correctAnswer": "C. 366",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 10,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "20 - 5 - 5 - 5 - 5 = 0 means:",
+    "options": [
+      "A. 20 ÷ 5 = 4",
+      "B. 20 ÷ 4 = 5",
+      "C. 5 × 5 = 20",
+      "D. 20 - 5 = 15"
+    ],
+    "correctAnswer": "A. 20 ÷ 5 = 4",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 11,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "How many seconds are in half a minute?",
+    "options": [
+      "A. 60",
+      "B. 50",
+      "C. 30",
+      "D. 15"
+    ],
+    "correctAnswer": "C. 30",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 12,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is the remainder when 15 is divided by 2?",
+    "options": [
+      "A. 0",
+      "B. 1",
+      "C. 2",
+      "D. 5"
+    ],
+    "correctAnswer": "B. 1",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 13,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Find the product of 12 and 3.",
+    "options": [
+      "A. 15",
+      "B. 30",
+      "C. 36",
+      "D. 32"
+    ],
+    "correctAnswer": "C. 36",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 14,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Quotient × Divisor + Remainder = ?",
+    "options": [
+      "A. Answer",
+      "B. Sum",
+      "C. Dividend",
+      "D. Difference"
+    ],
+    "correctAnswer": "C. Dividend",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 15,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is 600 ÷ 3?",
+    "options": [
+      "A. 20",
+      "B. 200",
+      "C. 300",
+      "D. 60"
+    ],
+    "correctAnswer": "B. 200",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 16,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "If a cartoon starts at 4:00 PM and ends at 4:30 PM, how long was it?",
+    "options": [
+      "A. 1 hour",
+      "B. 40 mins",
+      "C. 30 mins",
+      "D. 15 mins"
+    ],
+    "correctAnswer": "C. 30 mins",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 17,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "If today is Sunday, what day was it yesterday?",
+    "options": [
+      "A. Saturday",
+      "B. Monday",
+      "C. Friday",
+      "D. Tuesday"
+    ],
+    "correctAnswer": "A. Saturday",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 18,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "56 chocolates are shared equally by 8 kids. How many does each get?",
+    "options": [
+      "A. 6",
+      "B. 7",
+      "C. 8",
+      "D. 9"
+    ],
+    "correctAnswer": "B. 7",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 19,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is (4 × 5) + 3?",
+    "options": [
+      "A. 23",
+      "B. 32",
+      "C. 20",
+      "D. 12"
+    ],
+    "correctAnswer": "A. 23",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 20,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Convert 4 minutes into seconds.",
+    "options": [
+      "A. 200 seconds",
+      "B. 240 seconds",
+      "C. 100 seconds",
+      "D. 140 seconds"
+    ],
+    "correctAnswer": "B. 240 seconds",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 21,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "In 3/7, what is '7' called?",
+    "options": [
+      "A. Numerator",
+      "B. Denominator",
+      "C. Quotient",
+      "D. Whole"
+    ],
+    "correctAnswer": "B. Denominator",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 22,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "Write 0.5 as a fraction.",
+    "options": [
+      "A. 1/5",
+      "B. 5/100",
+      "C. 1/2",
+      "D. 5/1"
+    ],
+    "correctAnswer": "C. 1/2",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 23,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "How many 25 paise coins make 1 Rupee?",
+    "options": [
+      "A. 2",
+      "B. 3",
+      "C. 4",
+      "D. 8"
+    ],
+    "correctAnswer": "C. 4",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 24,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "Which fraction is the smallest?",
+    "options": [
+      "A. 1/2",
+      "B. 1/4",
+      "C. 1/8",
+      "D. 1/3"
+    ],
+    "correctAnswer": "C. 1/8",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 25,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "cost of 1 pen is Rs 15. What is the cost of 4 pens?",
+    "options": [
+      "A. Rs 45",
+      "B. Rs 50",
+      "C. Rs 60",
+      "D. Rs 55"
+    ],
+    "correctAnswer": "C. Rs 60",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 26,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Which number is a factor of 10?",
+    "options": [
+      "A. 3",
+      "B. 4",
+      "C. 5",
+      "D. 6"
+    ],
+    "correctAnswer": "C. 5",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 27,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Round 94 to the nearest 10.",
+    "options": [
+      "A. 90",
+      "B. 100",
+      "C. 95",
+      "D. 80"
+    ],
+    "correctAnswer": "A. 90",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 28,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Which is the 4th multiple of 5?",
+    "options": [
+      "A. 15",
+      "B. 20",
+      "C. 25",
+      "D. 10"
+    ],
+    "correctAnswer": "B. 20",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 29,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Complete the series: 1, 4, 9, 16, __",
+    "options": [
+      "A. 20",
+      "B. 24",
+      "C. 25",
+      "D. 30"
+    ],
+    "correctAnswer": "C. 25",
+    "marks": 4,
+    "negativeMarks": 1
+  },
+  {
+    "id": 30,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "The HCF of 2 and 4 is ___",
+    "options": [
+      "A. 1",
+      "B. 2",
+      "C. 4",
+      "D. 8"    
+    ],
+    "correctAnswer": "B. 2",
+    "marks": 4,
+    "negativeMarks": 1
+  }
+]

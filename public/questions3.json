@@ -1,0 +1,302 @@
+[
+  {
+    "id": 1,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is the product of 15 and 3?",
+    "options": ["A. 35", "B. 45", "C. 30", "D. 55"],
+    "correctAnswer": "B. 45",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 2,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "If you divide 25 by 4, what is the remainder?",
+    "options": ["A. 0", "B. 1", "C. 4", "D. 6"],
+    "correctAnswer": "B. 1",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 3,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "How many minutes are there in 3 hours?",
+    "options": ["A. 180", "B. 120", "C. 300", "D. 150"],
+    "correctAnswer": "A. 180",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 4,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Which month can have 29 days?",
+    "options": ["A. January", "B. February", "C. March", "D. December"],
+    "correctAnswer": "B. February",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 5,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What time is 'Half past 8'?",
+    "options": ["A. 8:30", "B. 7:30", "C. 8:15", "D. 8:50"],
+    "correctAnswer": "A. 8:30",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 6,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "7 groups of 9 equals ____.",
+    "options": ["A. 56", "B. 63", "C. 72", "D. 49"],
+    "correctAnswer": "B. 63",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 7,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Convert 3 weeks into days.",
+    "options": ["A. 15 days", "B. 21 days", "C. 28 days", "D. 30 days"],
+    "correctAnswer": "B. 21 days",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 8,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Which is the missing number?  __ ÷ 6 = 7",
+    "options": ["A. 42", "B. 13", "C. 48", "D. 36"],
+    "correctAnswer": "A. 42",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 9,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is 120 ÷ 10?",
+    "options": ["A. 10", "B. 12", "C. 120", "D. 20"],
+    "correctAnswer": "B. 12",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 10,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "If a movie starts at 2:00 PM and is 2 hours and 15 minutes long, when does it end?",
+    "options": ["A. 4:00 PM", "B. 4:15 PM", "C. 5:15 PM", "D. 3:45 PM"],
+    "correctAnswer": "B. 4:15 PM",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 11,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What time is 'Quarter to 10'?",
+    "options": ["A. 10:15", "B. 9:45", "C. 10:45", "D. 9:15"],
+    "correctAnswer": "B. 9:45",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 12,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Identify the leap year.",
+    "options": ["A. 2021", "B. 2022", "C. 2023", "D. 2024"],
+    "correctAnswer": "D. 2024",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 13,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "What is 0 multiplied by 255?",
+    "options": ["A. 255", "B. 0", "C. 1", "D. 25"],
+    "correctAnswer": "B. 0",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 14,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "There are 5 cars and 2 bikes. How many wheels are there in total?",
+    "options": ["A. 22", "B. 24", "C. 28", "D. 14"],
+    "correctAnswer": "B. 24",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 15,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "How many seconds are in 3 minutes?",
+    "options": ["A. 120", "B. 150", "C. 180", "D. 200"],
+    "correctAnswer": "C. 180",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 16,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Which operation helps us find the total of equal groups?",
+    "options": ["A. Addition", "B. Subtraction", "C. Multiplication", "D. Division"],
+    "correctAnswer": "C. Multiplication",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 17,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "366 divided by 6 is?",
+    "options": ["A. 60", "B. 61", "C. 66", "D. 11"],
+    "correctAnswer": "B. 61",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 18,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Which is the same as 6 x 4?",
+    "options": ["A. 4 x 6", "B. 6 + 4", "C. 6 - 4", "D. 64"],
+    "correctAnswer": "A. 4 x 6",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 19,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "If today is Friday, what day will it be after 3 days?",
+    "options": ["A. Sunday", "B. Monday", "C. Saturday", "D. Tuesday"],
+    "correctAnswer": "B. Monday",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 20,
+    "grade": "Class 3",
+    "subject": "Mathematics",
+    "text": "Fill in the blank: 9 x __ = 81",
+    "options": ["A. 8", "B. 9", "C. 7", "D. 6"],
+    "correctAnswer": "B. 9",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 21,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "Add the fractions: 2/7 + 3/7",
+    "options": ["A. 5/14", "B. 6/7", "C. 5/7", "D. 1/7"],
+    "correctAnswer": "C. 5/7",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 22,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "How many paise are in 5 Rupees?",
+    "options": ["A. 50", "B. 500", "C. 100", "D. 5"],
+    "correctAnswer": "B. 500",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 23,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "Subtract: Rs 50.00 - Rs 25.50",
+    "options": ["A. Rs 25.50", "B. Rs 24.50", "C. Rs 35.50", "D. Rs 25.00"],
+    "correctAnswer": "B. Rs 24.50",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 24,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "What is the decimal value of 3/10?",
+    "options": ["A. 3.0", "B. 0.3", "C. 0.03", "D. 3.1"],
+    "correctAnswer": "B. 0.3",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 25,
+    "grade": "Class 4",
+    "subject": "Mathematics",
+    "text": "Which fraction is equal to 1?",
+    "options": ["A. 4/5", "B. 7/7", "C. 1/2", "D. 0/1"],
+    "correctAnswer": "B. 7/7",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 26,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Which of these is a Prime Number?",
+    "options": ["A. 4", "B. 6", "C. 9", "D. 7"],
+    "correctAnswer": "D. 7",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 27,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Complete the pattern: 80, 75, 70, 65, __",
+    "options": ["A. 55", "B. 60", "C. 50", "D. 64"],
+    "correctAnswer": "B. 60",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 28,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Find the HCF of 6 and 12.",
+    "options": ["A. 2", "B. 3", "C. 6", "D. 12"],
+    "correctAnswer": "C. 6",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 29,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "Which number is a multiple of both 3 and 4?",
+    "options": ["A. 9", "B. 16", "C. 12", "D. 15"],
+    "correctAnswer": "C. 12",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 30,
+    "grade": "Class 5",
+    "subject": "Mathematics",
+    "text": "A pen is bought for Rs 10 and sold for Rs 15. What is the profit?",
+    "options": ["A. Rs 10", "B. Rs 15", "C. Rs 5", "D. Rs 25"],
+    "correctAnswer": "C. Rs 5",
+    "marks": 1,
+    "negativeMarks": 0
+  }
+]
