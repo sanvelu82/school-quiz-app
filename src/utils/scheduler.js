@@ -6,9 +6,9 @@ export const EXAM_SESSIONS = [
     id: 1,
     name: "QUIZ CONTEST (ROUND 1)",
     date: "2025-11-28",   // 🗓️ Update this to your test date
-    loginTime: "10:38",   // Can enter app
-    startTime: "10:40",   // Can click Start
-    endTime:   "10:42",   // Auto-submit
+    loginTime: "22:40",   // Can enter app
+    startTime: "22:42",   // Can click Start
+    endTime:   "22:44",   // Auto-submit
     questionFile: "/questions1.json"
   },
   {
