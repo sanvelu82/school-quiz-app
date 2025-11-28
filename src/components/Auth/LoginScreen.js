@@ -14,7 +14,6 @@ function LoginScreen({ onLoginSuccess }) {
 
   const LOGO_URL = "https://i.ibb.co/qYxNQQPx/Picture2.png";
 
-  // Check schedule on mount
   useEffect(() => {
     const check = getCurrentSession();
     if (check.status === 'active') {
@@ -41,11 +40,18 @@ function LoginScreen({ onLoginSuccess }) {
     }
 
     const result = await handleLogin(rollNo, password);
+    
+    // --- UPDATED LOGIC ---
     if (result.status === 'success') {
       onLoginSuccess(result.data, activeSession);
+    } else if (result.status === 'submitted') {
+      // ⛔ Block User
+      setError('⛔ ' + result.message); 
     } else {
       setError(result.message || 'Login failed.');
     }
+    // ---------------------
+    
     setLoading(false);
   };
 
@@ -56,7 +62,6 @@ function LoginScreen({ onLoginSuccess }) {
              <div style={{fontSize:'3rem', marginBottom:'20px'}}>🚫</div>
              <h2 className="school-line-1" style={{fontSize:'1.5rem'}}>No Contest Active</h2>
              <p style={{color:'#64748b', marginTop:'10px', fontWeight:'500'}}>{scheduleError}</p>
-             <p style={{fontSize:'0.8rem', color:'#94a3b8', marginTop:'20px'}}>Please check the schedule.</p>
          </div>
       </div>
     );
@@ -82,7 +87,7 @@ function LoginScreen({ onLoginSuccess }) {
         <form onSubmit={handleSubmit}>
           <div className={`input-container ${focusedInput === 'roll' ? 'focused' : ''}`}>
             <div className="icon-box">
-               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
             </div>
             <div className="field-wrapper">
               <label>Roll Number</label>
@@ -92,7 +97,7 @@ function LoginScreen({ onLoginSuccess }) {
           
           <div className={`input-container ${focusedInput === 'pass' ? 'focused' : ''}`}>
             <div className="icon-box">
-               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
             </div>
             <div className="field-wrapper">
               <label>Password</label>
@@ -100,7 +105,16 @@ function LoginScreen({ onLoginSuccess }) {
             </div>
           </div>
           
-          {error && <div className="error-toast">⚠️ {error}</div>}
+          {error && (
+            <div className="error-toast" style={{
+              background: error.includes('submitted') ? '#fff7ed' : '#fef2f2',
+              color: error.includes('submitted') ? '#c2410c' : '#ef4444',
+              borderColor: error.includes('submitted') ? '#ffedd5' : '#fecaca'
+            }}>
+              {error}
+            </div>
+          )}
+
           <button type="submit" className="neon-button" disabled={loading}>
             {loading ? 'Checking details...' : 'Start Contest >'}
           </button>

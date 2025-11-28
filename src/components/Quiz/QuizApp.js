@@ -1,4 +1,3 @@
-// src/components/Quiz/QuizApp.js
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { fetchQuestions } from '../../services/data';
 import { getExamDurationSeconds } from '../../utils/scheduler';
@@ -6,7 +5,6 @@ import Header from '../shared/Header';
 import QuestionDisplay from './QuestionDisplay';
 import NavigatorPanel from './NavigatorPanel';
 
-// 🔊 UPDATED: Your new 9-second countdown file
 const BEEP_URL = "/mixkit-start-countdown-927.wav"; 
 
 function QuizApp({ studentProfile, session, onQuizFinish }) {
@@ -17,10 +15,9 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   const [allResponses, setAllResponses] = useState({}); 
   const [isPaletteOpen, setIsPaletteOpen] = useState(false); 
 
-  // Audio Ref
   const beepAudio = useRef(new Audio(BEEP_URL));
 
-  // 1. Load Questions & Timer
+  // Load Data
   useEffect(() => {
     if (session && session.questionFile) {
       fetchQuestions(session.questionFile)
@@ -37,23 +34,34 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     }
   }, [session]);
 
+  // Core Submission Logic
   const handleFinalSubmit = useCallback(() => {
     let score = 0;
     questions.forEach(q => {
       const response = allResponses[q.id];
       if (response?.answer) {
-        // Determine points for this question
         const positiveMark = q.marks !== undefined ? q.marks : 4;
-        const negativeMark = q.negativeMarks !== undefined ? q.negativeMarks : 1; // Default to 1 if not specified
-
-        // Calculate Score
+        const negativeMark = q.negativeMarks !== undefined ? q.negativeMarks : 1;
         score += (response.answer === q.correctAnswer) ? positiveMark : -negativeMark;
       }
     });
     onQuizFinish(score, allResponses);
   }, [questions, allResponses, onQuizFinish]);
 
-  // 2. Timer & Audio Logic
+  // 🛑 NEW: Manual Submit Wrapper with Confirmation
+  const handleManualSubmitButton = () => {
+    // Check if time is still remaining
+    if (timeRemaining > 0) {
+      const confirmSubmit = window.confirm(
+        "⏳ You still have time left!\n\nAre you sure you want to SUBMIT your exam now? This cannot be undone."
+      );
+      if (!confirmSubmit) return; // Stop if they click Cancel
+    }
+    // Proceed if confirmed or time is 0 (though time=0 calls handleFinalSubmit directly)
+    handleFinalSubmit();
+  };
+
+  // Timer Logic
   useEffect(() => {
     if (loading) return;
 
@@ -61,17 +69,14 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
       setTimeRemaining(prev => {
         if (prev <= 1) {
           clearInterval(timer);
-          handleFinalSubmit();
+          handleFinalSubmit(); // Auto-submit when time dies
           return 0;
         }
         
-        // 🔊 PLAY ONCE at 9 Seconds
         if (prev === 9) { 
            if (beepAudio.current) {
              beepAudio.current.currentTime = 0;
-             beepAudio.current.play().catch(e => {
-                 console.warn("Audio blocked - user interaction needed first");
-             });
+             beepAudio.current.play().catch(e => console.warn("Audio blocked"));
            }
         }
         
@@ -82,28 +87,20 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     return () => clearInterval(timer);
   }, [loading, handleFinalSubmit]);
 
-  // ✅ NEW FIX: Automatically mark current question as 'visited' (Red) on entry
+  // Initial visited state
   useEffect(() => {
     if (!loading && questions.length > 0) {
       const currentQId = questions[currentQIndex]?.id;
       if (currentQId) {
         setAllResponses((prev) => {
-          // If we already have a record (answered, marked, etc.), don't overwrite it
           if (prev[currentQId]) return prev;
-
-          // Otherwise, mark as 'visited' so it shows as Red (Not Answered) in sidebar
-          return {
-            ...prev,
-            [currentQId]: { answer: null, status: 'visited' }
-          };
+          return { ...prev, [currentQId]: { answer: null, status: 'visited' } };
         });
       }
     }
   }, [currentQIndex, questions, loading]);
 
-  // Handlers
   const handleAnswerChange = useCallback((qId, opt) => {
-    // Unlock audio on first interaction (Safety measure)
     if (beepAudio.current.paused) {
         beepAudio.current.play().then(() => {
             beepAudio.current.pause();
@@ -113,16 +110,11 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
     setAllResponses(prev => ({ ...prev, [qId]: { ...prev[qId], answer: opt, status: 'answered' } }));
   }, []);
 
-  // ✅ ENHANCED: Clear Selection now explicitly sets status to 'visited' (Red)
   const handleClearSelection = () => {
     const currentQId = questions[currentQIndex].id;
     setAllResponses(prev => ({
       ...prev,
-      [currentQId]: { 
-        ...(prev[currentQId] || {}), // Preserve other props if any
-        answer: null, 
-        status: 'visited' // Forces the "Not Answered" red color
-      }
+      [currentQId]: { ...(prev[currentQId] || {}), answer: null, status: 'visited' }
     }));
   };
 
@@ -154,7 +146,6 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
   return (
     <div className="quiz-page">
       <div className="watermark-container">
-        {/* Watermark count set to 150 */}
         {Array.from({ length: 150 }).map((_, i) => ( <span key={i} className="watermark-text">SVV HI-TECH</span> ))}
       </div>
 
@@ -167,8 +158,6 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
            <div className="panel-top-bar">
               <h3>
                 Question {currentQIndex + 1}
-                
-                {/* Marks Display Logic */}
                 {currentQuestion && (
                   <span style={{fontSize: '0.85rem', marginLeft: '12px', fontWeight: '700'}}>
                     <span style={{color: '#16a34a'}}>(+{currentQuestion.marks || 4}</span>
@@ -212,7 +201,13 @@ function QuizApp({ studentProfile, session, onQuizFinish }) {
         <div className="bottom-right">
           <button className="quiz-btn btn-save" onClick={handleSaveNext}>Save & Next</button>
           {currentQIndex === questions.length - 1 && (
-             <button onClick={handleFinalSubmit} style={{background:'#dc2626', color:'white', border:'none'}} className="quiz-btn">Submit</button>
+             <button 
+               onClick={handleManualSubmitButton} // ⚠️ Calls the wrapper with confirmation
+               style={{background:'#dc2626', color:'white', border:'none'}} 
+               className="quiz-btn"
+             >
+               Submit
+             </button>
           )}
         </div>
       </div>

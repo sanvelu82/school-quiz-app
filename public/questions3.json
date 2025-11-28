@@ -273,9 +273,14 @@
     "id": 28,
     "grade": "Class 5",
     "subject": "Mathematics",
-    "text": "Find the HCF of 6 and 12.",
-    "options": ["A. 2", "B. 3", "C. 6", "D. 12"],
-    "correctAnswer": "C. 6",
+    "text": "Find the HCF of 6, 12, and 18.",
+    "options": [
+      "A. 3",
+      "B. 6",
+      "C. 12",
+      "D. 36"
+    ],
+    "correctAnswer": "B. 6",
     "marks": 4,
     "negativeMarks": -1
   },
