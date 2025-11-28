@@ -28,16 +28,29 @@ function QuestionDisplay({ question, selectedAnswer, onAnswerChange }) {
       {/* Options as Radio Buttons */}
       <div className="options-list">
         {question.options.map((option, index) => (
-          <div key={index} className="option-item">
+          <div 
+            key={index} 
+            className="option-item"
+            // --- CHANGED: Added onClick to the container div ---
+            onClick={() => onAnswerChange(question.id, option)}
+          >
             <input
               type="radio"
               id={`${radioGroupName}-option-${index}`}
               name={radioGroupName}
               value={option}
-              checked={selectedAnswer === option} // Checks the radio button if it matches the current selection
-              onChange={() => onAnswerChange(question.id, option)} // Calls the handler in QuizApp
+              checked={selectedAnswer === option} 
+              // --- CHANGED: Empty onChange to satisfy React (controlled by parent div click) ---
+              onChange={() => {}} 
             />
-            <label htmlFor={`${radioGroupName}-option-${index}`}>{option}</label>
+            <label 
+              htmlFor={`${radioGroupName}-option-${index}`}
+              // Prevent label click from firing twice (bubbling)
+              onClick={(e) => e.stopPropagation()} 
+              style={{cursor: 'pointer', width: '100%'}}
+            >
+              {option}
+            </label>
           </div>
         ))}
       </div>

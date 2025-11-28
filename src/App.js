@@ -76,22 +76,6 @@ function App() {
     if (document.exitFullscreen) document.exitFullscreen().catch(e => {});
   };
 
-  // --- VIOLATION SCREEN ---
-  if (studentProfile && !isFullScreen && submissionStatus !== 'success') {
-    return (
-      <div className="violation-overlay">
-        <div className="violation-box">
-          <h1>⚠️ ACTION REQUIRED</h1>
-          <p>You are attempting to exit the secure exam environment.</p>
-          <p>To continue the quiz, you must return to Full Screen mode.</p>
-          <button onClick={enterFullScreen} className="return-btn">
-            Return to Exam
-          </button>
-        </div>
-      </div>
-    );
-  }
-
   // --- RENDER LOGIC ---
 
   if (!studentProfile) {
@@ -108,49 +92,60 @@ function App() {
     );
   }
 
-  if (submissionStatus === 'submitting') {
-    return (
-      <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}>
-        <h2>Submitting your results...</h2>
-        <p>Please do not close this window.</p>
-      </div>
-    );
-  }
-
   if (submissionStatus === 'success') {
     return (
       <div className="ultimate-bg">
         <div className="glass-panel animate-card-entry" style={{textAlign: 'center', maxWidth: '500px'}}>
-          
           <div style={{fontSize: '4rem', marginBottom: '20px'}}>🎉</div>
-          
           <h2 className="school-line-1" style={{fontSize: '2rem', marginBottom: '10px'}}>
             Test Submitted!
           </h2>
-          
           <p style={{fontSize: '1.1rem', fontWeight: '600', color: '#334155', marginBottom: '5px'}}>
             Thank you, {studentProfile.fullName}
           </p>
-          
           <div className="portal-subtitle" style={{marginTop: '15px', marginBottom: '25px'}}>
             Response Recorded Securely
           </div>
-
           <button onClick={handleLogout} className="neon-button">
             Return to Home
           </button>
-          
         </div>
       </div>
     );
   }
 
+  // --- CHANGED SECTION: Always render QuizApp, overlay Warning on top ---
   return (
-    <QuizApp 
-      studentProfile={studentProfile} 
-      session={currentSession}
-      onQuizFinish={handleQuizFinish} 
-    />
+    <>
+      {/* ⚠️ VIOLATION OVERLAY (Now conditionally rendered ON TOP) */}
+      {(!isFullScreen && submissionStatus !== 'submitting') && (
+        <div className="violation-overlay">
+          <div className="violation-box">
+            <h1>⚠️ ACTION REQUIRED</h1>
+            <p>You are attempting to exit the secure exam environment.</p>
+            <p>To continue the quiz, you must return to Full Screen mode.</p>
+            <button onClick={enterFullScreen} className="return-btn">
+              Return to Exam
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Loading/Submitting State */}
+      {submissionStatus === 'submitting' ? (
+        <div className="app-container" style={{textAlign: 'center', marginTop: '50px'}}>
+          <h2>Submitting your results...</h2>
+          <p>Please do not close this window.</p>
+        </div>
+      ) : (
+        /* 📝 QUIZ APP (Kept mounted in background to preserve state) */
+        <QuizApp 
+          studentProfile={studentProfile} 
+          session={currentSession}
+          onQuizFinish={handleQuizFinish} 
+        />
+      )}
+    </>
   );
 }
 
