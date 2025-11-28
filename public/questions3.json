@@ -186,8 +186,8 @@
     "text": "If today is Friday, what day will it be after 3 days?",
     "options": ["A. Sunday", "B. Monday", "C. Saturday", "D. Tuesday"],
     "correctAnswer": "B. Monday",
-    "marks": 1,
-    "negativeMarks": 0
+    "marks": 4,
+    "negativeMarks": -1
   },
   {
     "id": 20,
@@ -274,12 +274,7 @@
     "grade": "Class 5",
     "subject": "Mathematics",
     "text": "Find the HCF of 6, 12, and 18.",
-    "options": [
-      "A. 3",
-      "B. 6",
-      "C. 12",
-      "D. 36"
-    ],
+    "options": ["A. 3", "B. 6", "C. 12", "D. 36"],
     "correctAnswer": "B. 6",
     "marks": 4,
     "negativeMarks": -1
@@ -291,8 +286,8 @@
     "text": "Which number is a multiple of both 3 and 4?",
     "options": ["A. 9", "B. 16", "C. 12", "D. 15"],
     "correctAnswer": "C. 12",
-    "marks": 1,
-    "negativeMarks": 0
+    "marks": 4,
+    "negativeMarks": -1
   },
   {
     "id": 30,
@@ -301,7 +296,307 @@
     "text": "A pen is bought for Rs 10 and sold for Rs 15. What is the profit?",
     "options": ["A. Rs 10", "B. Rs 15", "C. Rs 5", "D. Rs 25"],
     "correctAnswer": "C. Rs 5",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 31,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Choose the Passive Voice for: 'He eats an apple.'",
+    "options": ["A. An apple is eaten by he.", "B. An apple is eaten by him.", "C. An apple ate by him.", "D. An apple was eaten by him."],
+    "correctAnswer": "B. An apple is eaten by him.",
     "marks": 1,
     "negativeMarks": 0
+  },
+  {
+    "id": 32,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "If John's father is Peter and Peter's sister is Lucy, then Lucy is John's ___.",
+    "options": ["A. aunt", "B. sister", "C. mother", "D. cousin"],
+    "correctAnswer": "A. aunt",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 33,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Choose the correct negative sentence.",
+    "options": ["A. I like apples.", "B. I do not like apples.", "C. She is happy.", "D. They play."],
+    "correctAnswer": "B. I do not like apples.",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 34,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Choose the Interrogative form for: 'He is your brother.'",
+    "options": ["A. He your brother is?", "B. Is he your brother?", "C. Your brother he is?", "D. Is your brother he?"],
+    "correctAnswer": "B. Is he your brother?",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 35,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Choose the Exclamatory form for: 'This is a huge building.'",
+    "options": ["A. What huge building this is!", "B. How huge this building is!", "C. How building huge!", "D. What is a huge building!"],
+    "correctAnswer": "A. What huge building this is!",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 36,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Choose the Passive Voice for: 'She sings a song.'",
+    "options": ["A. A song is sung by her.", "B. A song was sung by her.", "C. A song sings by her.", "D. A song sung by her."],
+    "correctAnswer": "A. A song is sung by her.",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 37,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Your father's wife is your ___.",
+    "options": ["A. Aunt", "B. Grandmother", "C. Mother", "D. Sister"],
+    "correctAnswer": "C. Mother",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 38,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Choose the correct negative form: 'I like mangoes.'",
+    "options": ["A. I not like mangoes.", "B. I don't like mangoes.", "C. I no like mangoes.", "D. I does not like mangoes."],
+    "correctAnswer": "B. I don't like mangoes.",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 39,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Turn into a question: 'They are playing.'",
+    "options": ["A. They are playing?", "B. Are they playing?", "C. Is they playing?", "D. Do they playing?"],
+    "correctAnswer": "B. Are they playing?",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 40,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Make this Exclamatory: 'The flower is beautiful.'",
+    "options": ["A. What beautiful flower!", "B. How beautiful the flower is!", "C. The flower is very beautiful!", "D. Is the flower beautiful?"],
+    "correctAnswer": "B. How beautiful the flower is!",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 41,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Choose the Passive Voice for: 'Who taught you?'",
+    "options": ["A. Who was taught you?", "B. By whom were you taught?", "C. Whom were you taught?", "D. By who you were taught?"],
+    "correctAnswer": "B. By whom were you taught?",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 42,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "My mother's brother's son is my ___.",
+    "options": ["A. Uncle", "B. Nephew", "C. Cousin", "D. Brother"],
+    "correctAnswer": "C. Cousin",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 43,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "I ___ my work before he came.",
+    "options": ["A. finish", "B. had finished", "C. have finished", "D. will finish"],
+    "correctAnswer": "B. had finished",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 44,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "She has ___ money.",
+    "options": ["A. no", "B. any", "C. none", "D. not"],
+    "correctAnswer": "A. no",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 45,
+    "grade": "Class 3-5",
+    "subject": "English",
+    "text": "Select the correctly punctuated sentence.",
+    "options": ["A. Its a sunny day.", "B. It's a sunny day.", "C. Its' a sunny day.", "D. It is a sunny day?"],
+    "correctAnswer": "B. It's a sunny day.",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 46,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Which organ secretes insulin and digestive enzymes?",
+    "options": ["A. Liver", "B. Pancreas", "C. Stomach", "D. Large intestine"],
+    "correctAnswer": "B. Pancreas",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 47,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Manure improves:",
+    "options": ["A. Soil texture", "B. Soil pollution", "C. Pesticide levels", "D. Soil hardness"],
+    "correctAnswer": "A. Soil texture",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 48,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Oil and fat become rancid due to:",
+    "options": ["A. Excess salt", "B. Oxidation", "C. Fermentation", "D. Dehydration"],
+    "correctAnswer": "B. Oxidation",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 49,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "If the 'Villi' in the small intestine are flattened or damaged, what will be the immediate effect on the body? ",
+    "options": ["A. Food will not be digested.", "B. Nutrients will not be absorbed efficiently.", "C. The stomach will produce more acid.", "D. Bile production will stop."],
+    "correctAnswer": "B. Nutrients will not be absorbed efficiently.",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 50,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "A potato piece is chewed. After digestion, it will eventually reach the cells of the body in the form of ___.",
+    "options": ["A. Starch", "B. Amino Acids", "C. Glucose", "D. Fatty Acids"],
+    "correctAnswer": "C. Glucose",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 51,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Why is Drip Irrigation considered better than Sprinkler Irrigation in desert areas?",
+    "options": ["A. It looks better.", "B. It sprays water on leaves.", "C. It delivers water directly to roots, reducing evaporation.", "D. It uses more water."],
+    "correctAnswer": "C. It delivers water directly to roots, reducing evaporation.",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 52,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Milk turns sour because a specific bacterium converts the sugar in milk into ___.",
+    "options": ["A. Citric Acid", "B. Lactic Acid", "C. Acetic Acid", "D. Hydrochloric Acid"],
+    "correctAnswer": "B. Lactic Acid",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 53,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "We store food in the refrigerator. This does not kill bacteria, but it ___.",
+    "options": ["A. Removes oxygen.", "B. Slows down their reproduction rate.", "C. Removes moisture.", "D. Adds preservatives."],
+    "correctAnswer": "B. Slows down their reproduction rate.",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 54,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "During food production, 'Hybrid Seeds' are used. What is the main advantage of these seeds?",
+    "options": ["A. They are cheaper.", "B. They require more water.", "C. They provide high yield and disease resistance.", "D. They grow without sunlight."],
+    "correctAnswer": "C. They provide high yield and disease resistance.",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 55,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "The semi-solid mass of food that leaves the stomach and enters the small intestine is known as ___.",
+    "options": ["A. Bolus", "B. Chyme", "C. Saliva", "D. Bile"],
+    "correctAnswer": "B. Chyme",
+    "marks": 1,
+    "negativeMarks": 0
+  },
+  {
+    "id": 56,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "If a person has their Gallbladder surgically removed, which of the following foods should they avoid eating in large quantities? ",
+    "options": ["A. Boiled Rice (Carbohydrates)", "B. Fried Chicken (Fats)", "C. Egg Whites (Proteins)", "D. Fruit Salad (Vitamins)"],
+    "correctAnswer": "B. Fried Chicken (Fats)",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 57,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Salt and Sugar are used as preservatives in pickles and jams. How do they actually kill the bacteria?",
+    "options": ["A. They poison the bacteria.", "B. They draw water out of the bacterial cells (Dehydration).", "C. They freeze the bacteria.", "D. They remove oxygen from the jar."],
+    "correctAnswer": "B. They draw water out of the bacterial cells (Dehydration).",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 58,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Chlorophyll absorbs sunlight. What is this energy primarily used for in plants? ",
+    "options": ["A. To warm up the plant.", "B. To split water molecules and make food.", "C. To absorb nitrogen from soil.", "D. To turn the leaves green."],
+    "correctAnswer": "B. To split water molecules and make food.",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 59,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "If the mucus lining of the stomach is damaged, what will happen?",
+    "options": ["A. Digestion will be faster.", "B. The stomach acid will burn the stomach walls (Ulcer).", "C. The person will feel very hungry.", "D. Food will move to the lungs."],
+    "correctAnswer": "B. The stomach acid will burn the stomach walls (Ulcer).",
+    "marks": 4,
+    "negativeMarks": -1
+  },
+  {
+    "id": 60,
+    "grade": "Class 3-5",
+    "subject": "Science",
+    "text": "Canning is a method where food is sealed in airtight tins. This primarily prevents the growth of which type of bacteria?",
+    "options": ["A. Bacteria that need Air (Aerobic)", "B. Bacteria that do NOT need Air (Anaerobic)", "C. Only Viruses", "D. Only Fungi"],
+    "correctAnswer": "A. Bacteria that need Air (Aerobic)",
+    "marks": 4,
+    "negativeMarks": -1
   }
 ]
